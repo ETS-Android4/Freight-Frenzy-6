@@ -92,17 +92,10 @@ public class Robot {
 				telemetry,
 				this.hardwareMap.get(DcMotor.class, "pivotMotor"),
 				this.hardwareMap.get(DcMotor.class, "extensionMotor"),
-				this.hardwareMap.get(Servo.class,"rightHand"),
-				this.hardwareMap.get(Servo.class, "leftHand"),
+				this.hardwareMap.get(CRServo.class,"rightHand"),
+				this.hardwareMap.get(CRServo.class, "leftHand"),
 				this.hardwareMap.get(CRServo.class, "duckSpinner")
-
 		);
-
-//		wobbleGoalArm.init(
-//				telemetry,
-//				this.hardwareMap.get(DcMotor.class, "base"),
-//				this.hardwareMap.get(Servo.class, "claw")
-//		);
 
 	}
 

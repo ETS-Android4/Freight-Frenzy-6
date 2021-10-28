@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
 
+import java.security.CryptoPrimitive;
+
 public class Arm extends RobotComponent {
 
 	public DcMotor pivotMotor = null;
@@ -24,7 +26,7 @@ public class Arm extends RobotComponent {
 		super(opmode);
 	}
 
-	void init(Telemetry telemetry, DcMotor leftArm, DcMotor rightArm, DcMotor extendArm, CRServo rightHand) {
+	void init(Telemetry telemetry, DcMotor pivotMotor, DcMotor extensionMotor, CRServo leftHand, CRServo rightHand, CRServo duckSpinner) {
 		logger = new Logger(telemetry);
 
 		this.pivotMotor = pivotMotor;
@@ -46,10 +48,10 @@ public class Arm extends RobotComponent {
 		extensionMotor.setTargetPosition(0);
 
 		// Set all motors to zero power
-		setSpecificPowers(0, leftArm, rightArm, extendArm);
+		setSpecificPowers(0, pivotMotor, extensionMotor);
 
 		// Set all motors to run with encoders.
-		setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, leftArm, rightArm, extendArm);
+		setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, pivotMotor, extensionMotor);
 	}
 
 	@Override
@@ -122,13 +124,13 @@ public class Arm extends RobotComponent {
 	public void grabHand() {
 		isGrabbing = true;
 		setServoPosition(rightHand, 1);
-		setServoPosition(leftHand,1);
+		setServoPosition(leftHand,0);
 	}
 
 	public void releaseHand() {
 		isGrabbing = false;
 		setServoPosition(rightHand, 0);
-		setServoPosition(leftHand, 0);
+		setServoPosition(leftHand, 1);
 	}
 
 	public boolean isGrabbing() {

@@ -12,8 +12,7 @@ abstract class RobotComponent {
 	static final double COUNTS_PER_MOTOR_REV = 400;    // eg: 1440 if TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 3.75;     // For figuring circumference
-	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-			(WHEEL_DIAMETER_INCHES * 3.1415);
+	static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
 
 	static final double DEFAULT_DRIVE_SPEED = 1.0;
 	static final double DEFAULT_TURN_SPEED = 0.5;

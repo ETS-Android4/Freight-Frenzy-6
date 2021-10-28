@@ -15,7 +15,6 @@ public class TeleOp extends OpMode {
 
 	private Robot robot = new Robot();
 	private Logger logger = null;
-	private String elevatorLimit = "";
 
 	private double speed = 0.5;
 	private double armSpeed = 1.0;
@@ -24,8 +23,6 @@ public class TeleOp extends OpMode {
 	private boolean last_a = false;
 	private boolean last_y = false;
 	private boolean last_b = false;
-
-	private boolean manualOverride = false;
 
 	/**
 	 * Run once after INIT is pushed
@@ -105,16 +102,16 @@ public class TeleOp extends OpMode {
 			speed = 0.25;
 		}
 
-		last_x = this.gamepad1.x;
-		last_a = this.gamepad1.a;
-		last_y = this.gamepad1.y;
-		last_b = this.gamepad1.b;
-
 		if(this.gamepad1.y) {
 			robot.arm.turnOnSpinner();
 		} else if (this.gamepad1.a) {
 			robot.arm.turnOffSpinner();
 		}
+
+		last_x = this.gamepad1.x;
+		last_a = this.gamepad1.a;
+		last_y = this.gamepad1.y;
+		last_b = this.gamepad1.b;
 
 		/*
 		 * Controller 2 settings
@@ -130,8 +127,7 @@ public class TeleOp extends OpMode {
 
 		if (this.gamepad2.right_bumper) {
 			armSpeed = 1.0;
-		}
-		if (this.gamepad2.left_bumper) {
+		} else if (this.gamepad2.left_bumper) {
 			armSpeed = 0.5;
 		}
 
@@ -149,6 +145,8 @@ public class TeleOp extends OpMode {
 			robot.arm.releaseHand();
 		}
 
+		logger.numberLog("Drive Speed", speed);
+		logger.numberLog("Arm Speed", armSpeed);
 		logger.update();
 
 	}
