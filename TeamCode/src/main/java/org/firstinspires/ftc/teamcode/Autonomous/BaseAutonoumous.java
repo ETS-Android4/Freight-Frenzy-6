@@ -26,7 +26,15 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 		BLUE
 	}
 
-
+	public void turnOnDuckSpinner(long time) {
+		if(getColor() == Color.RED) {
+			robot.arm.turnOnSpinner(-1);
+		} else {
+			robot.arm.turnOnSpinner(1);
+		}
+		sleep(time);
+		robot.arm.turnOffSpinner();
+	}
 
 	public void moveTowardsRedAlliance(double distance, double maxSeconds, double speed) {
 		distance *= 2.25;

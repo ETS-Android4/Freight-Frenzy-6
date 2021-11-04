@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
 
 /**
- * Created by shell on 10/26/2019.
+ * Created by shell on 10/26/2021.
  */
 
 @Autonomous(group = "Red Side", name = "Red Side: Carousel Spin Park")
@@ -27,44 +27,36 @@ public class RedCarouselSpinPark extends BaseAutonoumous {
 		// Waiting until user presses start
 		waitForStart();
 
-// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 1 - drive towards the carousel
+		logger.statusLog(step++, "drive towards the carousel");
 		moveTowardsWareHouse(5.5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 2 - drive towards the parking zone
+		logger.statusLog(step++, "drive towards the parking zone");
 		moveTowardsBlueAlliance(5.5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 3 - align with the carousel
+		logger.statusLog(step++, "align with the carousel");
 		moveTowardsBlueAlliance(5.5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 4 - drive against the carousel
+		logger.statusLog(step++, "driving into the carousel");
 		moveTowardsAudience(3.5,999,0.5);
 
-		//
-		logger.statusLog(step++, "");
-		robot.arm.turnOnSpinner(-1);
+		// Step 5 - spin the duck off
+		logger.statusLog(step++, "spinning the servo");
+		turnOnDuckSpinner(7507);
 
-		//
-		logger.statusLog(step++, "");
-		sleep(7507);
-
-		//
-		logger.statusLog(step++, "");
-		robot.arm.turnOffSpinner();
-
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 6 - drive off of the carousel
+		logger.statusLog(step++, "Drive away from carousel");
 		moveTowardsWareHouse(2,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 7 - drive into the parking zone
+		logger.statusLog(step++, "drive into the parking zone");
 		moveTowardsBlueAlliance(3,999,0.25);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 8 - drive into the parking zone
+		logger.statusLog(step++, "Park");
 		moveTowardsWareHouse(7,999,0.5);
 	}
 

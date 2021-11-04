@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
 
 /**
- * Created by shell on 10/26/2019.
+ * Created by shell on 10/26/2021.
  */
 
 @Autonomous(group = "Red Side", name = "Red Side: Carousel Park")
@@ -27,20 +27,20 @@ public class RedCarouselPark extends BaseAutonoumous {
 		// Waiting until user presses start
 		waitForStart();
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 1 - Drive towards the carousel
+		logger.statusLog(step++, "Avoid Randomization");
 		moveTowardsBlueAlliance(5.5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 2 - Drive towards the other team
+		logger.statusLog(step++, "move out of the way of the carousel");
 		moveTowardsWareHouse(5.5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 3 - Drive up against the wall
+		logger.statusLog(step++, "Aligning with wall");
 		moveTowardsBlueAlliance(5,999,0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 4 - drive into the parking zone
+		logger.statusLog(step++, "Parking");
 		moveTowardsWareHouse(8,999,0.5);
 
 	}

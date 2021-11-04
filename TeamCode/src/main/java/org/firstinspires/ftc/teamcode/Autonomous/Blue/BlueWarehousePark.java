@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
 
 /**
- * Created by shell on 10/26/2019.
+ * Created by shell on 10/26/2021.
  */
 
 @Autonomous(group = "Blue Side", name = "Blue Side: Warehouse Park")
@@ -27,20 +27,20 @@ public class BlueWarehousePark extends BaseAutonoumous {
 		// Waiting until user presses start
 		waitForStart();
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 1 - move to align with the warehouse
+		logger.statusLog(step++, "align with warehouse");
 		moveTowardsAudience(8, 999, 0.25);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 2 - drive into the warehouse over the barrier
+		logger.statusLog(step++, "driving into warehouse");
 		moveTowardsRedAlliance(20,  999, 1);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 3 - move out of the way of the blocks
+		logger.statusLog(step++, "align with the wall");
 		moveTowardsAudience(4, 999, 0.5);
 
-		// Step 1 - Making sure base plate servos are up
-		logger.statusLog(step++, "");
+		// Step 4 - park against the wall
+		logger.statusLog(step++, "Parking");
 		moveTowardsRedAlliance(12,  999, 0.5);
 
 	}

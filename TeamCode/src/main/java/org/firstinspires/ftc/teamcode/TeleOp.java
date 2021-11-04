@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Robot.Robot;
 
 
 /**
- * Created by shell on 9/26/2020.
+ * Created by shell on 11/04/2021.
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode")
@@ -68,10 +68,7 @@ public class TeleOp extends OpMode {
 		 *      Right Joystick X - Turn the robot
 		 *
 		 * 		Y Button 		 - Turn on the duck spinner
-		 * 		A Button		 - Turn off the duck spinner
-		 *
-		 *      A + Y = Single joystick drive
-		 *      X + B = Two joystick drive
+		 * 		X Button		 - Turn on the duck spinner
 		 *
 		 * Controller 2 - "Arm Controller"
 		 *      Right Trigger    - Extends arm
@@ -105,6 +102,8 @@ public class TeleOp extends OpMode {
 		if(this.gamepad1.y) {
 			robot.arm.turnOnSpinner(1);
 		} else if (this.gamepad1.a) {
+			robot.arm.turnOnSpinner(-1);
+		} else {
 			robot.arm.turnOffSpinner();
 		}
 

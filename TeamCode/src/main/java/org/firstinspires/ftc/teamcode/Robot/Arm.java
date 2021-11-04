@@ -143,6 +143,9 @@ public class Arm extends RobotComponent {
 	public void turnOffSpinner() {
 		duckSpinner.setPower(0);
 	}
+	public void toggleSpinner() {
+
+	}
 
 	@Override
 	public void stopAllMotors() {

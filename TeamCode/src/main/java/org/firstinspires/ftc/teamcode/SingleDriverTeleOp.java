@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Robot.Robot;
 
 
 /**
- * Created by shell on 9/26/2020.
+ * Created by shell on 11/04/2021.
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Single Driver Manual Mode")
@@ -68,20 +68,16 @@ public class SingleDriverTeleOp extends OpMode {
 		 *
 		 * 		X Button 		 - Grab blocks
 		 * 		B Button		 - Release blocks
-		 * 		Y Button		 - Turn On duck
-		 * 		A Button		 - Turn off duck
+		 * 		Y Button		 - Turn on the duck spinner
+		 * 		A Button		 - Turn on the duck spinner
 		 *
 		 * 		Right Bumper	 - Half speed
 		 * 		left Bumper 	 - Half speed
 		 *
 		 * 		Up Dpad			 - Up arm
 		 * 		Down Dpad		 - Down arm
-		 * 		Left Dpad		 - invert duck direction
 		 *
 		 *      Right Joystick X - Turn the robot
-		 *
-		 *      A + Y = Single joystick drive
-		 *      X + B = Two joystick drive
 		 *
 		 */
 
@@ -102,9 +98,12 @@ public class SingleDriverTeleOp extends OpMode {
 		} else if (this.gamepad1.b) {
 			robot.arm.releaseHand();
 		}
+
 		if(this.gamepad1.y) {
-			robot.arm.turnOnSpinner(duckPower);
+			robot.arm.turnOnSpinner(1);
 		} else if (this.gamepad1.a) {
+			robot.arm.turnOnSpinner(-1);
+		} else {
 			robot.arm.turnOffSpinner();
 		}
 
@@ -112,10 +111,6 @@ public class SingleDriverTeleOp extends OpMode {
 			speed = 1.0;
 		} else if (this.gamepad1.left_bumper) {
 			speed = 0.5;
-		}
-
-		if (this.gamepad1.dpad_left){
-			duckPower = duckPower *-1;
 		}
 
 		if (this.gamepad1.dpad_up) {
