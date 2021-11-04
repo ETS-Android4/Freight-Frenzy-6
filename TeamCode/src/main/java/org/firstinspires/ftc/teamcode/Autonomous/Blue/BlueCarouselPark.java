@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
  * Created by shell on 10/26/2019.
  */
 
-@Autonomous(group = "Blue Side", name = "Blue Side: Blue Carousel Park")
+@Autonomous(group = "Blue Side", name = "Blue Side: Carousel Park")
 public class BlueCarouselPark extends BaseAutonoumous {
 	@Override
 	protected Color getColor() {
@@ -29,11 +29,20 @@ public class BlueCarouselPark extends BaseAutonoumous {
 
 		// Step 1 - Making sure base plate servos are up
 		logger.statusLog(step++, "");
-		moveTowardsRedAlliance(4, 999 );
+		moveTowardsWareHouse(5.5,999,0.5);
 
 		// Step 1 - Making sure base plate servos are up
 		logger.statusLog(step++, "");
-		robot.drivetrain.runDistance(4, 4, 999, 0.4);
+		moveTowardsBlueAlliance(5.5,999,0.5);
+
+		// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsWareHouse(5.5,999,0.5);
+
+		// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsBlueAlliance(5.5,999,0.5);
+
 	}
 
 }

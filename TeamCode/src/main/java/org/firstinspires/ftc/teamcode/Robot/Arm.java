@@ -137,8 +137,8 @@ public class Arm extends RobotComponent {
 		return isGrabbing;
 	}
 
-	public void turnOnSpinner() {
-		duckSpinner.setPower(1);
+	public void turnOnSpinner(double power) {
+		duckSpinner.setPower(power);
 	}
 	public void turnOffSpinner() {
 		duckSpinner.setPower(0);

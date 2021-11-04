@@ -28,11 +28,16 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 
 
 
-	public void moveTowardsRedAlliance(double distance, double maxSeconds) {
-		moveTowardsRedAlliance(distance, maxSeconds, robot.drivetrain.defaultSpeed);
+	public void moveTowardsRedAlliance(double distance, double maxSeconds, double speed) {
+		distance *= 2.25;
+		if(getColor() == Color.RED) {
+			robot.drivetrain.runDistance(distance, distance, distance, distance, maxSeconds, speed);
+		} else {
+			robot.drivetrain.runDistance(-distance, -distance, -distance, -distance, maxSeconds, speed);
+		}
 	}
 
-	public void moveTowardsRedAlliance(double distance, double maxSeconds, double speed) {
+	public void moveTowardsWareHouse(double distance, double maxSeconds, double speed) {
 		distance *= 2.25;
 		if(getColor() == Color.RED) {
 			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
@@ -41,16 +46,21 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 		}
 	}
 
-	public void moveTowardsBlueAlliance(double distance, double maxSeconds) {
-		moveTowardsBlueAlliance(distance, maxSeconds, robot.drivetrain.defaultSpeed);
-	}
-
-	public void moveTowardsBlueAlliance(double distance, double maxSeconds, double speed) {
+	public void moveTowardsAudience(double distance, double maxSeconds, double speed) {
 		distance *= 2.25;
 		if(getColor() == Color.RED) {
 			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
 		} else {
 			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
+		}
+	}
+
+	public void moveTowardsBlueAlliance(double distance, double maxSeconds, double speed) {
+		distance *= 2.25;
+		if(getColor() == Color.RED) {
+			robot.drivetrain.runDistance(-distance, -distance, -distance, -distance, maxSeconds, speed);
+		} else {
+			robot.drivetrain.runDistance(distance, distance, distance, distance, maxSeconds, speed);
 		}
 	}
 

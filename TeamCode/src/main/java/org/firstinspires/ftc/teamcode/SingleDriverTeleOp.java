@@ -10,14 +10,15 @@ import org.firstinspires.ftc.teamcode.Robot.Robot;
  * Created by shell on 9/26/2020.
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode")
-public class TeleOp extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Single Driver Manual Mode")
+public class SingleDriverTeleOp extends OpMode {
 
 	private Robot robot = new Robot();
 	private Logger logger = null;
 
 	private double speed = 0.5;
-	private double armSpeed = 1.0;
+	private double armSpeed = 0.25;
+	private double duckPower = 1;
 
 	private boolean last_x = false;
 	private boolean last_a = false;
@@ -62,29 +63,25 @@ public class TeleOp extends OpMode {
 		/* Controller Layouts
 		 *
 		 * Controller 1 - "Body Controller"
-		 *      Left Trigger     - Set full speed
-		 *      Right Trigger    - Set half speed
+		 *      Left Trigger     - extend the arm
+		 *      Right Trigger    - retrack the arm
+		 *
+		 * 		X Button 		 - Grab blocks
+		 * 		B Button		 - Release blocks
+		 * 		Y Button		 - Turn On duck
+		 * 		A Button		 - Turn off duck
+		 *
+		 * 		Right Bumper	 - Half speed
+		 * 		left Bumper 	 - Half speed
+		 *
+		 * 		Up Dpad			 - Up arm
+		 * 		Down Dpad		 - Down arm
+		 * 		Left Dpad		 - invert duck direction
 		 *
 		 *      Right Joystick X - Turn the robot
 		 *
-		 * 		Y Button 		 - Turn on the duck spinner
-		 * 		A Button		 - Turn off the duck spinner
-		 *
 		 *      A + Y = Single joystick drive
 		 *      X + B = Two joystick drive
-		 *
-		 * Controller 2 - "Arm Controller"
-		 *      Right Trigger    - Extends arm
-		 *      Left Trigger     - Detracts arm
-		 *
-		 * 		Right Bumper	 - Full arm speed
-		 * 		Left Bumper 	 - Hald arm speed
-		 *
-		 *      Dpad Up          - Raise the arm
-		 *      Dpad Down        - Lower the arm
-		 *
-		 *      Y Button         - Grab blocks with the hand
-		 *      A Button         - Release blocks with the hand
 		 *
 		 */
 
@@ -92,58 +89,44 @@ public class TeleOp extends OpMode {
 		 * Controller 1 settings
 		 */
 
-		singleJoystickDrive();
-
 		if (this.gamepad1.right_trigger > 0.5) {
-			speed = 1.0;
-		} else if (this.gamepad1.left_trigger > 0.5) {
-			speed = 0.5;
-		} else if (this.gamepad1.right_bumper) {
-			speed = 0.25;
-		}
-
-		if(this.gamepad1.y) {
-			robot.arm.turnOnSpinner(1);
-		} else if (this.gamepad1.a) {
-			robot.arm.turnOffSpinner();
-		}
-
-		last_x = this.gamepad1.x;
-		last_a = this.gamepad1.a;
-		last_y = this.gamepad1.y;
-		last_b = this.gamepad1.b;
-
-		/*
-		 * Controller 2 settings
-		 */
-
-		if (this.gamepad2.right_trigger > 0.5) {
 			robot.arm.extendWithPower(0.55);
-		} else if (this.gamepad2.left_trigger > 0.5) {
+		} else if (this.gamepad1.left_trigger > 0.5) {
 			robot.arm.extendWithPower(-0.55);
 		} else {
 			robot.arm.extendWithPower(0);
 		}
 
-		if (this.gamepad2.right_bumper) {
-			armSpeed = 1.0;
-		} else if (this.gamepad2.left_bumper) {
-			armSpeed = 0.5;
+		if(this.gamepad1.x) {
+			robot.arm.grabHand();
+		} else if (this.gamepad1.b) {
+			robot.arm.releaseHand();
+		}
+		if(this.gamepad1.y) {
+			robot.arm.turnOnSpinner(duckPower);
+		} else if (this.gamepad1.a) {
+			robot.arm.turnOffSpinner();
 		}
 
-		if (this.gamepad2.dpad_up) {
-			robot.arm.raiseWithPower(1 * armSpeed);
-		} else if (this.gamepad2.dpad_down) {
+		if (this.gamepad1.right_bumper) {
+			speed = 1.0;
+		} else if (this.gamepad1.left_bumper) {
+			speed = 0.5;
+		}
+
+		if (this.gamepad1.dpad_left){
+			duckPower = duckPower *-1;
+		}
+
+		if (this.gamepad1.dpad_up) {
+			robot.arm.raiseWithPower(armSpeed);
+		} else if (this.gamepad1.dpad_down) {
 			robot.arm.lowerWithPower(0.20);
 		} else {
 			robot.arm.raiseWithPower(0);
 		}
 
-		if(this.gamepad2.y) {
-			robot.arm.grabHand();
-		} else if (this.gamepad2.a) {
-			robot.arm.releaseHand();
-		}
+		singleJoystickDrive();
 
 		logger.numberLog("Drive Speed", speed);
 		logger.numberLog("Arm Speed", armSpeed);

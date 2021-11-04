@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
  * Created by shell on 10/26/2019.
  */
 
-@Autonomous(group = "Red Side", name = "Red Side: Red Carousel Spin Park")
+@Autonomous(group = "Red Side", name = "Red Side: Carousel Spin Park")
 public class RedCarouselSpinPark extends BaseAutonoumous {
 	@Override
 	protected Color getColor() {
@@ -27,22 +27,45 @@ public class RedCarouselSpinPark extends BaseAutonoumous {
 		// Waiting until user presses start
 		waitForStart();
 
+// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsWareHouse(5.5,999,0.5);
+
 		// Step 1 - Making sure base plate servos are up
 		logger.statusLog(step++, "");
-		robot.drivetrain.runDistance(-4, -4, 999, 0.4);
+		moveTowardsBlueAlliance(5.5,999,0.5);
+
+		// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsBlueAlliance(5.5,999,0.5);
+
+		// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsAudience(3.5,999,0.5);
+
+		//
+		logger.statusLog(step++, "");
+		robot.arm.turnOnSpinner(-1);
+
+		//
+		logger.statusLog(step++, "");
+		sleep(7507);
 
 		//
 		logger.statusLog(step++, "");
 		robot.arm.turnOffSpinner();
 
-		//
+		// Step 1 - Making sure base plate servos are up
 		logger.statusLog(step++, "");
-		sleep(1000);
+		moveTowardsWareHouse(2,999,0.5);
 
-		//
+		// Step 1 - Making sure base plate servos are up
 		logger.statusLog(step++, "");
-		robot.arm.turnOffSpinner();
-		moveTowardsRedAlliance(4, 4);
+		moveTowardsBlueAlliance(3,999,0.25);
+
+		// Step 1 - Making sure base plate servos are up
+		logger.statusLog(step++, "");
+		moveTowardsWareHouse(7,999,0.5);
 	}
 
 }
