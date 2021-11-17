@@ -75,7 +75,7 @@ public class TeleOp extends OpMode {
 		 *      Left Trigger     - Detracts arm
 		 *
 		 * 		Right Bumper	 - Full arm speed
-		 * 		Left Bumper 	 - Hald arm speed
+		 * 		Left Bumper 	 - Half arm speed
 		 *
 		 *      Dpad Up          - Raise the arm
 		 *      Dpad Down        - Lower the arm
