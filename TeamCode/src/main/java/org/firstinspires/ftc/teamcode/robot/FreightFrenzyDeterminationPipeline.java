@@ -39,8 +39,7 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	/*
 	 * An enum to define the randomization
 	 */
-	public enum RingPosition
-	{
+	public enum CapstonePosition {
 		LEFT,
 		MIDDLE,
 		RIGHT
@@ -50,61 +49,85 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	 * Some color constants
 	 */
 
+	static final Scalar RED = new Scalar(255, 0, 0);
+	static final Scalar GREEN = new Scalar(0, 255, 0);
 	static final Scalar BLUE = new Scalar(0, 0, 255);
+	static final Scalar BLACK = new Scalar(225, 225, 225);
 
-	static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(310, 40);
+	static final Point REGION1 = new Point(100, 100);
+	static final Point REGION2 = new Point(200, 200);
+	static final Point REGION3 = new Point(300, 300);
 
-	static final int REGION_WIDTH = 120;
-	static final int REGION_HEIGHT = 150;
+	static final int REGION1_WIDTH = 50;
+	static final int REGION1_HEIGHT = 50;
+	static final int REGION2_WIDTH = 50;
+	static final int REGION2_HEIGHT = 50;
+	static final int REGION3_WIDTH = 50;
+	static final int REGION3_HEIGHT = 50;
 
-	final int FOUR_RING_THRESHOLD = 140;
-	final int ONE_RING_THRESHOLD = 132;
+	final int POSITION_THRESHOLD = 140;
 
 	Point region1_pointA = new Point(
-			REGION1_TOPLEFT_ANCHOR_POINT.x,
-			REGION1_TOPLEFT_ANCHOR_POINT.y);
+			REGION1.x,
+			REGION1.y);
 	Point region1_pointB = new Point(
-			REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-			REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+			REGION1.x + REGION1_WIDTH,
+			REGION1.y + REGION1_HEIGHT);
+	Point region2_pointA = new Point(
+			REGION2.x,
+			REGION2.y);
+	Point region2_pointB = new Point(
+			REGION2.x + REGION2_WIDTH,
+			REGION2.y + REGION2_HEIGHT);
+	Point region3_pointA = new Point(
+			REGION3.x,
+			REGION3.y);
+	Point region3_pointB = new Point(
+			REGION3.x + REGION3_WIDTH,
+			REGION3.y + REGION3_HEIGHT);
 
 	/*
 	 * Working variables
 	 */
+
 	Mat region1_Cb;
+	Mat region2_Cb;
+	Mat region3_Cb;
 	Mat YCrCb = new Mat();
 	Mat Cb = new Mat();
 	int avg1;
+	int avg2;
 
 	// Volatile since accessed by OpMode thread w/o synchronization
-	public volatile RingPosition position = RingPosition.FOUR;
+	public volatile CapstonePosition position = CapstonePosition.RIGHT;
 
 	/*
 	 * This function takes the RGB frame, converts to YCrCb,
 	 * and extracts the Cb channel to the 'Cb' variable
 	 */
 
-	void inputToCb(Mat input)
-	{
+	void inputToCb(Mat input) {
 		Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
 		Core.extractChannel(YCrCb, Cb, 1);
 	}
 
 	@Override
-	public void init(Mat firstFrame)
-	{
+	public void init(Mat firstFrame) {
 		inputToCb(firstFrame);
 
 		region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
+		region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointA));
+		region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
 	}
 
 	Mat frame = null;
 
 	@Override
-	public Mat processFrame(Mat input)
-	{
+	public Mat processFrame(Mat input) {
 		inputToCb(input);
 
 		avg1 = (int) Core.mean(region1_Cb).val[0];
+		avg2 = (int) Core.mean(region2_Cb).val[0];
 
 		Imgproc.rectangle(
 				input, // Buffer to draw on
@@ -112,23 +135,34 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 				region1_pointB, // Second point which defines the rectangle
 				BLUE, // The color the rectangle is drawn in
 				2); // Thickness of the rectangle lines
+		Imgproc.rectangle(
+				input, // Buffer to draw on
+				region2_pointA, // First point which defines the rectangle
+				region2_pointB, // Second point which defines the rectangle
+				BLUE, // The color the rectangle is drawn in
+				2); // Thickness of the rectangle lines
+		Imgproc.rectangle(
+				input, // Buffer to draw on
+				region3_pointA, // First point which defines the rectangle
+				region3_pointB, // Second point which defines the rectangle
+				BLUE, // The color the rectangle is drawn in
+				2); // Thickness of the rectangle lines
 
-		position = getRingPosition();
+		position = getCapstonePosition();
 
-		// TODO: Initialize color scalars as static and use one of them
-		Scalar color = new Scalar(255, 255, 255);
-		if(position == RingPosition.FOUR) {
-			color = new Scalar(0, 0, 255); // Blue
-		} else if(position == RingPosition.ONE) {
-			color = new Scalar(0, 255, 0); // Green
-		} else if(position == RingPosition.NONE) {
-			color = new Scalar(255, 0, 0); // Red
+		Scalar color = BLACK;
+		if (position == CapstonePosition.LEFT) {
+			color = BLUE; // Blue
+		} else if (position == CapstonePosition.MIDDLE) {
+			color = GREEN; // Green
+		} else if (position == CapstonePosition.RIGHT) {
+			color = RED; // Red
 		}
 
 		/*
-		 * Four:  Blue
-		 * One:   Green
-		 * None:  Red
+		 * Left Position:  Blue
+		 * Middle Position:   Green
+		 * Right Position:  Red
 		 * Error: Black/White
 		 */
 
@@ -136,6 +170,20 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 				input, // Buffer to draw on
 				region1_pointA, // First point which defines the rectangle
 				region1_pointB, // Second point which defines the rectangle
+				color, // The color the rectangle is drawn in
+				// -1); // Negative thickness means solid fill
+				4); // Negative thickness means solid fill
+		Imgproc.rectangle(
+				input, // Buffer to draw on
+				region2_pointA, // First point which defines the rectangle
+				region2_pointB, // Second point which defines the rectangle
+				color, // The color the rectangle is drawn in
+				// -1); // Negative thickness means solid fill
+				4); // Negative thickness means solid fill
+		Imgproc.rectangle(
+				input, // Buffer to draw on
+				region3_pointA, // First point which defines the rectangle
+				region3_pointB, // Second point which defines the rectangle
 				color, // The color the rectangle is drawn in
 				// -1); // Negative thickness means solid fill
 				4); // Negative thickness means solid fill
@@ -148,13 +196,13 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 		return avg1;
 	}
 
-	public RingPosition getRingPosition() {
-		if(avg1 > FOUR_RING_THRESHOLD){
-			return RingPosition.FOUR;
-		}else if (avg1 > ONE_RING_THRESHOLD){
-			return RingPosition.ONE;
-		}else{
-			return RingPosition.NONE;
+	public CapstonePosition getCapstonePosition() {
+		if (avg1 > POSITION_THRESHOLD) {
+			return CapstonePosition.LEFT;
+		} else if (avg2 > POSITION_THRESHOLD) {
+			return CapstonePosition.MIDDLE;
+		} else {
+			return CapstonePosition.RIGHT;
 		}
 	}
 
@@ -163,4 +211,4 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 				Environment.DIRECTORY_DCIM);
 		Imgcodecs.imwrite(path + "/1.jpg", frame);
 	}
-]
+}
