@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b2b72d75-23f3-46c6-beec-8ade7226960c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Autonomous/BaseAutonomous.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/AutonomousMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/ManualMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/RoverRuckus/RoverRuckusAuto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/RoverRuckus/RoverRuckusBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/RoverRuckus/RoverRuckusManual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/SkyStone/SkyStoneAuto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/SkyStone/SkyStoneBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/SkyStone/SkyStoneManual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Legacy/TestWebcam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/CRServoExtended.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/CameraVision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/Drivetrain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/Intake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/Launcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/ObjectDetection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/Robot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/RobotComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/WobbleGoalArm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Robot/WobbleHand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/TeleOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/TeleOpCameraTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/TeleOpSingle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/TeleOpTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/Testing/TestingAutonomousMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/DriveConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleMecanumDrive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleMecanumDriveCancelable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/SampleTankDrive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/StandardTrackingWheelLocalizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/TwoWheelTrackingLocalizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutonomousMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutonomousModeFourRing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutonomousModeNoRing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutonomousModeSingleRing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/BackAndForth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/DriveVelocityPIDTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/FollowerPIDTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/LauncherTuning.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/LocalizationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/ManualFeedforwardTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MaxAngularVeloTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MaxVelocityTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/MotorDirectionDebugger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/SplineTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/StrafeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/StraightTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/TrackWidthTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/TrackingWheelForwardOffsetTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/TrackingWheelLateralDistanceTuner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/TurnTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/AssetsTrajectoryManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/AxesSigns.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/BNO055IMUUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/DashboardUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/Encoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/LoggingUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/LynxModuleUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/util/RegressionUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/vision/SkystoneDeterminationPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/firstinspires/ftc/teamcode/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2042z0wXZAE6TA8I9LPIA5l3Kzb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Ultimate-Goal/TeamCode" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\wsrsh\Documents\Robotics-Code-Bases\Freight-Frenzy\TeamCode\src\main\java\org\firstinspires\ftc\teamcode" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wsrsh\Documents\Robotics-Code-Bases\Freight-Frenzy\TeamCode\src\main\java\org\firstinspires\ftc\teamcode" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2b72d75-23f3-46c6-beec-8ade7226960c" name="Default Changelist" comment="" />
+      <created>1635289797369</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635289797369</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1635290582282">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1635290582282" />
+    <state x="421" y="171" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1635290172721">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="421" y="171" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1635290172721" />
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1635290597257">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1635290597257" />
+  </component>
+</project>

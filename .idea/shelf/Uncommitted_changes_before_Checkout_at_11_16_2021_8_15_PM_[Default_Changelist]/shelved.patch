@@ -1,0 +1,16 @@
+Index: TeamCode/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//\r\n// build.gradle in TeamCode\r\n//\r\n// Most of the definitions for building your module reside in a common, shared\r\n// file 'build.common.gradle'. Being factored in this way makes it easier to\r\n// integrate updates to the FTC into your code. If you really need to customize\r\n// the build definitions, you can place those customizations in this file, but\r\n// please think carefully as to whether such customizations are really necessary\r\n// before doing so.\r\n\r\n\r\n// Custom definitions may go here\r\n\r\n// Include common definitions from above.\r\napply from: '../build.common.gradle'\r\napply from: '../build.dependencies.gradle'\r\n\r\ndependencies {\r\n    implementation project(':FtcRobotController')\r\n    annotationProcessor files('lib/OpModeAnnotationProcessor.jar')\r\n    implementation 'org.openftc:easyopencv:1.5.0'\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- TeamCode/build.gradle	(revision 85a1070656b0ebfbf80f7b4dbe2ad618a8bc1b1f)
++++ TeamCode/build.gradle	(date 1637112960142)
+@@ -18,5 +18,5 @@
+ dependencies {
+     implementation project(':FtcRobotController')
+     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
+-    implementation 'org.openftc:easyopencv:1.5.0'
++    implementation 'org.openftc:easyopencv:1.5.1'
+ }
