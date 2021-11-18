@@ -71,53 +71,6 @@ public class Drivetrain extends RobotComponent {
 
 	}
 
-	/**
-	 * Turns the robot a specified amount of degrees either clockwise or counterclockwise
-	 *
-	 * @param degrees     The degrees to move
-	 * @param goClockwise If movement should be clockwise
-	 */
-	public void turnDegrees(double degrees, boolean goClockwise, double speed) {
-		int inchTurn = (int) (degrees / 3.7);
-		if (goClockwise) {
-			runDistance(inchTurn, -inchTurn);
-		} else {
-			runDistance(-inchTurn, inchTurn);
-		}
-
-	}
-
-	public void turnDegrees(double degrees, boolean goClockwise, double speed, double maxSeconds) {
-		int inchTurn = (int) (degrees / 10.95);
-		if (goClockwise) {
-			runDistance(inchTurn, -inchTurn, speed, maxSeconds);
-		} else {
-			runDistance(-inchTurn, inchTurn, speed, maxSeconds);
-		}
-
-	}
-
-	public void runDistance(double leftInches, double rightInches) {
-		runDistance(leftInches, rightInches, 999, defaultSpeed);
-	}
-
-	public void runDistance(double leftInches, double rightInches, double seconds) {
-		runDistance(leftInches, rightInches, seconds, defaultSpeed);
-	}
-
-	/**
-	 * Sets all the motors to run at a given speed to specified distances or until a maximum amount
-	 * of time has been reached.
-	 *
-	 * @param leftInches  The distance for the left motors to reach
-	 * @param rightInches The distance for the right motors to reach
-	 * @param maxSeconds  The maximum amount of time for the function to take
-	 * @param speed       The speed for all of the motors to be set at
-	 */
-	public void runDistance(double leftInches, double rightInches, double maxSeconds, double speed) {
-		runDistance(leftInches, leftInches, rightInches, rightInches, maxSeconds, speed);
-	}
-
 	public void runDistance(double frontLeftInches, double backLeftInches, double frontRightInches, double backRightInches, double maxSeconds, double maxSpeed) {
 		if (!opModeIsActive()) {
 			return;
@@ -180,15 +133,6 @@ public class Drivetrain extends RobotComponent {
 		setAllPowers(0);
 	}
 
-	public void setPowerLeft(double power) {
-		setIndividualPowers(-power, power, power, -power);
-	}
-
-	public void setPowerRight(double power) {
-		setIndividualPowers(power,-power, -power, power);
-	}
-
-
 	/**
 	 * Sets all 4 motors on the drivetrain to a given power
 	 *
@@ -196,16 +140,6 @@ public class Drivetrain extends RobotComponent {
 	 */
 	public void setAllPowers(double power) {
 		setSpecificPowers(power, frontLeft, frontRight, backLeft, backRight);
-	}
-
-	public void setIndividualPowers(double[] motorPowers) {
-		if (motorPowers.length != 4) {
-			return;
-		}
-		frontLeft.setPower(motorPowers[0]);
-		frontRight.setPower(motorPowers[1]);
-		backLeft.setPower(motorPowers[2]);
-		backRight.setPower(motorPowers[3]);
 	}
 
 	public void setIndividualPowers(float[] motorPowers) {
@@ -216,21 +150,6 @@ public class Drivetrain extends RobotComponent {
 		frontRight.setPower(motorPowers[1]);
 		backLeft.setPower(motorPowers[2]);
 		backRight.setPower(motorPowers[3]);
-	}
-
-	/**
-	 * Sets the powers of all motors in the drive train to a different power
-	 *
-	 * @param frontLeftPower  The power for the front left motor
-	 * @param frontRightPower The power for the front right motor
-	 * @param backLeftPower   The power for the back left motor
-	 * @param backRightPower  The power for the back right motor
-	 */
-	public void setIndividualPowers(double frontLeftPower, double frontRightPower, double backLeftPower, double backRightPower) {
-		frontLeft.setPower(frontLeftPower);
-		frontRight.setPower(frontRightPower);
-		backLeft.setPower(backLeftPower);
-		backRight.setPower(backRightPower);
 	}
 
 	@Override
