@@ -33,13 +33,13 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.io.File;
-import java.time.LocalDate;
 
 public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	/*
 	 * An enum to define the randomization
 	 */
-	public enum CapstonePosition {
+	public enum CapstonePosition
+	{
 		LEFT,
 		MIDDLE,
 		RIGHT
