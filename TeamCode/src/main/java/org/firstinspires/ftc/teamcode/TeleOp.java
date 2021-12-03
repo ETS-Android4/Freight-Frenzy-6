@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Logger;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
 
 
@@ -136,7 +134,7 @@ public class TeleOp extends OpMode {
 		} else if (this.gamepad2.dpad_down) {
 			robot.arm.lowerWithPower(0.20);
 		} else {
-			robot.arm.raiseWithPower(0);
+			robot.arm.raiseWithPower(0.05);
 		}
 
 		if(this.gamepad2.y) {

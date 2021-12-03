@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
-import org.firstinspires.ftc.teamcode.Robot.RobotComponent;
 
 import java.util.Locale;
 
@@ -38,10 +37,10 @@ public class Drivetrain extends RobotComponent {
 		backLeft.setTargetPosition(0);
 		backRight.setTargetPosition(0);
 
-		frontLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-		backLeft.setDirection(DcMotor.Direction.FORWARD);
-		frontRight.setDirection(DcMotor.Direction.REVERSE);
-		backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+		frontLeft.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+		backLeft.setDirection(DcMotor.Direction.REVERSE);
+		frontRight.setDirection(DcMotor.Direction.FORWARD);
+		backRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
 		frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);// Set to FORWARD if using AndyMark motors
 		frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);// Set to FORWARD if using AndyMark motors
@@ -196,16 +195,6 @@ public class Drivetrain extends RobotComponent {
 	 */
 	public void setAllPowers(double power) {
 		setSpecificPowers(power, frontLeft, frontRight, backLeft, backRight);
-	}
-
-	public void setIndividualPowers(double[] motorPowers) {
-		if (motorPowers.length != 4) {
-			return;
-		}
-		frontLeft.setPower(motorPowers[0]);
-		frontRight.setPower(motorPowers[1]);
-		backLeft.setPower(motorPowers[2]);
-		backRight.setPower(motorPowers[3]);
 	}
 
 	public void setIndividualPowers(float[] motorPowers) {

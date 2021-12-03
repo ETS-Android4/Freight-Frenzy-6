@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Logger;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
 
 
@@ -115,11 +113,11 @@ public class SingleDriverTeleOp extends OpMode {
 		}
 
 		if (this.gamepad1.dpad_up) {
-			robot.arm.raiseWithPower(armSpeed);
+			robot.arm.lowerWithPower(armSpeed);
 		} else if (this.gamepad1.dpad_down) {
-			robot.arm.lowerWithPower(0.20);
+			robot.arm.raiseWithPower(0.2);
 		} else {
-			robot.arm.raiseWithPower(0);
+			robot.arm.lowerWithPower(0.05);
 		}
 
 		singleJoystickDrive();

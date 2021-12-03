@@ -29,19 +29,19 @@ public class RedCarouselSpinPark extends BaseAutonoumous {
 
 		// Step 1 - drive towards the carousel
 		logger.statusLog(step++, "drive towards the carousel");
-		moveTowardsWareHouse(5.5,999,0.5);
+		moveLeft(6.5,999,1);
 
 		// Step 2 - drive towards the parking zone
 		logger.statusLog(step++, "drive towards the parking zone");
-		moveTowardsBlueAlliance(5.5,999,0.5);
+		moveForwards(6.5,999,1);
 
 		// Step 3 - align with the carousel
 		logger.statusLog(step++, "align with the carousel");
-		moveTowardsBlueAlliance(5.5,999,0.5);
+		moveLeft(5.5,999,1);
 
 		// Step 4 - drive against the carousel
 		logger.statusLog(step++, "driving into the carousel");
-		moveTowardsAudience(3.5,999,0.5);
+		moveBackwards(3.5,999,1);
 
 		// Step 5 - spin the duck off
 		logger.statusLog(step++, "spinning the servo");
@@ -49,15 +49,15 @@ public class RedCarouselSpinPark extends BaseAutonoumous {
 
 		// Step 6 - drive off of the carousel
 		logger.statusLog(step++, "Drive away from carousel");
-		moveTowardsWareHouse(2,999,0.5);
+		moveForwards(2,999,1);
 
 		// Step 7 - drive into the parking zone
 		logger.statusLog(step++, "drive into the parking zone");
-		moveTowardsBlueAlliance(3,999,0.25);
+		moveLeft(3,999,1);
 
 		// Step 8 - drive into the parking zone
 		logger.statusLog(step++, "Park");
-		moveTowardsWareHouse(7,999,0.5);
+		moveForwards(8.5,999,1);
 	}
 
 }

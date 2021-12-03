@@ -36,40 +36,40 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 		robot.arm.turnOffSpinner();
 	}
 
-	public void moveTowardsRedAlliance(double distance, double maxSeconds, double speed) {
-		distance *= 2.25;
-		if(getColor() == Color.RED) {
-			robot.drivetrain.runDistance(distance, distance, distance, distance, maxSeconds, speed);
-		} else {
+	public void moveBackwards(double distance, double maxSeconds, double speed) {
+			distance *= 4.5;
+//		if(getColor() == Color.RED) {
+//			robot.drivetrain.runDistance(distance, distance, distance, distance, maxSeconds, speed);
+//		} else {
 			robot.drivetrain.runDistance(-distance, -distance, -distance, -distance, maxSeconds, speed);
-		}
+//		}
 	}
 
-	public void moveTowardsWareHouse(double distance, double maxSeconds, double speed) {
-		distance *= 2.25;
-		if(getColor() == Color.RED) {
-			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
-		} else {
+	public void moveRight(double distance, double maxSeconds, double speed) {
+		distance *= 4.5;
+//		if(getColor() == Color.RED) {
+//			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
+//		} else {
 			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
-		}
+//		}
 	}
 
-	public void moveTowardsAudience(double distance, double maxSeconds, double speed) {
-		distance *= 2.25;
-		if(getColor() == Color.RED) {
-			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
-		} else {
+	public void moveLeft(double distance, double maxSeconds, double speed) {
+		distance *= 4.5;
+//		if(getColor() == Color.RED) {
+//			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
+//		} else {
 			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
-		}
+//		}
 	}
 
-	public void moveTowardsBlueAlliance(double distance, double maxSeconds, double speed) {
-		distance *= 2.25;
-		if(getColor() == Color.RED) {
-			robot.drivetrain.runDistance(-distance, -distance, -distance, -distance, maxSeconds, speed);
-		} else {
+	public void moveForwards(double distance, double maxSeconds, double speed) {
+		distance *= 4.5;
+//		if(getColor() == Color.RED) {
+//			robot.drivetrain.runDistance(-distance, -distance, -distance, -distance, maxSeconds, speed);
+//		} else {
 			robot.drivetrain.runDistance(distance, distance, distance, distance, maxSeconds, speed);
-		}
+//		}
 	}
 
 	@Override

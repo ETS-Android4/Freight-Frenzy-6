@@ -29,20 +29,7 @@ public class BlueWarehousePark extends BaseAutonoumous {
 
 		// Step 1 - move to align with the warehouse
 		logger.statusLog(step++, "align with warehouse");
-		moveTowardsAudience(8, 999, 0.25);
-
-		// Step 2 - drive into the warehouse over the barrier
-		logger.statusLog(step++, "driving into warehouse");
-		moveTowardsRedAlliance(20,  999, 1);
-
-		// Step 3 - move out of the way of the blocks
-		logger.statusLog(step++, "align with the wall");
-		moveTowardsAudience(4, 999, 0.5);
-
-		// Step 4 - park against the wall
-		logger.statusLog(step++, "Parking");
-		moveTowardsRedAlliance(12,  999, 0.5);
+		moveBackwards(25, 999, 1);
 
 	}
-
 }

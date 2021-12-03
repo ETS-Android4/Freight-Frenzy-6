@@ -29,19 +29,19 @@ public class RedCarouselPark extends BaseAutonoumous {
 
 		// Step 1 - Drive towards the carousel
 		logger.statusLog(step++, "Avoid Randomization");
-		moveTowardsBlueAlliance(5.5,999,0.5);
+		moveLeft(5.5,999,1);
 
 		// Step 2 - Drive towards the other team
 		logger.statusLog(step++, "move out of the way of the carousel");
-		moveTowardsWareHouse(5.5,999,0.5);
+		moveForwards(10,999,1);
 
 		// Step 3 - Drive up against the wall
 		logger.statusLog(step++, "Aligning with wall");
-		moveTowardsBlueAlliance(5,999,0.5);
+		moveLeft(6.5,999,1);
 
 		// Step 4 - drive into the parking zone
 		logger.statusLog(step++, "Parking");
-		moveTowardsWareHouse(8,999,0.5);
+		moveForwards(7,999,1);
 
 	}
 
