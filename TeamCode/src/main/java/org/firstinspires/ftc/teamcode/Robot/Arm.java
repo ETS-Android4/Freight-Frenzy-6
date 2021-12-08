@@ -62,7 +62,9 @@ public class Arm extends RobotComponent {
 
 	}
 
-	public void extendWithPower(double power) {extensionMotor.setPower(power);}
+	public void extendWithPower(double power) {
+		extensionMotor.setPower(power);
+	}
 
 	public void raiseWithPower(double power) {
 		if (armRunMode != DcMotor.RunMode.RUN_USING_ENCODER) {
@@ -80,44 +82,6 @@ public class Arm extends RobotComponent {
 		pivotMotor.setPower(power);
 	}
 
-	public void raiseArm(boolean isHoldingBlock) {
-		if (isHoldingBlock) {
-			raiseWithPower(1);
-			sleep(500);
-		} else {
-			raiseWithPower(0.5);
-			sleep(500);
-		}
-	}
-
-	public void lowerArm(boolean isHoldingBlock) {
-		if(isHoldingBlock) {
-			lowerWithPower(0.5);
-			sleep(500);
-		} else {
-			lowerWithPower(0.25);
-			sleep(500);
-		}
-		stopAllMotors();
-	}
-/*
-	public void maintainPosition() {
-		if(armRunMode == DcMotor.RunMode.RUN_TO_POSITION) {
-			return;
-		} else if(armRunMode != DcMotor.RunMode.RUN_USING_ENCODER) {
-			setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, rightArm);
-		}
-		leftArm.setTargetPosition(leftArm.getCurrentPosition() + 80);
-		//leftArm.setTargetPosition(300);
-		logger.completeLog("Pos", String.valueOf(leftArm.getCurrentPosition()));
-
-		setRunMode(DcMotor.RunMode.RUN_TO_POSITION, leftArm);
-		armRunMode = DcMotor.RunMode.RUN_TO_POSITION;
-
-		leftArm.setPower(0.68);
-		rightArm.setPower(0);
-	}
-*/
 	public void grabHand() {
 		isGrabbing = true;
 		setServoPosition(rightHand, 1);
@@ -130,16 +94,8 @@ public class Arm extends RobotComponent {
 		setServoPosition(leftHand, 1);
 	}
 
-	public boolean isGrabbing() {
-		return isGrabbing;
-	}
-
 	public void turnOnSpinner(double power) {
 		duckSpinner.setPower(power);
-	}
-	public void turnOffSpinner() {duckSpinner.setPower(0);}
-	public void toggleSpinner() {
-
 	}
 
 	@Override

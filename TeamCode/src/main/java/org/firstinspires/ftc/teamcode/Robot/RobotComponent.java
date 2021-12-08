@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public abstract class RobotComponent {
 
+	//TODO: Fix the number of inches thing.
 	static final double COUNTS_PER_MOTOR_REV = 400;    // eg: 1440 if TETRIX Motor Encoder
 	static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
 	static final double WHEEL_DIAMETER_INCHES = 3.75;     // For figuring circumference
@@ -16,7 +17,6 @@ public abstract class RobotComponent {
 
 	static final double DEFAULT_DRIVE_SPEED = 1.0;
 	static final double DEFAULT_TURN_SPEED = 0.5;
-	//TODO: Fix the number of inches thing.
 
 	private OpMode opmode;
 
@@ -44,7 +44,7 @@ public abstract class RobotComponent {
 		}
 	}
 
-void setRunMode(DcMotor.RunMode runMode, DcMotor... motors) {
+	void setRunMode(DcMotor.RunMode runMode, DcMotor... motors) {
 		for (DcMotor motor : motors) {
 			motor.setMode(runMode);
 		}

@@ -2,14 +2,14 @@ package org.firstinspires.ftc.teamcode.Autonomous.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonoumous;
+import org.firstinspires.ftc.teamcode.Autonomous.BaseAutonomous;
 
 /**
  * Created by shell on 10/26/2021.
  */
 
 @Autonomous(group = "Blue Side", name = "Blue Side: Carousel Spin Park")
-public class BlueCarouselSpinPark extends BaseAutonoumous {
+public class BlueCarouselSpinPark extends BaseAutonomous {
 	@Override
 	protected Color getColor() {
 		return Color.BLUE;

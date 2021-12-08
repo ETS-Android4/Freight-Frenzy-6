@@ -58,6 +58,7 @@ public class TeleOp extends OpMode {
 
 	@Override
 	public void loop() {
+
 		/* Controller Layouts
 		 *
 		 * Controller 1 - "Body Controller"
@@ -84,9 +85,7 @@ public class TeleOp extends OpMode {
 		 *
 		 */
 
-		/*
-		 * Controller 1 settings
-		 */
+		/* Controller 1 settings --------------------------------------------------------------- */
 
 		singleJoystickDrive();
 
@@ -107,24 +106,12 @@ public class TeleOp extends OpMode {
 		}
 		robot.arm.turnOnSpinner(0);
 
-		/*
-		if(this.gamepad1.y) {
-			robot.arm.turnOnSpinner(1);
-		} else if (this.gamepad1.a) {
-			robot.arm.turnOnSpinner(-1);
-		} else {
-			robot.arm.turnOnSpinner(0);
-		}
-		*/
-
 		last_x = this.gamepad1.x;
 		last_a = this.gamepad1.a;
 		last_y = this.gamepad1.y;
 		last_b = this.gamepad1.b;
 
-		/*
-		 * Controller 2 settings
-		 */
+		/* Controller 2 settings --------------------------------------------------------------- */
 
 		if (this.gamepad2.right_trigger > 0.5) {
 			robot.arm.extendWithPower(0.55);

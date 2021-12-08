@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Robot.Robot;
 
 @Disabled
 @Autonomous(group = "Base", name = "Base: Autonomous")
-public abstract class BaseAutonoumous extends LinearOpMode {
+public abstract class BaseAutonomous extends LinearOpMode {
 
 	protected abstract Color getColor();
 
@@ -33,7 +33,8 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 			robot.arm.turnOnSpinner(1);
 		}
 		sleep(time);
-		robot.arm.turnOffSpinner();
+		//this turns the duck spinner off
+		robot.arm.turnOnSpinner(0);
 	}
 
 	public void moveBackwards(double distance, double maxSeconds, double speed) {
@@ -72,11 +73,50 @@ public abstract class BaseAutonoumous extends LinearOpMode {
 //		}
 	}
 
+	public void raiseArm(boolean isHoldingBlock) {
+		if (isHoldingBlock) {
+			robot.arm.raiseWithPower(1);
+			sleep(500);
+		} else {
+			robot.arm.raiseWithPower(0.5);
+			sleep(500);
+		}
+	}
+
+	public void lowerArm(boolean isHoldingBlock) {
+		if(isHoldingBlock) {
+			robot.arm.lowerWithPower(0.5);
+			sleep(500);
+		} else {
+			robot.arm.lowerWithPower(0.25);
+			sleep(500);
+		}
+		robot.arm.stopAllMotors();
+	}
+
+	/*
+	public void maintainPosition() {
+		if(armRunMode == DcMotor.RunMode.RUN_TO_POSITION) {
+			return;
+		} else if(armRunMode != DcMotor.RunMode.RUN_USING_ENCODER) {
+			setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, rightArm);
+		}
+		leftArm.setTargetPosition(leftArm.getCurrentPosition() + 80);
+		//leftArm.setTargetPosition(300);
+		logger.completeLog("Pos", String.valueOf(leftArm.getCurrentPosition()));
+
+		setRunMode(DcMotor.RunMode.RUN_TO_POSITION, leftArm);
+		armRunMode = DcMotor.RunMode.RUN_TO_POSITION;
+
+		leftArm.setPower(0.68);
+		rightArm.setPower(0);
+	}
+	*/
+
 	@Override
 	public void runOpMode() {
 		// Initialize motors/servos
 		robot.init(hardwareMap, telemetry, this);
 		logger = new Logger(telemetry);
 	}
-
 }
