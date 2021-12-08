@@ -66,8 +66,8 @@ public class TeleOp extends OpMode {
 		 *
 		 *      Right Joystick X - Turn the robot
 		 *
-		 * 		Y Button 		 - Turn on the duck spinner
-		 * 		X Button		 - Turn on the duck spinner
+		 * 		Y Button 		 - Turn on the duck spinner SIDE BLUE
+		 * 		A Button		 - Turn on the duck spinner SIDE RED
 		 *
 		 * Controller 2 - "Arm Controller"
 		 *      Right Trigger    - Extends arm
@@ -98,13 +98,24 @@ public class TeleOp extends OpMode {
 			speed = 0.25;
 		}
 
+		while(this.gamepad1.y) {
+			robot.arm.turnOnSpinner(1);
+		}
+		robot.arm.turnOnSpinner(0);
+		while(this.gamepad1.a) {
+			robot.arm.turnOnSpinner(-1);
+		}
+		robot.arm.turnOnSpinner(0);
+
+		/*
 		if(this.gamepad1.y) {
 			robot.arm.turnOnSpinner(1);
 		} else if (this.gamepad1.a) {
 			robot.arm.turnOnSpinner(-1);
 		} else {
-			robot.arm.turnOffSpinner();
+			robot.arm.turnOnSpinner(0);
 		}
+		*/
 
 		last_x = this.gamepad1.x;
 		last_a = this.gamepad1.a;
@@ -130,11 +141,11 @@ public class TeleOp extends OpMode {
 		}
 
 		if (this.gamepad2.dpad_up) {
-			robot.arm.raiseWithPower(1 * armSpeed);
+			robot.arm.raiseWithPower(armSpeed);
 		} else if (this.gamepad2.dpad_down) {
-			robot.arm.lowerWithPower(0.20);
+			robot.arm.lowerWithPower(.1);
 		} else {
-			robot.arm.raiseWithPower(0.05);
+			robot.arm.raiseWithPower(0);
 		}
 
 		if(this.gamepad2.y) {
@@ -160,9 +171,9 @@ public class TeleOp extends OpMode {
 	}
 
 	private void singleJoystickDrive() {
-		float leftX = this.gamepad1.left_stick_x;
-		float leftY = this.gamepad1.left_stick_y;
-		float rightX = this.gamepad1.right_stick_x;
+		float leftX =  -1 * this.gamepad1.left_stick_y;//x
+		float leftY =  this.gamepad1.left_stick_x;//y
+		float rightX = this.gamepad1.right_stick_x;//x
 
 		float[] motorPowers = new float[4];
 		motorPowers[0] = (leftY-leftX-rightX);// -+

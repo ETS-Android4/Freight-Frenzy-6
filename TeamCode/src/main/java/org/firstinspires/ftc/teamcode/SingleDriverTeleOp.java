@@ -98,13 +98,14 @@ public class SingleDriverTeleOp extends OpMode {
 			robot.arm.releaseHand();
 		}
 
-		if(this.gamepad1.y) {
+		while(this.gamepad1.y) {
 			robot.arm.turnOnSpinner(1);
-		} else if (this.gamepad1.a) {
-			robot.arm.turnOnSpinner(-1);
-		} else {
-			robot.arm.turnOffSpinner();
 		}
+		robot.arm.turnOnSpinner(0);
+		while(this.gamepad1.a) {
+			robot.arm.turnOnSpinner(-1);
+		}
+		robot.arm.turnOnSpinner(0);
 
 		if (this.gamepad1.right_bumper) {
 			speed = 1.0;
@@ -113,11 +114,11 @@ public class SingleDriverTeleOp extends OpMode {
 		}
 
 		if (this.gamepad1.dpad_up) {
-			robot.arm.lowerWithPower(armSpeed);
+			robot.arm.raiseWithPower(armSpeed);
 		} else if (this.gamepad1.dpad_down) {
-			robot.arm.raiseWithPower(0.2);
+			robot.arm.lowerWithPower(0.2);
 		} else {
-			robot.arm.lowerWithPower(0.05);
+			robot.arm.raiseWithPower(0.001);
 		}
 
 		singleJoystickDrive();

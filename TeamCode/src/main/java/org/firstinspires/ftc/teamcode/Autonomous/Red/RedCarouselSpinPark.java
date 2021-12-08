@@ -57,7 +57,7 @@ public class RedCarouselSpinPark extends BaseAutonoumous {
 
 		// Step 8 - drive into the parking zone
 		logger.statusLog(step++, "Park");
-		moveForwards(8.5,999,1);
+		moveForwards(9,999,1);
 	}
 
 }

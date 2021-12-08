@@ -69,7 +69,7 @@ public class Arm extends RobotComponent {
 			setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, pivotMotor);
 			armRunMode = DcMotor.RunMode.RUN_USING_ENCODER;
 		}
-		pivotMotor.setPower(power);
+		pivotMotor.setPower(-power);
 	}
 
 	public void lowerWithPower(double power) {
@@ -77,7 +77,7 @@ public class Arm extends RobotComponent {
 			setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, pivotMotor);
 			armRunMode = DcMotor.RunMode.RUN_USING_ENCODER;
 		}
-		pivotMotor.setPower(-power);
+		pivotMotor.setPower(power);
 	}
 
 	public void raiseArm(boolean isHoldingBlock) {
@@ -137,9 +137,7 @@ public class Arm extends RobotComponent {
 	public void turnOnSpinner(double power) {
 		duckSpinner.setPower(power);
 	}
-	public void turnOffSpinner() {
-		duckSpinner.setPower(0);
-	}
+	public void turnOffSpinner() {duckSpinner.setPower(0);}
 	public void toggleSpinner() {
 
 	}
