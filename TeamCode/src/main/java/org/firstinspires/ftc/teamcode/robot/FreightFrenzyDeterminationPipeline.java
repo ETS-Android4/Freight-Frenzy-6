@@ -54,16 +54,16 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	static final Scalar BLUE = new Scalar(0, 0, 255);
 	static final Scalar BLACK = new Scalar(225, 225, 225);
 
-	static final Point REGION1 = new Point(100, 100);
-	static final Point REGION2 = new Point(200, 200);
-	static final Point REGION3 = new Point(300, 300);
+	static final Point REGION1 = new Point(175, 0);
+	static final Point REGION2 = new Point(175, 400);
+	static final Point REGION3 = new Point(175, 830);
 
-	static final int REGION1_WIDTH = 50;
-	static final int REGION1_HEIGHT = 50;
-	static final int REGION2_WIDTH = 50;
-	static final int REGION2_HEIGHT = 50;
-	static final int REGION3_WIDTH = 50;
-	static final int REGION3_HEIGHT = 50;
+	static final int REGION1_WIDTH = 125;
+	static final int REGION1_HEIGHT = 125;
+	static final int REGION2_WIDTH = 125;
+	static final int REGION2_HEIGHT = 125;
+	static final int REGION3_WIDTH = 125;
+	static final int REGION3_HEIGHT = 125;
 
 	final int POSITION_THRESHOLD = 140;
 
@@ -99,7 +99,7 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	int avg2;
 
 	// Volatile since accessed by OpMode thread w/o synchronization
-	public volatile CapstonePosition position = CapstonePosition.RIGHT;
+	public volatile CapstonePosition position = getCapstonePosition();
 
 	/*
 	 * This function takes the RGB frame, converts to YCrCb,
@@ -116,7 +116,7 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 		inputToCb(firstFrame);
 
 		region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
-		region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointA));
+		region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
 		region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
 	}
 
@@ -128,6 +128,7 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 
 		avg1 = (int) Core.mean(region1_Cb).val[0];
 		avg2 = (int) Core.mean(region2_Cb).val[0];
+
 
 		Imgproc.rectangle(
 				input, // Buffer to draw on

@@ -30,8 +30,8 @@ public class TeleOpCameraTest extends OpMode {
 	@Override
 	public void loop() {
 		FreightFrenzyDeterminationPipeline.CapstonePosition rp = cameraVision.getPosition();
-		int analysis = cameraVision.getAnalysis();
-		logger.completeLog("14736: Capstone Position", rp.toString() + " " + String.valueOf(analysis));
+		int analysis1 = cameraVision.getAnalysis();
+		logger.completeLog("14736: Capstone Position", rp.toString() + " " + String.valueOf(analysis1));
 		logger.update();
 	}
 
