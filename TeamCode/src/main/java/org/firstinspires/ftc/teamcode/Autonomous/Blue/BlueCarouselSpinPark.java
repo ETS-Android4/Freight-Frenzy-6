@@ -59,5 +59,4 @@ public class BlueCarouselSpinPark extends BaseAutonomous {
 		logger.statusLog(step++, "Park");
 		moveRight(8,999,1);
 	}
-
 }
