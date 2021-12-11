@@ -84,7 +84,6 @@ public class Drivetrain extends RobotComponent {
 		} else {
 			runDistance(-inchTurn, inchTurn, speed, maxSeconds);
 		}
-
 	}
 
 	/**
@@ -102,6 +101,7 @@ public class Drivetrain extends RobotComponent {
 	}
 
 	public void runDistance(double frontLeftInches, double backLeftInches, double frontRightInches, double backRightInches, double maxSeconds, double maxSpeed) {
+
 		if (!opModeIsActive()) {
 			return;
 		}
@@ -155,6 +155,7 @@ public class Drivetrain extends RobotComponent {
 
 		// Stop all motion
 		setAllPowers(0);
+
 
 		// Turn off RUN_TO_POSITION
 		setRunMode(DcMotor.RunMode.RUN_USING_ENCODER, frontLeft, frontRight, backLeft, backRight);
