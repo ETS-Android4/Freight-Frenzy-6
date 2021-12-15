@@ -57,6 +57,6 @@ public class BlueCarouselSpinPark extends BaseAutonomous {
 
 		// Step 8 - drive into the parking zone
 		logger.statusLog(step++, "Park");
-		moveRight(8,999,1);
+		moveRight(8.5,999,1);
 	}
 }
