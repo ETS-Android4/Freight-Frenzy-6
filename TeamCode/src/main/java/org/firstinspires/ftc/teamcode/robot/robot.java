@@ -29,14 +29,11 @@
 
 package org.firstinspires.ftc.teamcode.robot;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
@@ -48,7 +45,9 @@ public class robot {
 	private OpMode opmode = null;
 	private Logger logger = null;
 
-	public CameraVision cameraVision = null;
+	public drivetrain drivetrain = null;
+
+	public cameravision cameraVision = null;
 
 	/* Constructor */
 	public robot() { }
@@ -69,7 +68,35 @@ public class robot {
 
 		// Create specific robot parts
 		logger = new Logger(telemetry);
-		cameraVision = new CameraVision(hardwareMap);
+		drivetrain = new drivetrain(opmode);
+		cameraVision = new cameravision(hardwareMap);
 
+		// Initialize specific robot parts
+		if(!usesRoadRunner) {
+			drivetrain.init(
+					telemetry,
+					this.hardwareMap.get(DcMotor.class, "leftFront"),
+					this.hardwareMap.get(DcMotor.class, "rightFront"),
+					this.hardwareMap.get(DcMotor.class, "leftRear"),
+					this.hardwareMap.get(DcMotor.class, "rightRear")
+			);
+		}
 	}
+
+	// TODO: Bad system to have setServoPosition here and in robot component instead extend CRServo class and implement it
+	public static void setServoPosition(CRServo crservo, double position) {
+		crservo.getController().setServoPosition(crservo.getPortNumber(), position);
+	}
+
+	private boolean opModeIsActive() {
+		if (opmode instanceof LinearOpMode) {
+			return ((LinearOpMode) opmode).opModeIsActive();
+		}
+		return true;
+	}
+
+	public void logTeleOpData() {
+		drivetrain.logTeleOpData();
+	}
+
 }

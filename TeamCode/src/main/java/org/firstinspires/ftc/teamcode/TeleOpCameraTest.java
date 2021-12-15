@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.robot.CameraVision;
+import org.firstinspires.ftc.teamcode.robot.cameravision;
 import org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline;
 
 
@@ -14,11 +14,11 @@ import org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline;
 public class TeleOpCameraTest extends OpMode {
 
 	private Logger logger = null;
-	private CameraVision cameraVision = null;
+	private cameravision cameraVision = null;
 
 	@Override
 	public void init() {
-		cameraVision = new CameraVision(hardwareMap);
+		cameraVision = new cameravision(hardwareMap);
 		logger = new Logger(telemetry);
 		this.msStuckDetectStop = 60000;
 

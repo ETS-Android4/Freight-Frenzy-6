@@ -8,11 +8,11 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-public class CameraVision {
+public class cameravision {
 	private OpenCvCamera webcam;
 	private FreightFrenzyDeterminationPipeline pipeline;
 
-	public CameraVision(HardwareMap hardwareMap) {
+	public cameravision(HardwareMap hardwareMap) {
 		int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
 		webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "TensorFlowCamera"), cameraMonitorViewId);
 		pipeline = new FreightFrenzyDeterminationPipeline();
