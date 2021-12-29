@@ -80,6 +80,13 @@ public class TeleOpSingle extends OpMode {
 			speed = 0.5;
 		}
 
+		// Raise and Lower the Deadwheels
+		if (this.gamepad1.dpad_up) {
+			robot.odometerpods.raiseOdometerWheels();
+		} else if (this.gamepad1.dpad_down) {
+			robot.odometerpods.lowerOdometerWheels();
+		}
+
 		/* Controller 2 settings --------------------------------------------------------------- */
 
 		//telemetry.addData("Launch Speed", shootSpeed);

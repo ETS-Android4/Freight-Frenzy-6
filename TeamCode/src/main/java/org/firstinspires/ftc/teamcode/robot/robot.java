@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
@@ -46,7 +47,7 @@ public class robot {
 	private Logger logger = null;
 
 	public drivetrain drivetrain = null;
-
+	public odometerpods odometerpods = null;
 	public cameravision cameraVision = null;
 
 	/* Constructor */
@@ -81,6 +82,13 @@ public class robot {
 					this.hardwareMap.get(DcMotor.class, "rightRear")
 			);
 		}
+
+		odometerpods.init(
+				telemetry,
+				this.hardwareMap.get(Servo.class, "rightXAxis"),
+				this.hardwareMap.get(Servo.class, "leftXAxis"),
+				this.hardwareMap.get(Servo.class, "middleYAxis")
+		);
 	}
 
 	// TODO: Bad system to have setServoPosition here and in robot component instead extend CRServo class and implement it

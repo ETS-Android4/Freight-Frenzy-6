@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
 
-public class drivetrain extends  robotcomponent {
+public class drivetrain extends robotcomponent {
 
 	private DcMotor frontLeft;
 	private DcMotor frontRight;
@@ -54,18 +54,6 @@ public class drivetrain extends  robotcomponent {
 		setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, frontLeft, frontRight, backLeft, backRight);
 	}
 
-	@Override
-	public void logTeleOpData() {
-		logger.numberLog("Frontleft", frontLeft.getPower());
-		logger.numberLog("Frontleft", frontLeft.getCurrentPosition());
-		logger.numberLog("Frontright", frontRight.getPower());
-		logger.numberLog("Frontright", frontRight.getCurrentPosition());
-		logger.numberLog("Backleft", backLeft.getPower());
-		logger.numberLog("Backleft", backLeft.getCurrentPosition());
-		logger.numberLog("Backright", backRight.getPower());
-		logger.numberLog("Backright", backRight.getCurrentPosition());
-	}
-
 	public void runWithoutEncoders() {
 		setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, frontLeft, frontRight, backLeft, backRight);
 	}
@@ -83,7 +71,6 @@ public class drivetrain extends  robotcomponent {
 	 *
 	 * @param power The power to set the motors to (-1.0 to 1.0)
 	 */
-
 	public void setAllPowers(double power) {
 		setSpecificPowers(power, frontLeft, frontRight, backLeft, backRight);
 	}
@@ -96,5 +83,22 @@ public class drivetrain extends  robotcomponent {
 		frontRight.setPower(motorPowers[1]);
 		backLeft.setPower(motorPowers[2]);
 		backRight.setPower(motorPowers[3]);
+	}
+
+	@Override
+	public void stopAllMotors() {
+
+	}
+
+	@Override
+	public void logTeleOpData() {
+		logger.numberLog("Frontleft", frontLeft.getPower());
+		logger.numberLog("Frontleft", frontLeft.getCurrentPosition());
+		logger.numberLog("Frontright", frontRight.getPower());
+		logger.numberLog("Frontright", frontRight.getCurrentPosition());
+		logger.numberLog("Backleft", backLeft.getPower());
+		logger.numberLog("Backleft", backLeft.getCurrentPosition());
+		logger.numberLog("Backright", backRight.getPower());
+		logger.numberLog("Backright", backRight.getCurrentPosition());
 	}
 }
