@@ -20,7 +20,7 @@ public class intake extends robotcomponent {
 		this.intakeMotor = intakeMotor;
 	}
 
-	public void runintake(double power) {
+	public void setintakepower(double power) {
 		intakeMotor.setPower(-power);
 	}
 

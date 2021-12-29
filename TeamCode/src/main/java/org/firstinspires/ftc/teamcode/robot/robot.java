@@ -48,6 +48,7 @@ public class robot {
 
 	public drivetrain drivetrain = null;
 	public odometerpods odometerpods = null;
+	public intake intake = null;
 	public cameravision cameraVision = null;
 
 	/* Constructor */

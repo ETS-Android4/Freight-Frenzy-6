@@ -16,6 +16,7 @@ public class TeleOpSingle extends OpMode {
 	private robot robot = new robot();
 	private Logger logger = null;
 	private double speed = 1.0;
+	private boolean isIntakeRunning = false;
 
 	/**
 	 * Run once after INIT is pushed
@@ -63,6 +64,12 @@ public class TeleOpSingle extends OpMode {
 		 * 		Left Joystick X - Make the robot crab-walk
 		 * 		Left Joystick Y - Make the robot drive forwards and backwards
 		 *
+		 * 		Dpad Up - Raise the dead wheels off the ground
+		 * 		Dpad Down - Lower the dead wheels onto the ground
+		 *
+		 * 		Y button - Turn the Intake on forwards
+		 * 		A button - Turn the Intake on backwards
+		 *
 		 * Controller 2 - "Arm Controller"
 		 *
 		 */
@@ -80,12 +87,31 @@ public class TeleOpSingle extends OpMode {
 			speed = 0.5;
 		}
 
-		// Raise and Lower the Deadwheels
+		// Raise and Lower the dead-wheels
 		if (this.gamepad1.dpad_up) {
 			robot.odometerpods.raiseOdometerWheels();
 		} else if (this.gamepad1.dpad_down) {
 			robot.odometerpods.lowerOdometerWheels();
 		}
+
+		// Turn the intake on and off
+		if (this.gamepad1.y) {
+			if(isIntakeRunning) {
+				robot.intake.setintakepower(0);
+			} else {
+				robot.intake.setintakepower(1);
+			}
+			isIntakeRunning = !isIntakeRunning;
+		} else if (this.gamepad1.a) {
+			if(isIntakeRunning) {
+				robot.intake.setintakepower(0);
+			} else {
+				robot.intake.setintakepower(-1);
+			}
+			isIntakeRunning = !isIntakeRunning;
+		}
+
+
 
 		/* Controller 2 settings --------------------------------------------------------------- */
 
