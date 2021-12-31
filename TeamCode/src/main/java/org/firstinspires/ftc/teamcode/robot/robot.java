@@ -49,6 +49,9 @@ public class robot {
 	public drivetrain drivetrain = null;
 	public odometerpods odometerpods = null;
 	public intake intake = null;
+	public caroselspinner caroselspinner = null;
+	public freightcontainer freightcontainer = null;
+	public freightcrane freightcrane = null;
 	public cameravision cameraVision = null;
 
 	/* Constructor */
@@ -90,11 +93,31 @@ public class robot {
 				this.hardwareMap.get(Servo.class, "leftXAxis"),
 				this.hardwareMap.get(Servo.class, "middleYAxis")
 		);
-	}
 
-	// TODO: Bad system to have setServoPosition here and in robot component instead extend CRServo class and implement it
-	public static void setServoPosition(CRServo crservo, double position) {
-		crservo.getController().setServoPosition(crservo.getPortNumber(), position);
+		intake.init(
+				telemetry,
+				this.hardwareMap.get(DcMotor.class, "intakeMotor")
+		);
+
+		caroselspinner.init(
+				telemetry,
+				this.hardwareMap.get(CRServo.class, "leftSpinner"),
+				this.hardwareMap.get(CRServo.class, "rightSpinner")
+		);
+
+		freightcontainer.init(
+				telemetry,
+				this.hardwareMap.get(DcMotor.class, "containerMotor"),
+				this.hardwareMap.get(Servo.class, "containerServo")
+		);
+
+		freightcrane.init(
+				telemetry,
+				this.hardwareMap.get(DcMotor.class, "verticalMotor"),
+				this.hardwareMap.get(Servo.class,"leftHorizontalServo"),
+				this.hardwareMap.get(Servo.class,"rightHorizontalServo")
+		);
+
 	}
 
 	private boolean opModeIsActive() {

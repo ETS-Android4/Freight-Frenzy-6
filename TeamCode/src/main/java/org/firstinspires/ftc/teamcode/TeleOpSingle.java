@@ -70,7 +70,22 @@ public class TeleOpSingle extends OpMode {
 		 * 		Y button - Turn the Intake on forwards
 		 * 		A button - Turn the Intake on backwards
 		 *
+		 * 		X button - Spin the duck-spinner Clockwise
+		 * 		B button - Spin the duck-spinner Counterclockwise
+		 *
 		 * Controller 2 - "Arm Controller"
+		 *
+		 * 		Right Trigger - extend the crane vertically
+		 * 		Right Bumper - collapse the crane vertically
+		 *
+		 * 		left Trigger - extend the crane horizontally
+		 * 		left Trigger - collapse the crane horizontally
+		 *
+		 *		X button - flip the container open
+		 * 		B button - flip the container closed
+		 *
+		 * 		Y button - open the container
+		 * 		A button - close the container
 		 *
 		 */
 
@@ -86,6 +101,9 @@ public class TeleOpSingle extends OpMode {
 		else if (this.gamepad1.left_trigger > 0.5) {
 			speed = 0.5;
 		}
+
+		telemetry.addData("Chassis Speed", speed);
+		telemetry.update();
 
 		// Raise and Lower the dead-wheels
 		if (this.gamepad1.dpad_up) {
@@ -111,14 +129,52 @@ public class TeleOpSingle extends OpMode {
 			isIntakeRunning = !isIntakeRunning;
 		}
 
-
+		while(this.gamepad1.x) {
+			robot.caroselspinner.turnOnSpinners(1);
+		}
+		robot.caroselspinner.turnOnSpinners(0);
+		while(this.gamepad1.b) {
+			robot.caroselspinner.turnOnSpinners(-1);
+		}
+		robot.caroselspinner.turnOnSpinners(0);
 
 		/* Controller 2 settings --------------------------------------------------------------- */
 
-		//telemetry.addData("Launch Speed", shootSpeed);
-		telemetry.addData("Chassis Speed", speed);
-		telemetry.update();
+		if (this.gamepad2.right_trigger > 0.5) {
+			robot.freightcrane.setVerticalCranePower(.75);
+		} else {
+			robot.freightcrane.setVerticalCranePower(0);
+		}
+		if (this.gamepad2.right_bumper) {
+			robot.freightcrane.extendCraneHorizontally();
+		}
+
+		if (this.gamepad2.left_trigger > 0.5) {
+			robot.freightcrane.setVerticalCranePower(-1);
+		} else {
+			robot.freightcrane.setVerticalCranePower(0);
+		}
+		if (this.gamepad2.right_bumper) {
+			robot.freightcrane.collapseCraneHorizontally();
+		}
+
+		if (this.gamepad2.x) {
+			robot.freightcontainer.setContainerFlipperPower(1);
+		} else if (this.gamepad2.b) {
+			robot.freightcontainer.setContainerFlipperPower(-1);
+		} else {
+			robot.freightcontainer.setContainerFlipperPower(0);
+		}
+
+		if (this.gamepad2.y) {
+			robot.freightcontainer.openContainer();
+		} else if (this.gamepad2.a) {
+			robot.freightcontainer.closeContainer();
+		}
+
 	}
+
+
 
 	/**
 	 * Runs once after STOP is pushed

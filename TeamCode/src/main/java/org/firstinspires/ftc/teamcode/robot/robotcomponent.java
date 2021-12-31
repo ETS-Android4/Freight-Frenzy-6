@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 abstract class robotcomponent {
@@ -32,16 +31,6 @@ abstract class robotcomponent {
 	 * Force all componts to be able to log their data while in teleOp mode
 	 */
 	abstract void logTeleOpData();
-
-	/**
-	 * An easier way to set the position for a CRServo
-	 *
-	 * @param crservo The servo that should have its position changed
-	 * @param position The position (0 to 1)
-	 */
-	void setServoPosition(CRServo crservo, double position) {
-		crservo.getController().setServoPosition(crservo.getPortNumber(), position);
-	}
 
 	/**
 	 * Sets the power for all passed motors to a given power

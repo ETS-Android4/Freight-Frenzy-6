@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Logger;
 
 @Config
 public class odometerpods extends robotcomponent {
@@ -14,15 +13,8 @@ public class odometerpods extends robotcomponent {
 	private Servo leftXAxis;
 	private Servo middleYAxis;
 
-	private Logger logger = null;
-
 	odometerpods(OpMode opmode) {
 		super(opmode);
-	}
-
-	@Override
-	public void stopAllMotors() {
-
 	}
 
 	public void init (Telemetry telemetry, Servo rightXAxis, Servo leftXAxis, Servo middleYAxis) {
@@ -42,6 +34,11 @@ public class odometerpods extends robotcomponent {
 		leftXAxis.setPosition(0);
 		rightXAxis.setPosition(0);
 		middleYAxis.setPosition(0);
+	}
+
+	@Override
+	public void stopAllMotors() {
+
 	}
 
 	@Override

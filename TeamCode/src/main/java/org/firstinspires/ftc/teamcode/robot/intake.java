@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class intake extends robotcomponent {
 
-	private DcMotor intakeMotor = null;
+	private DcMotor intakeMotor;
 
 	intake(OpMode opmode) {
 		super(opmode);
