@@ -6,21 +6,21 @@ import org.firstinspires.ftc.teamcode.robot.robot;
 
 
 /**
- * Created by shell bots on 1/02/2022.
+ * Created by shell bots on 12/31/2021.
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Single")
-public class TeleOpSingle extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Tester")
+public class TeleOpTester extends OpMode {
 
+	private static final boolean TUNING = true;
 	private robot robot = new robot();
 	private Logger logger = null;
 	private double speed = 1.0;
 	private boolean isIntakeRunning = false;
-	//last_gamepad_1 left bumper
-	private boolean last_g1_lb = false;
-	//last_gamepad_1 right bumper
-	private boolean last_g1_rb = false;
 
+	/**
+	 * Run once after INIT is pushed
+	 */
 
 	@Override
 	public void init() {
@@ -56,34 +56,44 @@ public class TeleOpSingle extends OpMode {
 
 		/* Controller Layouts
 		 *
+		 * Controller 1 - "Body Controller" ------------------------------------------------------
+		 *
 		 *      Left Trigger - Set full speed
 		 *      Right Trigger - Set half speed
-		 *
-		 * 		left bumper - Turn the Intake on forwards
-		 * 		right bumper - Turn the Intake on backwards
 		 *
 		 *      Right Joystick X - Turn the robot
 		 * 		Left Joystick X - Make the robot crab-walk
 		 * 		Left Joystick Y - Make the robot drive forwards and backwards
 		 *
-		 * 		Y button - Spin the duck-spinner Clockwise
-		 * 		A button - Spin the duck-spinner Counterclockwise
+		 * 		Dpad Up - Raise the dead wheels off the ground
+		 * 		Dpad Down - Lower the dead wheels onto the ground
 		 *
-		 * 		B button - drop the freight (open the container)
-		 * 		X button - lock the freight in the robot (close the container)
+		 * 		Y button - Turn the Intake on forwards
+		 * 		A button - Turn the Intake on backwards
 		 *
-		 * 		Dpad up - get ready to place a freight in the highest goal
-		 * 				  (extend the crane vertically, extend the the crane horizontally, and flip
-		 * 				  the container into the drop position.)
-		 * 				  if pressed when already in the highest position lower the goal so more
-		 * 				  freight can be grabbed
-		 * 		Dpad down - get ready to place a freight in the lowest goal
-		 * 					(flip he container into the upright position, collapse the crane
-		 * 					horizontally, and collapse the crone vertically.)
-		 * 					if pressed when already in the lowest position lower the goal so more
-		 * 					freight can be grabbed
+		 * 		X button - Spin the duck-spinner Clockwise
+		 * 		B button - Spin the duck-spinner Counterclockwise
+		 *
+		 * Controller 2 - "Arm Controller" -------------------------------------------------------
+		 *
+		 * 		Right Trigger - extend the crane vertically
+		 * 		Right Bumper - collapse the crane vertically
+		 *
+		 * 		left Trigger - extend the crane horizontally
+		 * 		left Trigger - collapse the crane horizontally
+		 *
+		 *		X button - flip the container open
+		 * 		B button - flip the container closed
+		 *
+		 * 		Y button - open the container
+		 * 		A button - close the container
 		 *
 		 */
+
+		/* Controller 1 settings --------------------------------------------------------------- */
+
+		// Move according to player 1's joysticks
+		singleJoystickDrive();
 
 		// Change driving speed
 		if (this.gamepad1.right_trigger > 0.5) {
@@ -96,15 +106,22 @@ public class TeleOpSingle extends OpMode {
 		telemetry.addData("Chassis Speed", speed);
 		telemetry.update();
 
+		// Raise and Lower the dead-wheels
+		if (this.gamepad1.dpad_up) {
+			robot.odometerpods.raiseOdometerWheels();
+		} else if (this.gamepad1.dpad_down) {
+			robot.odometerpods.lowerOdometerWheels();
+		}
+
 		// Turn the intake on and off
-		if (this.gamepad1.left_bumper && !last_g1_lb) {
+		if (this.gamepad1.y) {
 			if(isIntakeRunning) {
 				robot.intake.setintakepower(0);
 			} else {
 				robot.intake.setintakepower(1);
 			}
 			isIntakeRunning = !isIntakeRunning;
-		} else if (this.gamepad1.right_bumper && !last_g1_rb) {
+		} else if (this.gamepad1.a) {
 			if(isIntakeRunning) {
 				robot.intake.setintakepower(0);
 			} else {
@@ -113,36 +130,51 @@ public class TeleOpSingle extends OpMode {
 			isIntakeRunning = !isIntakeRunning;
 		}
 
-		last_g1_lb = this.gamepad2.left_bumper;
-		last_g1_rb = this.gamepad2.right_bumper;
-
-		// Move according to player joysticks inputs
-		singleJoystickDrive();
-
-		// Turn the duck spinners off and on
-		while(this.gamepad1.y) {
+		while(this.gamepad1.x) {
 			robot.caroselspinner.turnOnSpinners(1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
-		while(this.gamepad1.a) {
+		while(this.gamepad1.b) {
 			robot.caroselspinner.turnOnSpinners(-1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
 
+		/* Controller 2 settings --------------------------------------------------------------- */
 
-		// Open and close the freight container
-		if (this.gamepad1.b) {
+		if (this.gamepad2.right_trigger > 0.5) {
+			robot.outtake.freightcrane.setVerticalCranePower(.5);
+		} else {
+			robot.outtake.freightcrane.setVerticalCranePower(0);
+		}
+
+		if (this.gamepad2.right_bumper) {
+			robot.outtake.freightcrane.extendCraneHorizontally();
+		}
+
+		if (this.gamepad2.left_trigger > 0.5) {
+			robot.outtake.freightcrane.setVerticalCranePower(-.5);
+		} else {
+			robot.outtake.freightcrane.setVerticalCranePower(0);
+		}
+
+		if (this.gamepad2.right_bumper) {
+			robot.outtake.freightcrane.collapseCraneHorizontally();
+		}
+
+		if (this.gamepad2.x) {
+			robot.outtake.freightcontainer.setContainerFlipperPower(1);
+		} else if (this.gamepad2.b) {
+			robot.outtake.freightcontainer.setContainerFlipperPower(-1);
+		} else {
+			robot.outtake.freightcontainer.setContainerFlipperPower(0);
+		}
+
+		if (this.gamepad2.y) {
 			robot.outtake.freightcontainer.openContainer();
-		} else if (this.gamepad1.x) {
+		} else if (this.gamepad2.a) {
 			robot.outtake.freightcontainer.closeContainer();
 		}
 
-		// set the outtake so the robot can pickup new freight, and place it
-		if (this.gamepad1.dpad_up) {
-			robot.outtake.setOutTakeToTopPosition();
-		}  else if (this.gamepad1.dpad_down) {
-			robot.outtake.setOutTakeToLowerPosition();
-		}
 	}
 
 	/**
@@ -188,11 +220,10 @@ public class TeleOpSingle extends OpMode {
 
 	private double getLargestAbsVal(double[] values) {
 		double max = 0;
-		for (double val : values) {
-			if (Math.abs(val) > max) {
-				max = Math.abs(val);
-			}
+		for(double val : values) {
+			if(Math.abs(val) > max) { max = Math.abs(val); }
 		}
 		return max;
 	}
+
 }

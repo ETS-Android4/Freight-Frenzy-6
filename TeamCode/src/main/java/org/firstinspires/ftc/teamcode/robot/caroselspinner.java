@@ -28,8 +28,9 @@ public class caroselspinner extends robotcomponent {
 	}
 
 	@Override
-	public void stopAllMotors() {
-
+	public void stopEverything() {
+		leftSpinner.setPower(0);
+		rightSpinner.setPower(0);
 	}
 
 	@Override

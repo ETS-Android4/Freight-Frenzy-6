@@ -37,7 +37,7 @@ public class odometerpods extends robotcomponent {
 	}
 
 	@Override
-	public void stopAllMotors() {
+	public void stopEverything() {
 
 	}
 

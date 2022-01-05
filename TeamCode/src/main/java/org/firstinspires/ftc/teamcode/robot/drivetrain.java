@@ -50,20 +50,8 @@ public class drivetrain extends robotcomponent {
 
 		setAllPowers(0);
 
-		// Set all motors to run using encoders
+		// Set all motors to run without encoders
 		setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, frontLeft, frontRight, backLeft, backRight);
-	}
-
-	public void runWithoutEncoders() {
-		setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, frontLeft, frontRight, backLeft, backRight);
-	}
-
-	private void normalizePower(double speed, double totalDistance, DcMotor motor) {
-		double x = Math.abs( motor.getTargetPosition() - motor.getCurrentPosition() ) / totalDistance;
-		//if( x < 0.15 || x > 0.85 ) { motor.setPower(speed * 0.75); }
-		//else { motor.setPower(speed); }
-		//motor.setPower( speed * Math.abs( Math.sin( Math.PI / 3 * x + Math.PI/3) ) );
-		//motor.setPower( speed * Math.abs( Math.sin( ( 0.5 * Math.PI * x ) + ( Math.PI / 3.75 ) ) ) );
 	}
 
 	/**
@@ -86,8 +74,8 @@ public class drivetrain extends robotcomponent {
 	}
 
 	@Override
-	public void stopAllMotors() {
-
+	public void stopEverything() {
+		setSpecificPowers(0, frontLeft, frontRight, backLeft, backRight);
 	}
 
 	@Override

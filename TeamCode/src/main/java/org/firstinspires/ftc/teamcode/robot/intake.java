@@ -18,6 +18,9 @@ public class intake extends robotcomponent {
 
 	public void init(Telemetry telemetry, DcMotor intakeMotor) {
 		this.intakeMotor = intakeMotor;
+
+		intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+		intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 	}
 
 	public void setintakepower(double power) {
@@ -25,8 +28,8 @@ public class intake extends robotcomponent {
 	}
 
 	@Override
-	public void stopAllMotors() {
-
+	public void stopEverything() {
+		intakeMotor.setPower(0);
 	}
 
 	@Override

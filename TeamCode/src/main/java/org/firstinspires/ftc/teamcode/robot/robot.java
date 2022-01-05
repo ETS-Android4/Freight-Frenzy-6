@@ -50,8 +50,7 @@ public class robot {
 	public odometerpods odometerpods = null;
 	public intake intake = null;
 	public caroselspinner caroselspinner = null;
-	public freightcontainer freightcontainer = null;
-	public freightcrane freightcrane = null;
+	public outtake outtake = null;
 	public cameravision cameraVision = null;
 
 	/* Constructor */
@@ -73,8 +72,12 @@ public class robot {
 
 		// Create specific robot parts
 		logger = new Logger(telemetry);
-		drivetrain = new drivetrain(opmode);
 		cameraVision = new cameravision(hardwareMap);
+		drivetrain = new drivetrain(opmode);
+		odometerpods = new odometerpods(opmode);
+		intake = new intake(opmode);
+		caroselspinner = new caroselspinner(opmode);
+		outtake = new outtake(opmode);
 
 		// Initialize specific robot parts
 		if(!usesRoadRunner) {
@@ -105,19 +108,11 @@ public class robot {
 				this.hardwareMap.get(CRServo.class, "rightSpinner")
 		);
 
-		freightcontainer.init(
+		outtake.init(
+				hardwareMap,
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "containerMotor"),
-				this.hardwareMap.get(Servo.class, "containerServo")
+				opmode
 		);
-
-		freightcrane.init(
-				telemetry,
-				this.hardwareMap.get(DcMotor.class, "verticalMotor"),
-				this.hardwareMap.get(Servo.class,"leftHorizontalServo"),
-				this.hardwareMap.get(Servo.class,"rightHorizontalServo")
-		);
-
 	}
 
 	private boolean opModeIsActive() {
@@ -127,8 +122,17 @@ public class robot {
 		return true;
 	}
 
-	public void logTeleOpData() {
-		drivetrain.logTeleOpData();
+	public void stopEverything() {
+		caroselspinner.stopEverything();
+		drivetrain.stopEverything();
+		outtake.stopEverything();
+		intake.stopEverything();
 	}
 
+	public void logTeleOpData() {
+		caroselspinner.logTeleOpData();
+		drivetrain.logTeleOpData();
+		outtake.logTeleOpData();
+		intake.logTeleOpData();
+	}
 }

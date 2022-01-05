@@ -25,7 +25,7 @@ abstract class robotcomponent {
 	/**
 	 * Force all components to have a quick stop option
 	 */
-	public abstract void stopAllMotors();
+	public abstract void stopEverything();
 
 	/**
 	 * Force all componts to be able to log their data while in teleOp mode
