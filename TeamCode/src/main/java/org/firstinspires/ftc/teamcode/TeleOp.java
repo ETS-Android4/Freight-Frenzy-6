@@ -127,12 +127,17 @@ public class TeleOp extends OpMode {
 			armSpeed = 0.5;
 		}
 
-		if (this.gamepad2.dpad_up) {
+		if(this.gamepad2.left_stick_y > 0.1) {
+			robot.arm.lowerWithPower(this.gamepad2.left_stick_y);
+		}
+		else if(this.gamepad2.left_stick_y < -0.1) {
+			robot.arm.lowerWithPower(this.gamepad2.left_stick_y);
+		} else if (this.gamepad2.dpad_up) {
 			robot.arm.raiseWithPower(armSpeed);
 		} else if (this.gamepad2.dpad_down) {
 			robot.arm.lowerWithPower(0.1);
 		} else {
-			robot.arm.raiseWithPower(0);
+			robot.arm.lowerWithPower(0.0001);
 		}
 
 		if(this.gamepad2.y) {
@@ -158,8 +163,8 @@ public class TeleOp extends OpMode {
 	}
 
 	private void singleJoystickDrive() {
-		float leftY  = this.gamepad1.left_stick_y;  //x
-		float leftX  = this.gamepad1.left_stick_x;  //y
+		float leftY  = this.gamepad1.left_stick_x;  //x
+		float leftX  = this.gamepad1.left_stick_y;  //y
 		float rightX = this.gamepad1.right_stick_x; //x
 
 		float[] motorPowers = new float[4];
