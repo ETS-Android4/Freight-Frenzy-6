@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -36,15 +37,15 @@ public class outtake extends robotcomponent {
 
 		freightcrane.init(
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "verticalMotor"),
-				this.hardwareMap.get(Servo.class, "leftHorizontalServo"),
-				this.hardwareMap.get(Servo.class, "rightHorizontalServo")
+				this.hardwareMap.get(DcMotor.class, "verticalMotor"), //Hub:3 Port:
+				this.hardwareMap.get(CRServo.class, "leftHorizontalServo"), //Hub: Port:
+				this.hardwareMap.get(CRServo.class, "rightHorizontalServo")  //Hub: Port:
 		);
 
 		freightcontainer.init(
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "containerMotor"),
-				this.hardwareMap.get(Servo.class, "containerServo")
+				this.hardwareMap.get(DcMotor.class, "containerMotor"), //Hub: Port:
+				this.hardwareMap.get(Servo.class, "containerServo")  //Hub: Port:
 		);
 	}
 
@@ -55,7 +56,7 @@ public class outtake extends robotcomponent {
 			freightcrane.extendCraneVertically(1, 0.5, 10);
 			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
 			if (currentPositionOfCrane > tierOneTime) {
-				freightcrane.extendCraneHorizontally();
+				freightcrane.extendCraneHorizontally(1000);
 			}
 			if (currentPositionOfCrane > tierTwoTime) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
@@ -67,7 +68,7 @@ public class outtake extends robotcomponent {
 			freightcrane.extendCraneVertically(1, 0.5, 10);
 			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
 			if (currentPositionOfCrane > tierOneTime) {
-				freightcrane.extendCraneHorizontally();
+				freightcrane.extendCraneHorizontally(1000);
 			}
 			if (currentPositionOfCrane > tierTwoTime) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
@@ -85,7 +86,7 @@ public class outtake extends robotcomponent {
 			freightcrane.extendCraneVertically(1, 0.5, 10);
 			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
 			if (currentPositionOfCrane > tierOneTime) {
-				freightcrane.extendCraneHorizontally();
+				freightcrane.extendCraneHorizontally(1000);
 			}
 			if (currentPositionOfCrane > tierTwoTime) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
@@ -97,7 +98,7 @@ public class outtake extends robotcomponent {
 			freightcrane.extendCraneVertically(1, 0.5, 10);
 			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
 			if (currentPositionOfCrane > tierOneTime) {
-				freightcrane.extendCraneHorizontally();
+				freightcrane.extendCraneHorizontally(1000);
 			}
 			if (currentPositionOfCrane > tierTwoTime) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
@@ -111,7 +112,7 @@ public class outtake extends robotcomponent {
 	public void collapseOutTake() {
 		if (outTakePosition != 1) {
 			freightcrane.extendCraneVertically(0.75, 0.5, 10);
-			freightcrane.extendCraneHorizontally();
+			freightcrane.extendCraneHorizontally(1000);
 			freightcontainer.flipContainer(0.5,0.5, .10);
 			outTakePosition = 1;
 		} else {

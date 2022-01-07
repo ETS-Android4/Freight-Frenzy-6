@@ -148,7 +148,7 @@ public class TeleOpTester extends OpMode {
 		}
 
 		if (this.gamepad2.right_bumper) {
-			robot.outtake.freightcrane.extendCraneHorizontally();
+			robot.outtake.freightcrane.extendCraneHorizontally(1000);
 		}
 
 		if (this.gamepad2.left_trigger > 0.5) {
@@ -158,7 +158,7 @@ public class TeleOpTester extends OpMode {
 		}
 
 		if (this.gamepad2.right_bumper) {
-			robot.outtake.freightcrane.collapseCraneHorizontally();
+			robot.outtake.freightcrane.collapseCraneHorizontally(1000);
 		}
 
 		if (this.gamepad2.x) {

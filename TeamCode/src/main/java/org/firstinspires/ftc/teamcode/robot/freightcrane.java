@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,8 +13,8 @@ import java.util.Locale;
 public class freightcrane extends robotcomponent{
 
 	public DcMotor verticalMotor;
-	public Servo leftHorizontalServo;
-	public Servo rightHorizontalServo;
+	public CRServo leftHorizontalServo;
+	public CRServo rightHorizontalServo;
 
 	private Logger logger = null;
 
@@ -22,7 +22,7 @@ public class freightcrane extends robotcomponent{
 		super(opmode);
 	}
 
-	 void init(Telemetry telemetry, DcMotor verticalMotor, Servo leftHorizontalServo, Servo rightHorizontalServo) {
+	 void init(Telemetry telemetry, DcMotor verticalMotor, CRServo leftHorizontalServo, CRServo rightHorizontalServo) {
 
 		logger = new Logger(telemetry);
 
@@ -62,14 +62,16 @@ public class freightcrane extends robotcomponent{
 		}
 	}
 
-	public void extendCraneHorizontally() {
-		leftHorizontalServo.setPosition(.5);
-		rightHorizontalServo.setPosition(.5);
+	public void extendCraneHorizontally(long sleep) {
+		leftHorizontalServo.setPower(0.5);
+		sleep(sleep);
+		rightHorizontalServo.setPower(0);
 	}
 
-	public void collapseCraneHorizontally() {
-		leftHorizontalServo.setPosition(0);
-		rightHorizontalServo.setPosition(0);
+	public void collapseCraneHorizontally(long sleep) {
+		leftHorizontalServo.setPower(-0.5);
+		sleep(sleep);
+		rightHorizontalServo.setPower(0);
 	}
 
 	@Override

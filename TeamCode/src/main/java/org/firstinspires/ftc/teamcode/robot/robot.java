@@ -80,32 +80,34 @@ public class robot {
 		outtake = new outtake(opmode);
 
 		// Initialize specific robot parts
+		// Hub 1 = Control Hub
+		// Hub 2 = Expansion Hub 2
 		if(!usesRoadRunner) {
 			drivetrain.init(
 					telemetry,
-					this.hardwareMap.get(DcMotor.class, "leftFront"),
-					this.hardwareMap.get(DcMotor.class, "rightFront"),
-					this.hardwareMap.get(DcMotor.class, "leftRear"),
-					this.hardwareMap.get(DcMotor.class, "rightRear")
+					this.hardwareMap.get(DcMotor.class, "leftFront"), //Hub:2 Port:1
+					this.hardwareMap.get(DcMotor.class, "rightFront"), //Hub:1 Port:1
+					this.hardwareMap.get(DcMotor.class, "leftRear"), // Hub:2 Port:0
+					this.hardwareMap.get(DcMotor.class, "rightRear")  // Hub:1 Port:0
 			);
 		}
 
 		odometerpods.init(
 				telemetry,
-				this.hardwareMap.get(Servo.class, "rightXAxis"),
-				this.hardwareMap.get(Servo.class, "leftXAxis"),
-				this.hardwareMap.get(Servo.class, "middleYAxis")
+				this.hardwareMap.get(Servo.class, "rightXAxis"), //Hub:1 Port:5
+				this.hardwareMap.get(Servo.class, "leftXAxis"), //Hub:2 Port:
+				this.hardwareMap.get(Servo.class, "middleYAxis")  //Hub:2 Port:5
 		);
 
 		intake.init(
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "intakeMotor")
+				this.hardwareMap.get(DcMotor.class, "intakeMotor")  //Hub:1 Port:2
 		);
 
 		caroselspinner.init(
 				telemetry,
-				this.hardwareMap.get(CRServo.class, "leftSpinner"),
-				this.hardwareMap.get(CRServo.class, "rightSpinner")
+				this.hardwareMap.get(CRServo.class, "leftSpinner"), //Hub:2 Port:1
+				this.hardwareMap.get(CRServo.class, "rightSpinner")  //Hub:1 Port:4
 		);
 
 		outtake.init(

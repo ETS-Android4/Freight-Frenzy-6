@@ -25,9 +25,9 @@ public class odometerpods extends robotcomponent {
 	}
 
 	public void lowerOdometerWheels() {
-		leftXAxis.setPosition(.5);
-		rightXAxis.setPosition(.5);
-		middleYAxis.setPosition(.5);
+		leftXAxis.setPosition(.2);
+		rightXAxis.setPosition(.2);
+		middleYAxis.setPosition(.2);
 	}
 
 	public void raiseOdometerWheels() {
