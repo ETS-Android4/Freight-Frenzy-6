@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
 
+//date and time
 public class freightcontainer extends robotcomponent{
 
 	public DcMotor containerMotor;
