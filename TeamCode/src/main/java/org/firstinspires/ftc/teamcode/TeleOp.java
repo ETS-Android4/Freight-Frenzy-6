@@ -128,10 +128,10 @@ public class TeleOp extends OpMode {
 		}
 
 		if(this.gamepad2.left_stick_y > 0.1) {
-			robot.arm.lowerWithPower(this.gamepad2.left_stick_y);
+			robot.arm.lowerWithPower(this.gamepad2.left_stick_y/2);
 		}
 		else if(this.gamepad2.left_stick_y < -0.1) {
-			robot.arm.lowerWithPower(this.gamepad2.left_stick_y);
+			robot.arm.lowerWithPower(this.gamepad2.left_stick_y/4);
 		} else if (this.gamepad2.dpad_up) {
 			robot.arm.raiseWithPower(armSpeed);
 		} else if (this.gamepad2.dpad_down) {

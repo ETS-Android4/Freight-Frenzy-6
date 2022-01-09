@@ -1,0 +1,525 @@
+@startuml
+
+title __FREIGHT-FRENZY.TEAMCODE's Class Diagram__\n
+
+  namespace org.firstinspires.ftc.teamcode {
+    class org.firstinspires.ftc.teamcode.Logger {
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    class org.firstinspires.ftc.teamcode.TeleOpCameraTest {
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    class org.firstinspires.ftc.teamcode.TeleOpDouble {
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    class org.firstinspires.ftc.teamcode.TeleOpSingle {
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    class org.firstinspires.ftc.teamcode.TeleOpTester {
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      class org.firstinspires.ftc.teamcode.drive.DriveConstants {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      class org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      class org.firstinspires.ftc.teamcode.drive.SampleTankDrive {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      class org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.BackAndForth {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.FollowerPIDTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.LocalizationTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVeloTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.MaxVelocityTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.MotorDirectionDebugger {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.SplineTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.StrafeTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.StraightTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.TrackWidthTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelForwardOffsetTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelLateralDistanceTuner {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace drive {
+      namespace opmode {
+        class org.firstinspires.ftc.teamcode.drive.opmode.TurnTest {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.cameravision {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.caroselspinner {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.drivetrain {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.freightcontainer {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.freightcrane {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.intake {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.odometerpods {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.outtake {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      class org.firstinspires.ftc.teamcode.robot.robot {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace robot {
+      abstract class org.firstinspires.ftc.teamcode.robot.robotcomponent {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      class org.firstinspires.ftc.teamcode.trajectorysequence.EmptySequenceException {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      class org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      class org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      class org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      namespace sequencesegment {
+        abstract class org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.SequenceSegment {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      namespace sequencesegment {
+        class org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TrajectorySegment {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      namespace sequencesegment {
+        class org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TurnSegment {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace trajectorysequence {
+      namespace sequencesegment {
+        class org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.WaitSegment {
+        }
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.AssetsTrajectoryManager {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      enum AxesSigns {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.BNO055IMUUtil {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.DashboardUtil {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.Encoder {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.LoggingUtil {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.LynxModuleUtil {
+      }
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.teamcode {
+    namespace util {
+      class org.firstinspires.ftc.teamcode.util.RegressionUtil {
+      }
+    }
+  }
+  
+
+  org.firstinspires.ftc.teamcode.TeleOpCameraTest -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.teamcode.TeleOpCameraTest o-- org.firstinspires.ftc.teamcode.robot.cameravision : cameraVision
+  org.firstinspires.ftc.teamcode.TeleOpCameraTest o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.TeleOpDouble -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.teamcode.TeleOpDouble o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.TeleOpDouble o-- org.firstinspires.ftc.teamcode.robot.robot : robot
+  org.firstinspires.ftc.teamcode.TeleOpSingle -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.teamcode.TeleOpSingle o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.TeleOpSingle o-- org.firstinspires.ftc.teamcode.robot.robot : robot
+  org.firstinspires.ftc.teamcode.TeleOpTester -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.teamcode.TeleOpTester o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.TeleOpTester o-- org.firstinspires.ftc.teamcode.robot.robot : robot
+  org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive -up-|> com.acmerobotics.roadrunner.drive.MecanumDrive
+  org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive o-- org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner : trajectorySequenceRunner
+  org.firstinspires.ftc.teamcode.drive.SampleTankDrive -up-|> com.acmerobotics.roadrunner.drive.TankDrive
+  org.firstinspires.ftc.teamcode.drive.SampleTankDrive o-- org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner : trajectorySequenceRunner
+  org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer -up-|> com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer
+  org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer o-- org.firstinspires.ftc.teamcode.util.Encoder : frontEncoder
+  org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer o-- org.firstinspires.ftc.teamcode.util.Encoder : leftEncoder
+  org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer o-- org.firstinspires.ftc.teamcode.util.Encoder : rightEncoder
+  org.firstinspires.ftc.teamcode.drive.opmode.AutomaticFeedforwardTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.BackAndForth -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.DriveVelocityPIDTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.FollowerPIDTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.LocalizationTest -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner o-- org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive : drive
+  org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner o-- org.firstinspires.ftc.teamcode.drive.opmode.ManualFeedforwardTuner.Mode : mode
+  org.firstinspires.ftc.teamcode.drive.opmode.MaxAngularVeloTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.MaxVelocityTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.MotorDirectionDebugger -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.SplineTest -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.StrafeTest -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.StraightTest -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.TrackWidthTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelForwardOffsetTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.TrackingWheelLateralDistanceTuner -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.drive.opmode.TurnTest -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline -up-|> org.openftc.easyopencv.OpenCvPipeline
+  org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline o-- org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline.CapstonePosition : position
+  org.firstinspires.ftc.teamcode.robot.cameravision o-- org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline : pipeline
+  org.firstinspires.ftc.teamcode.robot.caroselspinner -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.drivetrain -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.drivetrain o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.robot.freightcontainer -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.freightcontainer o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.robot.freightcrane -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.freightcrane o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.robot.intake -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.odometerpods -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.outtake -up-|> org.firstinspires.ftc.teamcode.robot.robotcomponent
+  org.firstinspires.ftc.teamcode.robot.outtake o-- org.firstinspires.ftc.teamcode.robot.freightcontainer : freightcontainer
+  org.firstinspires.ftc.teamcode.robot.outtake o-- org.firstinspires.ftc.teamcode.robot.freightcrane : freightcrane
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.cameravision : cameraVision
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.caroselspinner : caroselspinner
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.drivetrain : drivetrain
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.intake : intake
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.odometerpods : odometerpods
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.robot.outtake : outtake
+  org.firstinspires.ftc.teamcode.robot.robot o-- org.firstinspires.ftc.teamcode.Logger : logger
+  org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner o-- org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence : currentTrajectorySequence
+  org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TrajectorySegment -up-|> org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.SequenceSegment
+  org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.TurnSegment -up-|> org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.SequenceSegment
+  org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.WaitSegment -up-|> org.firstinspires.ftc.teamcode.trajectorysequence.sequencesegment.SequenceSegment
+  org.firstinspires.ftc.teamcode.util.Encoder o-- org.firstinspires.ftc.teamcode.util.Encoder.Direction : direction
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,713 @@
+@startuml
+
+title __SAMPLES's Class Diagram__\n
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.BasicOpMode_Iterative {
+        - leftDrive : DcMotor
+        - rightDrive : DcMotor
+        - runtime : ElapsedTime
+        + init()
+        + init_loop()
+        + loop()
+        + start()
+        + stop()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.BasicOpMode_Linear {
+        - leftDrive : DcMotor
+        - rightDrive : DcMotor
+        - runtime : ElapsedTime
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptCompassCalibration {
+        {static} ~ CAL_TIME_SEC : double
+        {static} ~ HOLD_TIME_MS : long
+        {static} ~ MOTOR_POWER : double
+        ~ compass : CompassSensor
+        - runtime : ElapsedTime
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptDIMAsIndicator {
+        {static} ~ BLUE_LED : int
+        {static} ~ RED_LED : int
+        ~ dim : DeviceInterfaceModule
+        - runtime : ElapsedTime
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptGamepadRumble {
+        ~ HALF_TIME : double
+        ~ TRIGGER_THRESHOLD : double
+        ~ customRumbleEffect : RumbleEffect
+        ~ highLevel : boolean
+        ~ lastA : boolean
+        ~ lastLB : boolean
+        ~ runtime : ElapsedTime
+        ~ secondHalf : boolean
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptGamepadTouchpad {
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptI2cAddressChange {
+        {static} + ADDRESS_MEMORY_START : int
+        {static} + ADDRESS_SET_NEW_I2C_ADDRESS : int
+        {static} + BUFFER_CHANGE_ADDRESS_LENGTH : int
+        {static} + COLOR_SENSOR_FIRMWARE_REV : byte
+        {static} + COLOR_SENSOR_ORIGINAL_ADDRESS : byte
+        {static} + COLOR_SENSOR_SENSOR_ID : byte
+        {static} + FIRMWARE_REV : byte
+        {static} + IR_SEEKER_V3_FIRMWARE_REV : byte
+        {static} + IR_SEEKER_V3_ORIGINAL_ADDRESS : I2cAddr
+        {static} + IR_SEEKER_V3_SENSOR_ID : byte
+        {static} + MANUFACTURER_CODE : byte
+        {static} + READ_MODE : int
+        {static} + SENSOR_ID : byte
+        {static} + TOTAL_MEMORY_LENGTH : int
+        {static} + TRIGGER_BYTE_1 : byte
+        {static} + TRIGGER_BYTE_2 : byte
+        ~ currentAddress : I2cAddr
+        ~ dim : DeviceInterfaceModule
+        ~ newAddress : I2cAddr
+        ~ port : int
+        ~ readCache : byte[]
+        ~ readLock : Lock
+        ~ writeCache : byte[]
+        ~ writeLock : Lock
+        + runOpMode()
+        - foundExpectedBytes()
+        - performAction()
+        - writeNewAddress()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptMotorBulkRead {
+        ~ TEST_CYCLES : int
+        ~ t1 : double
+        ~ t2 : double
+        ~ t3 : double
+        - e1 : long
+        - e2 : long
+        - e3 : long
+        - e4 : long
+        - m1 : DcMotorEx
+        - m2 : DcMotorEx
+        - m3 : DcMotorEx
+        - m4 : DcMotorEx
+        - v1 : double
+        - v2 : double
+        - v3 : double
+        - v4 : double
+        + runOpMode()
+        ~ displayCycleTimes()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptNullOp {
+        - runtime : ElapsedTime
+        + init()
+        + init_loop()
+        + loop()
+        + start()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptRampMotorSpeed {
+        {static} ~ CYCLE_MS : int
+        {static} ~ INCREMENT : double
+        {static} ~ MAX_FWD : double
+        {static} ~ MAX_REV : double
+        ~ motor : DcMotor
+        ~ power : double
+        ~ rampUp : boolean
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptRevSPARKMini {
+        - leftDrive : DcMotorSimple
+        - rightDrive : DcMotorSimple
+        - runtime : ElapsedTime
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptScanServo {
+        {static} ~ CYCLE_MS : int
+        {static} ~ INCREMENT : double
+        {static} ~ MAX_POS : double
+        {static} ~ MIN_POS : double
+        ~ position : double
+        ~ rampUp : boolean
+        ~ servo : Servo
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsASJava {
+        - WasB : boolean
+        - goldFound : boolean
+        - isB : boolean
+        - isX : boolean
+        - silverFound : boolean
+        - wasX : boolean
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsOnBotJava {
+        - WasB : boolean
+        - goldFile : File
+        - isB : boolean
+        - isX : boolean
+        - silverFile : File
+        - soundPath : String
+        - wasX : boolean
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsSKYSTONE {
+        ~ soundPlaying : boolean
+        ~ sounds : String[]
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptTelemetry {
+        {static} ~ poem : String[]
+        ~ poemElapsed : ElapsedTime
+        ~ poemLine : int
+        + runOpMode()
+        ~ emitPoemLine()
+        ~ getBatteryVoltage()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetection {
+        {static} - LABELS : String[]
+        {static} - TFOD_MODEL_ASSET : String
+        {static} - VUFORIA_KEY : String
+        - tfod : TFObjectDetector
+        - vuforia : VuforiaLocalizer
+        + runOpMode()
+        - initTfod()
+        - initVuforia()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetectionSwitchableCameras {
+        {static} - LABELS : String[]
+        {static} - TFOD_MODEL_ASSET : String
+        {static} - VUFORIA_KEY : String
+        - oldLeftBumper : boolean
+        - oldRightBumper : boolean
+        - switchableCamera : SwitchableCamera
+        - tfod : TFObjectDetector
+        - vuforia : VuforiaLocalizer
+        - webcam1 : WebcamName
+        - webcam2 : WebcamName
+        + runOpMode()
+        - doCameraSwitching()
+        - initTfod()
+        - initVuforia()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetectionWebcam {
+        {static} - LABELS : String[]
+        {static} - TFOD_MODEL_ASSET : String
+        {static} - VUFORIA_KEY : String
+        - tfod : TFObjectDetector
+        - vuforia : VuforiaLocalizer
+        + runOpMode()
+        - initTfod()
+        - initVuforia()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuMarkIdentification {
+        {static} + TAG : String
+        ~ lastLocation : OpenGLMatrix
+        ~ vuforia : VuforiaLocalizer
+        + runOpMode()
+        ~ format()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuMarkIdentificationWebcam {
+        {static} + TAG : String
+        ~ lastLocation : OpenGLMatrix
+        ~ vuforia : VuforiaLocalizer
+        ~ webcamName : WebcamName
+        + runOpMode()
+        ~ format()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaDriveToTargetWebcam {
+        ~ DESIRED_DISTANCE : double
+        ~ MM_PER_INCH : double
+        ~ SPEED_GAIN : double
+        ~ TURN_GAIN : double
+        ~ targetName : String
+        ~ targetPose : OpenGLMatrix
+        ~ vuforia : VuforiaLocalizer
+        {static} - VUFORIA_KEY : String
+        - leftDrive : DcMotor
+        - rightDrive : DcMotor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaFieldNavigation {
+        {static} - CAMERA_CHOICE : CameraDirection
+        {static} - PHONE_IS_PORTRAIT : boolean
+        {static} - VUFORIA_KEY : String
+        {static} - halfField : float
+        {static} - halfTile : float
+        - lastLocation : OpenGLMatrix
+        {static} - mmPerInch : float
+        {static} - mmTargetHeight : float
+        {static} - oneAndHalfTile : float
+        - phoneXRotate : float
+        - phoneYRotate : float
+        - phoneZRotate : float
+        - targetVisible : boolean
+        - targets : VuforiaTrackables
+        - vuforia : VuforiaLocalizer
+        + runOpMode()
+        ~ identifyTarget()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaFieldNavigationWebcam {
+        {static} - VUFORIA_KEY : String
+        {static} - halfField : float
+        {static} - halfTile : float
+        - lastLocation : OpenGLMatrix
+        {static} - mmPerInch : float
+        {static} - mmTargetHeight : float
+        {static} - oneAndHalfTile : float
+        - targetVisible : boolean
+        - targets : VuforiaTrackables
+        - vuforia : VuforiaLocalizer
+        - webcamName : WebcamName
+        + runOpMode()
+        ~ identifyTarget()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.ConceptWebcam {
+        {static} - TAG : String
+        - callbackHandler : Handler
+        - camera : Camera
+        - cameraCaptureSession : CameraCaptureSession
+        - cameraManager : CameraManager
+        - cameraName : WebcamName
+        - captureCounter : int
+        - captureDirectory : File
+        - frameQueue : EvictingBlockingQueue<Bitmap>
+        {static} - secondsPermissionTimeout : int
+        + runOpMode()
+        - closeCamera()
+        - contains()
+        - error()
+        - error()
+        - initializeFrameQueue()
+        - onNewFrame()
+        - openCamera()
+        - saveBitmap()
+        - startCamera()
+        - stopCamera()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot {
+        {static} + ARM_DOWN_POWER : double
+        {static} + ARM_UP_POWER : double
+        {static} + MID_SERVO : double
+        + leftArm : DcMotor
+        + leftClaw : Servo
+        + leftDrive : DcMotor
+        + rightClaw : Servo
+        + rightDrive : DcMotor
+        ~ hwMap : HardwareMap
+        - period : ElapsedTime
+        + HardwarePushbot()
+        + init()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByEncoder_Linear {
+        {static} ~ COUNTS_PER_INCH : double
+        {static} ~ COUNTS_PER_MOTOR_REV : double
+        {static} ~ DRIVE_GEAR_REDUCTION : double
+        {static} ~ DRIVE_SPEED : double
+        {static} ~ TURN_SPEED : double
+        {static} ~ WHEEL_DIAMETER_INCHES : double
+        - runtime : ElapsedTime
+        + encoderDrive()
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByGyro_Linear {
+        {static} ~ COUNTS_PER_INCH : double
+        {static} ~ COUNTS_PER_MOTOR_REV : double
+        {static} ~ DRIVE_GEAR_REDUCTION : double
+        {static} ~ DRIVE_SPEED : double
+        {static} ~ HEADING_THRESHOLD : double
+        {static} ~ P_DRIVE_COEFF : double
+        {static} ~ P_TURN_COEFF : double
+        {static} ~ TURN_SPEED : double
+        {static} ~ WHEEL_DIAMETER_INCHES : double
+        ~ gyro : ModernRoboticsI2cGyro
+        + getError()
+        + getSteer()
+        + gyroDrive()
+        + gyroHold()
+        + gyroTurn()
+        + runOpMode()
+        ~ onHeading()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByTime_Linear {
+        {static} ~ FORWARD_SPEED : double
+        {static} ~ TURN_SPEED : double
+        - runtime : ElapsedTime
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveToLine_Linear {
+        {static} ~ APPROACH_SPEED : double
+        {static} ~ WHITE_THRESHOLD : double
+        ~ lightSensor : LightSensor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopPOV_Linear {
+        ~ CLAW_SPEED : double
+        ~ clawOffset : double
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopTank_Iterative {
+        ~ CLAW_SPEED : double
+        ~ clawOffset : double
+        + init()
+        + init_loop()
+        + loop()
+        + start()
+        + stop()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver {
+        ~ blinkinLedDriver : RevBlinkinLedDriver
+        ~ display : Item
+        ~ gamepadRateLimit : Deadline
+        ~ ledCycleDeadline : Deadline
+        ~ pattern : BlinkinPattern
+        ~ patternName : Item
+        {static} - GAMEPAD_LOCKOUT : int
+        {static} - LED_PERIOD : int
+        + init()
+        + loop()
+        # displayPattern()
+        # doAutoDisplay()
+        # handleGamepad()
+        # setDisplayKind()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    enum DisplayKind {
+      AUTO
+      MANUAL
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorAdafruitRGB {
+        {static} ~ LED_CHANNEL : int
+        ~ cdim : DeviceInterfaceModule
+        ~ sensorRGB : ColorSensor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU {
+        ~ angles : Orientation
+        ~ gravity : Acceleration
+        ~ imu : BNO055IMU
+        + runOpMode()
+        ~ composeTelemetry()
+        ~ formatAngle()
+        ~ formatDegrees()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMUCalibration {
+        ~ angles : Orientation
+        ~ imu : BNO055IMU
+        + runOpMode()
+        ~ composeTelemetry()
+        ~ formatAngle()
+        ~ formatDegrees()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorColor {
+        ~ colorSensor : NormalizedColorSensor
+        ~ relativeLayout : View
+        + runOpMode()
+        # runSample()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorDIO {
+        ~ BLUE_LED_CHANNEL : int
+        ~ RED_LED_CHANNEL : int
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorDigitalTouch {
+        ~ digitalTouch : DigitalChannel
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorKLNavxMicro {
+        ~ gyro : IntegratingGyroscope
+        ~ navxMicro : NavxMicroNavigationSensor
+        ~ timer : ElapsedTime
+        + runOpMode()
+        ~ formatAngle()
+        ~ formatDegrees()
+        ~ formatRate()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMRColor {
+        ~ colorSensor : ColorSensor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMRCompass {
+        ~ compass : ModernRoboticsI2cCompassSensor
+        ~ timer : ElapsedTime
+        + runOpMode()
+        # doTelemetry()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMRGyro {
+        ~ gyro : IntegratingGyroscope
+        ~ modernRoboticsI2cGyro : ModernRoboticsI2cGyro
+        ~ timer : ElapsedTime
+        + runOpMode()
+        ~ formatFloat()
+        ~ formatRate()
+        ~ formatRaw()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMRIrSeeker {
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMROpticalDistance {
+        ~ odsSensor : OpticalDistanceSensor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorMRRangeSensor {
+        ~ rangeSensor : ModernRoboticsI2cRangeSensor
+        + runOpMode()
+    }
+  }
+  
+
+  namespace org.firstinspires.ftc.robotcontroller.external.samples {
+    class org.firstinspires.ftc.robotcontroller.external.samples.SensorREV2mDistance {
+        - sensorRange : DistanceSensor
+        + runOpMode()
+    }
+  }
+  
+
+  org.firstinspires.ftc.robotcontroller.external.samples.BasicOpMode_Iterative -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.BasicOpMode_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptCompassCalibration -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptCompassCalibration o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptDIMAsIndicator -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptGamepadRumble -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptGamepadTouchpad -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptI2cAddressChange -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptMotorBulkRead -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptNullOp -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptRampMotorSpeed -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptRevSPARKMini -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptScanServo -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsASJava -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsOnBotJava -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptSoundsSKYSTONE -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptTelemetry -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetection -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetectionSwitchableCameras -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetectionWebcam -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuMarkIdentification -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuMarkIdentificationWebcam -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaDriveToTargetWebcam -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaFieldNavigation -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuforiaFieldNavigationWebcam -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.ConceptWebcam -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByEncoder_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByEncoder_Linear o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByGyro_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByGyro_Linear o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByTime_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveByTime_Linear o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveToLine_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotAutoDriveToLine_Linear o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopPOV_Linear -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopPOV_Linear o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopTank_Iterative -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.PushbotTeleopTank_Iterative o-- org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot : robot
+  org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver -up-|> com.qualcomm.robotcore.eventloop.opmode.OpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver o-- org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver.DisplayKind : displayKind
+  org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver +-down- org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver.DisplayKind
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorAdafruitRGB -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMU -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorBNO055IMUCalibration -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorColor -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorDIO -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorDigitalTouch -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorKLNavxMicro -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMRColor -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMRCompass -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMRGyro -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMRIrSeeker -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMROpticalDistance -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorMRRangeSensor -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+  org.firstinspires.ftc.robotcontroller.external.samples.SensorREV2mDistance -up-|> com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

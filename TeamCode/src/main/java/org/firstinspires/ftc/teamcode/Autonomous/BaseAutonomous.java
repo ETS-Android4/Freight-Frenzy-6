@@ -51,7 +51,7 @@ public abstract class BaseAutonomous extends LinearOpMode {
 //		if(getColor() == Color.RED) {
 //			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
 //		} else {
-			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
+			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
 //		}
 	}
 
@@ -60,7 +60,7 @@ public abstract class BaseAutonomous extends LinearOpMode {
 //		if(getColor() == Color.RED) {
 //			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
 //		} else {
-			robot.drivetrain.runDistance(-distance, distance, distance, -distance, maxSeconds, speed);
+			robot.drivetrain.runDistance(distance, -distance, -distance, distance, maxSeconds, speed);
 //		}
 	}
 
