@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.robot;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.robot.robot;
 /**
  * Created by shell bots on 1/02/2022.
  */
-
+@Disabled
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Double")
 public class TeleOpDouble extends OpMode {
 
@@ -28,7 +29,6 @@ public class TeleOpDouble extends OpMode {
 		logger = new Logger(telemetry);
 
 		logger.statusLog(0, "Initialized");
-
 	}
 
 	/**
@@ -63,8 +63,8 @@ public class TeleOpDouble extends OpMode {
 		 * 		Left Joystick X - Make the robot crab-walk
 		 * 		Left Joystick Y - Make the robot drive forwards and backwards
 		 *
-		 * 		Y button - Spin the duck-spinner Clockwise
-		 * 		A button - Spin the duck-spinner Counterclockwise
+		 * 		X button - Spin the duck-spinners for blue alliance
+		 * 		A button - Spin the duck-spinners for red alliance
 		 *
 		 * 	Controller 2 - "Arm Controller" -------------------------------------------------------
 		 *
@@ -105,11 +105,11 @@ public class TeleOpDouble extends OpMode {
 		singleJoystickDrive();
 
 		//Turn the duck spinners off and on
-		while(this.gamepad1.y) {
+		while(this.gamepad1.b) {
 			robot.caroselspinner.turnOnSpinners(1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
-		while(this.gamepad1.a) {
+		while(this.gamepad1.x) {
 			robot.caroselspinner.turnOnSpinners(-1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
@@ -148,9 +148,6 @@ public class TeleOpDouble extends OpMode {
 		}  else if (this.gamepad2.dpad_down) {
 			robot.outtake.setOutTakeToLowerPosition();
 		}
-
-
-
 	}
 
 	/**
@@ -160,7 +157,6 @@ public class TeleOpDouble extends OpMode {
 	@Override
 	public void stop() {
 		robot.stopEverything();
-		//robot.logTeleOpData();
 		logger.completeLog("Status", "Stopped");
 		logger.update();
 	}
@@ -188,7 +184,7 @@ public class TeleOpDouble extends OpMode {
 			if(motorPowers[i] > 1.0) { motorPowers[i] = 1.0; }
 			if(motorPowers[i] < -1.0) { motorPowers[i] = -1.0; }
 			motorPowers[i] *= speed;
-			logger.numberLog("Motor" + i, motorPowers[i]);
+			//logger.numberLog("Motor" + i, motorPowers[i]);
 		}
 
 		robot.drivetrain.setIndividualPowers(motorPowers);

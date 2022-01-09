@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class outtake extends robotcomponent {
 
+	//
 	//bottom is 1
 	//lower is 2
 	//top is 3
@@ -37,7 +38,7 @@ public class outtake extends robotcomponent {
 
 		freightcrane.init(
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "verticalMotor"), //Hub:3 Port:
+				this.hardwareMap.get(DcMotor.class, "verticalMotor"), //Hub: Port:
 				this.hardwareMap.get(CRServo.class, "leftHorizontalServo"), //Hub: Port:
 				this.hardwareMap.get(CRServo.class, "rightHorizontalServo")  //Hub: Port:
 		);
@@ -51,26 +52,20 @@ public class outtake extends robotcomponent {
 
 	public void setOutTakeToTopPosition() {
 		if (outTakePosition == 1) {
-			double tierOneTime = 1000;
-			double tierTwoTime = 2000;
 			freightcrane.extendCraneVertically(1, 0.5, 10);
-			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
-			if (currentPositionOfCrane > tierOneTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
 				freightcrane.extendCraneHorizontally(1000);
 			}
-			if (currentPositionOfCrane > tierTwoTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
 			}
 			outTakePosition = 3;
 		} else if (outTakePosition == 2) {
-			double tierOneTime = 1000;
-			double tierTwoTime = 2000;
 			freightcrane.extendCraneVertically(1, 0.5, 10);
-			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
-			if (currentPositionOfCrane > tierOneTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
 				freightcrane.extendCraneHorizontally(1000);
 			}
-			if (currentPositionOfCrane > tierTwoTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
 			}
 			outTakePosition = 3;
@@ -81,26 +76,20 @@ public class outtake extends robotcomponent {
 
 	public void setOutTakeToLowerPosition() {
 		if (outTakePosition == 1) {
-			double tierOneTime = 1000;
-			double tierTwoTime = 2000;
 			freightcrane.extendCraneVertically(1, 0.5, 10);
-			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
-			if (currentPositionOfCrane > tierOneTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
 				freightcrane.extendCraneHorizontally(1000);
 			}
-			if (currentPositionOfCrane > tierTwoTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
 			}
 			outTakePosition = 2;
 		} else if (outTakePosition == 3) {
-			double tierOneTime = 1000;
-			double tierTwoTime = 2000;
 			freightcrane.extendCraneVertically(1, 0.5, 10);
-			int currentPositionOfCrane = freightcrane.verticalMotor.getCurrentPosition();
-			if (currentPositionOfCrane > tierOneTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
 				freightcrane.extendCraneHorizontally(1000);
 			}
-			if (currentPositionOfCrane > tierTwoTime) {
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
 				freightcontainer.flipContainer(0.5,0.5, 10);
 			}
 			outTakePosition = 2;
@@ -109,15 +98,43 @@ public class outtake extends robotcomponent {
 		}
 	}
 
+	public void awwoooooogsetOutTakeToTopPosition() {
+		if (outTakePosition != 3) {
+			freightcrane.extendCraneVertically(1, 0.5, 10);
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
+				freightcrane.extendCraneHorizontally(1000);
+			}
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
+				freightcontainer.flipContainer(0.5,0.5, 10);
+			}
+			outTakePosition = 3;
+		} else { }
+	}
+
+	public void awwoooooogsetOutTakeToLowerPosition() {
+		if (outTakePosition != 2) {
+			freightcrane.extendCraneVertically(1, 0.5, 10);
+			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
+				freightcrane.extendCraneHorizontally(1000);
+			}
+			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
+				freightcontainer.flipContainer(0.5,0.5, 10);
+			}
+			outTakePosition = 2;
+		} else { }
+	}
+
 	public void collapseOutTake() {
 		if (outTakePosition != 1) {
 			freightcrane.extendCraneVertically(0.75, 0.5, 10);
 			freightcrane.extendCraneHorizontally(1000);
-			freightcontainer.flipContainer(0.5,0.5, .10);
+			freightcontainer.flipContainer(0.5,0.5, 10);
 			outTakePosition = 1;
-		} else {
-
 		}
+	}
+
+	public int getOutTakePosition() {
+		return outTakePosition;
 	}
 
 	@Override

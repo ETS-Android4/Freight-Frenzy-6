@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
 
-import java.util.Locale;
-
 public class freightcontainer extends robotcomponent{
 
 	public DcMotor containerMotor;
@@ -30,17 +28,19 @@ public class freightcontainer extends robotcomponent{
 
 		containerMotor.setTargetPosition(0);
 		containerMotor.setDirection(DcMotor.Direction.FORWARD);
-		containerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
-	public void setContainerFlipperPower(double power){
+	public void setContainerFlipperPower(double power)
+	{
+		containerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 		containerMotor.setPower(power);
+		logger.numberLog("containerMotor Power", containerMotor.getPower());
 	}
 
 	public void flipContainer(double position, double power, double maxSeconds) {
-		int newVerticalMotorTarget = containerMotor.getCurrentPosition() + (int) (-position * COUNTS_PER_INCH);
+		int newContainerMotorTarget = containerMotor.getCurrentPosition() + (int) (-position * COUNTS_PER_INCH);
 
-		containerMotor.setTargetPosition(newVerticalMotorTarget);
+		containerMotor.setTargetPosition(newContainerMotorTarget);
 
 		containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -49,14 +49,14 @@ public class freightcontainer extends robotcomponent{
 		setContainerFlipperPower(power);
 
 		while (opModeIsActive() && (runtime.seconds() < maxSeconds) && (containerMotor.isBusy())) {
-			logger.addData("Path1", String.format(Locale.US, "Running to VL:%7d", newVerticalMotorTarget));
-			logger.addData("Path2", String.format(Locale.US, "Running at VL:%7d", containerMotor.getCurrentPosition()));
-			logger.update();
+		//	logger.addData("CM Target", String.format(Locale.US, "Running to VL:%7d", newContainerMotorTarget));
+		//	logger.addData("CM Curr Pos", String.format(Locale.US, "Running at VL:%7d", containerMotor.getCurrentPosition()));
 
-			logger.completeLog("Is busy? FL", containerMotor.isBusy() ? "yes" : "no");
-			logger.numberLog("Curr Time", runtime.seconds());
-			logger.numberLog("Max Time", maxSeconds);
-			logger.completeLog("Opmode is active? ", opModeIsActive() ? "yes" : "no");
+			logger.completeLog("Is busy? CM", containerMotor.isBusy() ? "yes" : "no");
+		//	logger.numberLog("Curr Time", runtime.seconds());
+		//	logger.numberLog("Max Time", maxSeconds);
+		//	logger.completeLog("OpMode is active? ", opModeIsActive() ? "yes" : "no");
+			logger.update();
 		}
 	}
 

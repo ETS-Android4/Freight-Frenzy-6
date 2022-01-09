@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.robot;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.robot.robot;
 /**
  * Created by shell bots on 1/02/2022.
  */
-
+@Disabled
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Single")
 public class TeleOpSingle extends OpMode {
 
@@ -29,7 +30,6 @@ public class TeleOpSingle extends OpMode {
 
 		// Step 0 - Initialized
 		logger.statusLog(0, "Initialized");
-
 	}
 
 	/**
@@ -66,11 +66,11 @@ public class TeleOpSingle extends OpMode {
 		 * 		Left Joystick X - Make the robot crab-walk
 		 * 		Left Joystick Y - Make the robot drive forwards and backwards
 		 *
-		 * 		Y button - Spin the duck-spinner Clockwise
-		 * 		A button - Spin the duck-spinner Counterclockwise
+		 * 		X button - Spin the duck-spinners for blue alliance
+		 * 		A button - Spin the duck-spinners for red alliance
 		 *
-		 * 		B button - drop the freight (open the container)
-		 * 		X button - lock the freight in the robot (close the container)
+		 * 		Y button - drop the freight (open the container)
+		 * 		A button - lock the freight in the robot (close the container)
 		 *
 		 * 		Dpad up - get ready to place a freight in the highest goal
 		 * 				  (extend the crane vertically, extend the the crane horizontally, and flip
@@ -94,7 +94,6 @@ public class TeleOpSingle extends OpMode {
 		}
 
 		telemetry.addData("Chassis Speed", speed);
-		telemetry.update();
 
 		// Turn the intake on and off
 		if (this.gamepad1.left_bumper && !last_g1_lb) {
@@ -120,11 +119,11 @@ public class TeleOpSingle extends OpMode {
 		singleJoystickDrive();
 
 		// Turn the duck spinners off and on
-		while(this.gamepad1.y) {
+		while(this.gamepad1.x) {
 			robot.caroselspinner.turnOnSpinners(1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
-		while(this.gamepad1.a) {
+		while(this.gamepad1.b) {
 			robot.caroselspinner.turnOnSpinners(-1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
@@ -143,6 +142,8 @@ public class TeleOpSingle extends OpMode {
 		}  else if (this.gamepad1.dpad_down) {
 			robot.outtake.setOutTakeToLowerPosition();
 		}
+
+		telemetry.update();
 	}
 
 	/**
@@ -152,7 +153,6 @@ public class TeleOpSingle extends OpMode {
 	@Override
 	public void stop() {
 		robot.stopEverything();
-		//robot.logTeleOpData();
 		logger.completeLog("Status", "Stopped");
 		logger.update();
 	}
@@ -180,7 +180,7 @@ public class TeleOpSingle extends OpMode {
 			if(motorPowers[i] > 1.0) { motorPowers[i] = 1.0; }
 			if(motorPowers[i] < -1.0) { motorPowers[i] = -1.0; }
 			motorPowers[i] *= speed;
-			logger.numberLog("Motor" + i, motorPowers[i]);
+			//logger.numberLog("Motor" + i, motorPowers[i]);
 		}
 
 		robot.drivetrain.setIndividualPowers(motorPowers);

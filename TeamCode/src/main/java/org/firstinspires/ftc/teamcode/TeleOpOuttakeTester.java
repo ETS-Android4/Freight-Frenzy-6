@@ -4,18 +4,20 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.robot;
 
+import java.util.Locale;
+
 
 /**
- * Created by shell bots on 12/31/2021.
+ * Created by shell bots on 1/08/2022.
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Tester")
-public class TeleOpTester extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode OuttakeTester")
+public class TeleOpOuttakeTester extends OpMode {
 
 	private static final boolean TUNING = true;
 	private robot robot = new robot();
 	private Logger logger = null;
-	private double speed = 1.0;
+	private double speed = 0.5;
 	private boolean isIntakeRunning = false;
 
 	/**
@@ -57,123 +59,67 @@ public class TeleOpTester extends OpMode {
 		 *
 		 * Controller 1 - "Body Controller" ------------------------------------------------------
 		 *
-		 *      Left Trigger - Set full speed
-		 *      Right Trigger - Set half speed
-		 *
-		 *      Right Joystick X - Turn the robot
-		 * 		Left Joystick X - Make the robot crab-walk
-		 * 		Left Joystick Y - Make the robot drive forwards and backwards
-		 *
-		 * 		Dpad Up - Raise the dead wheels off the ground
-		 * 		Dpad Down - Lower the dead wheels onto the ground
-		 *
-		 * 		Y button - Turn the Intake on forwards
-		 * 		A button - Turn the Intake on backwards
-		 *
-		 * 		X button - Spin the duck-spinners for blue alliance
-		 * 		A button - Spin the duck-spinners for red alliance
 		 *
 		 * Controller 2 - "Arm Controller" -------------------------------------------------------
 		 *
-		 * 		Right Trigger - extend the crane vertically
-		 * 		Right Bumper - extend the crane horizontally
-		 *
-		 * 		left Trigger - collapse the crane horizontally
-		 * 		left Bumper - collapse the crane horizontally
-		 *
-		 *		X button - flip the container open
-		 * 		B button - flip the container closed
-		 *
-		 * 		up dpad - open the container
-		 * 		down dpad - close the container
 		 *
 		 */
 
 		/* Controller 1 settings --------------------------------------------------------------- */
 
-		// Move according to player 1's joysticks
-		singleJoystickDrive();
-
-		// Change driving speed
-		if (this.gamepad1.right_trigger > 0.5) {
-			speed = 1.0;
-		}
-		else if (this.gamepad1.left_trigger > 0.5) {
-			speed = 0.5;
-		}
-
-		telemetry.addData("Chassis Speed", speed);
-
-		// Raise and Lower the dead-wheels
-		if (this.gamepad1.dpad_up) {
-			robot.odometerpods.raiseOdometerWheels();
-		} else if (this.gamepad1.dpad_down) {
-			robot.odometerpods.lowerOdometerWheels();
-		}
-
-		// Turn the intake on and off
-		if (this.gamepad1.y) {
-			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
-			} else {
-				robot.intake.setintakepower(1);
-			}
-			isIntakeRunning = !isIntakeRunning;
-		} else if (this.gamepad1.a) {
-			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
-			} else {
-				robot.intake.setintakepower(-1);
-			}
-			isIntakeRunning = !isIntakeRunning;
-		}
-
-		while(this.gamepad1.x) {
-			robot.caroselspinner.turnOnSpinners(1);
-		}
-		while(this.gamepad1.b) {
-			robot.caroselspinner.turnOnSpinners(-1);
-		}
-		robot.caroselspinner.turnOnSpinners(0);
-
-		/* Controller 2 settings --------------------------------------------------------------- */
-
-		while (this.gamepad2.right_trigger > 0.5) {
+		while (this.gamepad1.right_trigger > 0.5) {
 			robot.outtake.freightcrane.setVerticalCranePower(1);
-		} if (this.gamepad2.right_trigger < 0.5) {
+		} if (this.gamepad1.right_trigger < 0.5) {
 			robot.outtake.freightcrane.setVerticalCranePower(0);
 		}
 
-		while (this.gamepad2.left_trigger > 0.5) {
+		while (this.gamepad1.left_trigger > 0.5) {
 			robot.outtake.freightcrane.setVerticalCranePower(-1);
-		} if (this.gamepad2.left_trigger < 0.5) {
+		} if (this.gamepad1.left_trigger < 0.5) {
 			robot.outtake.freightcrane.setVerticalCranePower(0);
 		}
 
 
-		while (this.gamepad2.right_bumper) {
+		while (this.gamepad1.y) {
 			robot.outtake.freightcrane.setCraneHorizontalPower(1);
 		}
-		while (this.gamepad2.left_bumper) {
+
+		while (this.gamepad1.x) {
 			robot.outtake.freightcrane.setCraneHorizontalPower(-1);
 		}
+
 		robot.outtake.freightcrane.setCraneHorizontalPower(0);
 
 
-		if (this.gamepad2.dpad_up) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(.25);
-		} else if (this.gamepad2.dpad_down) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(-.25);
-		} else if (this.gamepad2.dpad_left){
+		if (this.gamepad1.dpad_up) {
+			robot.outtake.freightcontainer.setContainerFlipperPower(1);
+		} else if (this.gamepad1.dpad_down) {
+			robot.outtake.freightcontainer.setContainerFlipperPower(-1);
+		} else if (this.gamepad1.dpad_left){
 			robot.outtake.freightcontainer.setContainerFlipperPower(0);
 		}
 
-		if (this.gamepad2.y) {
-			robot.outtake.freightcontainer.openContainer();
-		} else if (this.gamepad2.a) {
-			robot.outtake.freightcontainer.closeContainer();
+		/* Controller 2 settings --------------------------------------------------------------- */
+
+		if (this.gamepad2.dpad_up) {
+			robot.outtake.awwoooooogsetOutTakeToTopPosition();
+		} else if (this.gamepad2.dpad_right) {
+			robot.outtake.awwoooooogsetOutTakeToLowerPosition();
+		} else if (this.gamepad2.dpad_down) {
+			robot.outtake.collapseOutTake();
+		} else if (this.gamepad2.dpad_left) {
+			robot.outtake.freightcrane.verticalMotor.setPower(0);
+			robot.outtake.freightcrane.leftHorizontalServo.setPower(0);
+			robot.outtake.freightcrane.rightHorizontalServo.setPower(0);
+			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
 
+
+		logger.addData("CM Curr Pos", String.format(Locale.US, "Running at VL:%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
+		logger.addData("VM Curr Pos", String.format(Locale.US, "Running at VL:%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
+		logger.update();
+
+		telemetry.addData("current outtake Position", robot.outtake.getOutTakePosition());
 		telemetry.addData("containerMotor power", robot.outtake.freightcontainer.containerMotor.getPower());
 		telemetry.addData("verticalMotor power", robot.outtake.freightcrane.verticalMotor.getPower());
 		telemetry.update();

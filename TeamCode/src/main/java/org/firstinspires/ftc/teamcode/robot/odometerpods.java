@@ -20,19 +20,20 @@ public class odometerpods extends robotcomponent {
 	public void init (Telemetry telemetry, Servo rightXAxis, Servo leftXAxis, Servo middleYAxis) {
 		// save all passed dead wheel servos
 		this.rightXAxis = rightXAxis;
+		rightXAxis.setDirection(Servo.Direction.REVERSE);
 		this.leftXAxis = leftXAxis;
 		this.middleYAxis = middleYAxis;
 	}
 
 	public void lowerOdometerWheels() {
-		leftXAxis.setPosition(.2);
-		rightXAxis.setPosition(.2);
-		middleYAxis.setPosition(.2);
+		leftXAxis.setPosition(.4);
+		rightXAxis.setPosition(.4);
+		middleYAxis.setPosition(.4);
 	}
 
 	public void raiseOdometerWheels() {
 		leftXAxis.setPosition(0);
-		rightXAxis.setPosition(0);
+		rightXAxis.setPosition(.9);
 		middleYAxis.setPosition(0);
 	}
 

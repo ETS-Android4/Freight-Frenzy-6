@@ -6,7 +6,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.util.Locale;
 
-public class Logger {
+public class  Logger {
 
 	private Telemetry telemetry;
 	private static final int HOW_OFTEN_LOG = 3;

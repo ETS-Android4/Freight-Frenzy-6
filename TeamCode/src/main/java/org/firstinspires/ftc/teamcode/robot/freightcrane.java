@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Logger;
 
-import java.util.Locale;
-
 public class freightcrane extends robotcomponent{
 
 	public DcMotor verticalMotor;
@@ -32,10 +30,11 @@ public class freightcrane extends robotcomponent{
 
 		verticalMotor.setTargetPosition(0);
 		verticalMotor.setDirection(DcMotor.Direction.FORWARD);
-		verticalMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
-	public void setVerticalCranePower(double power) {
+	public void setVerticalCranePower(double power)
+	{
+		verticalMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 		verticalMotor.setPower(power);
 	}
 
@@ -51,27 +50,32 @@ public class freightcrane extends robotcomponent{
 		setVerticalCranePower(power);
 
 		while (opModeIsActive() && (runtime.seconds() < maxSeconds) && (verticalMotor.isBusy())) {
-			logger.addData("Path1", String.format(Locale.US, "Running to VL:%7d", newVerticalMotorTarget));
-			logger.addData("Path2", String.format(Locale.US, "Running at VL:%7d", verticalMotor.getCurrentPosition()));
-			logger.update();
+		//	logger.addData("VM Target", String.format(Locale.US, "Running to VL:%7d", newVerticalMotorTarget));
+		//	logger.addData("VM Curr Pos", String.format(Locale.US, "Running at VL:%7d", verticalMotor.getCurrentPosition()));
 
-			logger.completeLog("Is busy? FL", verticalMotor.isBusy() ? "yes" : "no");
-			logger.numberLog("Curr Time", runtime.seconds());
-			logger.numberLog("Max Time", maxSeconds);
-			logger.completeLog("Opmode is active? ", opModeIsActive() ? "yes" : "no");
+			logger.completeLog("Is busy? VM", verticalMotor.isBusy() ? "yes" : "no");
+		//	logger.numberLog("Curr Time", runtime.seconds());
+		//	logger.numberLog("Max Time", maxSeconds);
+		//	logger.completeLog("Opmode is active? ", opModeIsActive() ? "yes" : "no");
+			logger.update();
 		}
 	}
 
 	public void extendCraneHorizontally(long sleep) {
-		leftHorizontalServo.setPower(0.5);
+		leftHorizontalServo.setPower(1);
 		sleep(sleep);
 		rightHorizontalServo.setPower(0);
 	}
 
 	public void collapseCraneHorizontally(long sleep) {
-		leftHorizontalServo.setPower(-0.5);
+		leftHorizontalServo.setPower(-1);
 		sleep(sleep);
 		rightHorizontalServo.setPower(0);
+	}
+
+	public void setCraneHorizontalPower(double power) {
+		leftHorizontalServo.setPower(power);
+		rightHorizontalServo.setPower(power);
 	}
 
 	@Override
