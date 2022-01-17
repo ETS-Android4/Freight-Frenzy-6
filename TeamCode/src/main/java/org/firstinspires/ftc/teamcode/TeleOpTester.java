@@ -9,13 +9,13 @@ import org.firstinspires.ftc.teamcode.robot.robot;
  * Created by shell bots on 12/31/2021.
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Manual Mode Tester")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "TeleOpTester")
 public class TeleOpTester extends OpMode {
 
 	private static final boolean TUNING = true;
 	private robot robot = new robot();
 	private Logger logger = null;
-	private double speed = 1.0;
+	private double speed = .5;
 	private boolean isIntakeRunning = false;
 
 	/**
@@ -71,7 +71,7 @@ public class TeleOpTester extends OpMode {
 		 * 		A button - Turn the Intake on backwards
 		 *
 		 * 		X button - Spin the duck-spinners for blue alliance
-		 * 		A button - Spin the duck-spinners for red alliance
+		 * 		B button - Spin the duck-spinners for red alliance
 		 *
 		 * Controller 2 - "Arm Controller" -------------------------------------------------------
 		 *
@@ -150,20 +150,10 @@ public class TeleOpTester extends OpMode {
 			robot.outtake.freightcrane.setVerticalCranePower(0);
 		}
 
-
-		while (this.gamepad2.right_bumper) {
-			robot.outtake.freightcrane.setCraneHorizontalPower(1);
-		}
-		while (this.gamepad2.left_bumper) {
-			robot.outtake.freightcrane.setCraneHorizontalPower(-1);
-		}
-		robot.outtake.freightcrane.setCraneHorizontalPower(0);
-
-
 		if (this.gamepad2.dpad_up) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(.25);
+			robot.outtake.freightcontainer.setContainerFlipperPower(.5);
 		} else if (this.gamepad2.dpad_down) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(-.25);
+			robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
 		} else if (this.gamepad2.dpad_left){
 			robot.outtake.freightcontainer.setContainerFlipperPower(0);
 		}

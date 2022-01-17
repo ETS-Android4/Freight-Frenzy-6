@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,12 +8,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class outtake extends robotcomponent {
-
-	//
-	//bottom is 1
-	//lower is 2
-	//top is 3
-	private int outTakePosition = 1;
 
 	private HardwareMap hardwareMap = null;
 	private Telemetry telemetry = null;
@@ -38,9 +31,7 @@ public class outtake extends robotcomponent {
 
 		freightcrane.init(
 				telemetry,
-				this.hardwareMap.get(DcMotor.class, "verticalMotor"), //Hub: Port:
-				this.hardwareMap.get(CRServo.class, "leftHorizontalServo"), //Hub: Port:
-				this.hardwareMap.get(CRServo.class, "rightHorizontalServo")  //Hub: Port:
+				this.hardwareMap.get(DcMotor.class, "verticalMotor") //Hub: Port:
 		);
 
 		freightcontainer.init(
@@ -51,90 +42,15 @@ public class outtake extends robotcomponent {
 	}
 
 	public void setOutTakeToTopPosition() {
-		if (outTakePosition == 1) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 3;
-		} else if (outTakePosition == 2) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 3;
-		} else {
-			collapseOutTake();
-		}
+		freightcrane.CraneVertically( 5900, 1);
 	}
 
 	public void setOutTakeToLowerPosition() {
-		if (outTakePosition == 1) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 2;
-		} else if (outTakePosition == 3) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 2;
-		} else {
-			collapseOutTake();
-		}
+		freightcrane.CraneVertically(5000, 1);
 	}
 
-	public void awwoooooogsetOutTakeToTopPosition() {
-		if (outTakePosition != 3) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 3;
-		} else { }
-	}
-
-	public void awwoooooogsetOutTakeToLowerPosition() {
-		if (outTakePosition != 2) {
-			freightcrane.extendCraneVertically(1, 0.5, 10);
-			if (freightcrane.verticalMotor.getCurrentPosition() > 1000) {
-				freightcrane.extendCraneHorizontally(1000);
-			}
-			if (freightcrane.verticalMotor.getCurrentPosition() > 2000) {
-				freightcontainer.flipContainer(0.5,0.5, 10);
-			}
-			outTakePosition = 2;
-		} else { }
-	}
-
-	public void collapseOutTake() {
-		if (outTakePosition != 1) {
-			freightcrane.extendCraneVertically(0.75, 0.5, 10);
-			freightcrane.extendCraneHorizontally(1000);
-			freightcontainer.flipContainer(0.5,0.5, 10);
-			outTakePosition = 1;
-		}
-	}
-
-	public int getOutTakePosition() {
-		return outTakePosition;
+	public void setOutTakeToIntakePosition() {
+		freightcrane.CraneVertically(99,1);
 	}
 
 	@Override
