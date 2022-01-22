@@ -54,16 +54,13 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	static final Scalar BLUE = new Scalar(0, 0, 255);
 	static final Scalar BLACK = new Scalar(225, 225, 225);
 
-	static final Point REGION1 = new Point(175, 0);
-	static final Point REGION2 = new Point(175, 400);
-	static final Point REGION3 = new Point(175, 830);
+	static final Point REGION1 = new Point(350, 800);
+	static final Point REGION2 = new Point(350, 370);
 
 	static final int REGION1_WIDTH = 125;
 	static final int REGION1_HEIGHT = 125;
 	static final int REGION2_WIDTH = 125;
 	static final int REGION2_HEIGHT = 125;
-	static final int REGION3_WIDTH = 125;
-	static final int REGION3_HEIGHT = 125;
 
 	final int POSITION_THRESHOLD = 140;
 
@@ -79,12 +76,6 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	Point region2_pointB = new Point(
 			REGION2.x + REGION2_WIDTH,
 			REGION2.y + REGION2_HEIGHT);
-	Point region3_pointA = new Point(
-			REGION3.x,
-			REGION3.y);
-	Point region3_pointB = new Point(
-			REGION3.x + REGION3_WIDTH,
-			REGION3.y + REGION3_HEIGHT);
 
 	/*
 	 * Working variables
@@ -117,7 +108,6 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 
 		region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
 		region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
-		region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
 	}
 
 	Mat frame = null;
@@ -140,12 +130,6 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 				input, // Buffer to draw on
 				region2_pointA, // First point which defines the rectangle
 				region2_pointB, // Second point which defines the rectangle
-				BLUE, // The color the rectangle is drawn in
-				2); // Thickness of the rectangle lines
-		Imgproc.rectangle(
-				input, // Buffer to draw on
-				region3_pointA, // First point which defines the rectangle
-				region3_pointB, // Second point which defines the rectangle
 				BLUE, // The color the rectangle is drawn in
 				2); // Thickness of the rectangle lines
 
@@ -178,13 +162,6 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 				input, // Buffer to draw on
 				region2_pointA, // First point which defines the rectangle
 				region2_pointB, // Second point which defines the rectangle
-				color, // The color the rectangle is drawn in
-				// -1); // Negative thickness means solid fill
-				4); // Negative thickness means solid fill
-		Imgproc.rectangle(
-				input, // Buffer to draw on
-				region3_pointA, // First point which defines the rectangle
-				region3_pointB, // Second point which defines the rectangle
 				color, // The color the rectangle is drawn in
 				// -1); // Negative thickness means solid fill
 				4); // Negative thickness means solid fill

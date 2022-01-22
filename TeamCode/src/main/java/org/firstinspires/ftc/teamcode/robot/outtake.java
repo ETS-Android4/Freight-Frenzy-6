@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -15,6 +16,8 @@ public class outtake extends robotcomponent {
 
 	public freightcrane freightcrane = null;
 	public freightcontainer freightcontainer = null;
+
+	ElapsedTime liftTimer = new ElapsedTime();
 
 	outtake(OpMode opmode) {
 		super(opmode);
@@ -39,6 +42,33 @@ public class outtake extends robotcomponent {
 				this.hardwareMap.get(DcMotor.class, "containerMotor"), //Hub: Port:
 				this.hardwareMap.get(Servo.class, "containerServo")  //Hub: Port:
 		);
+	}
+
+	public void placeInTopGoal() {
+		liftTimer.reset();
+		liftTimer.startTime();
+		freightcrane.craneVertically(2750, 1);
+		if (freightcrane.verticalMotor.getCurrentPosition() > 2700) {
+			freightcontainer.flipContainerForDrop();
+			if (freightcontainer.containerMotor.getCurrentPosition() >= 80) {
+				freightcontainer.containerMotor.setPower(0);
+				if (liftTimer.seconds() > 5) {
+					freightcontainer.openContainerForDrop();
+				}
+				if (liftTimer.seconds() > 7) {
+					freightcontainer.closeContainer();
+					if (freightcontainer.containerMotor.getCurrentPosition() <= 80) {
+						freightcontainer.containerMotor.setPower(0);
+						freightcrane.craneVertically(0, 1);
+						if (freightcrane.verticalMotor.getCurrentPosition() < 50) {
+							if (liftTimer.seconds() >= 10) {
+								freightcontainer.openContainer();
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override

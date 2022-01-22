@@ -123,7 +123,7 @@ public class TeleOpDouble extends OpMode {
 		singleJoystickDrive();
 
 		if (this.gamepad1.y && containerIsLiftable) {
-			robot.outtake.freightcontainer.containerMotor.setPower(.4);
+			robot.outtake.freightcontainer.containerMotor.setPower(.6);
 		} else if (this.gamepad1.a && containerIsLiftable) {
 			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
@@ -132,11 +132,11 @@ public class TeleOpDouble extends OpMode {
 
 		//Turn the duck spinners off and on
 		while(this.gamepad2.b) {
-			robot.caroselspinner.turnOnSpinners(1);
+			robot.caroselspinner.turnOnSpinners(-1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
 		while(this.gamepad2.x) {
-			robot.caroselspinner.turnOnSpinners(-1);
+			robot.caroselspinner.turnOnSpinners( 1);
 		}
 		robot.caroselspinner.turnOnSpinners(0);
 
@@ -174,7 +174,7 @@ public class TeleOpDouble extends OpMode {
 					containerIsLiftable = false;
 					outTakePosition = OutTakePosition.EXTENDINGLOWER;
 				} else if (this.gamepad2.dpad_up) {
-					robot.outtake.freightcrane.craneVertically(2500, 1);
+					robot.outtake.freightcrane.craneVertically(2750, 1);
 					containerIsLiftable = false;
 					outTakePosition = OutTakePosition.EXTENDINGTOP;
 				}
@@ -190,7 +190,7 @@ public class TeleOpDouble extends OpMode {
 				}
 				break;
 			case EXTENDINGTOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2450) {
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2700) {
 					robot.outtake.freightcontainer.flipContainerForDrop();
 					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() >= 80) {
 						robot.outtake.freightcontainer.containerMotor.setPower(0);
@@ -204,7 +204,7 @@ public class TeleOpDouble extends OpMode {
 				}
 				break;
 			case TOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2450) {
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2700) {
 					outTakePosition = OutTakePosition.DROPTOP;
 				}
 			case DROPLOWER:
