@@ -16,7 +16,7 @@ public class freightcrane extends robotcomponent{
 		super(opmode);
 	}
 
-	 void init(Telemetry telemetry, DcMotor verticalMotor) {
+	void init(Telemetry telemetry, DcMotor verticalMotor) {
 
 		logger = new Logger(telemetry);
 
@@ -25,20 +25,13 @@ public class freightcrane extends robotcomponent{
 		verticalMotor.setTargetPosition(0);
 		verticalMotor.setDirection(DcMotor.Direction.FORWARD);
 		verticalMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-		verticalMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+		verticalMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 	}
 
-	public void setVerticalCranePower(double power)
-	{
-		verticalMotor.setPower(power);
-	}
-
-	public void CraneVertically(int position, double power) {
+	public void craneVertically(int position, double power) {
 		if (opModeIsActive()) {
 			verticalMotor.setTargetPosition(position);
-
 			verticalMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
 			verticalMotor.setPower(power);
 		}
 	}

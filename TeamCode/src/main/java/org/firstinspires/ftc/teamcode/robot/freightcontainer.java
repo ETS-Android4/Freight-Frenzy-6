@@ -28,18 +28,31 @@ public class freightcontainer extends robotcomponent{
 
 		containerMotor.setTargetPosition(0);
 		containerMotor.setDirection(DcMotor.Direction.REVERSE);
-
+		containerMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+		containerMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 	}
 
-	public void setContainerFlipperPower(double power)
-	{
-		containerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-		containerMotor.setPower(power);
+	public void flipContainerForDrop() {
+		if (opModeIsActive()) {
+			containerMotor.setTargetPosition(150);
+			containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			containerMotor.setPower(.4);
+		}
 	}
 
+	public void flipContainerForIntake() {
+		if (opModeIsActive()) {
+			containerMotor.setTargetPosition(0);
+			containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+			containerMotor.setPower(-.4);
+		}
+	}
+	public void openContainerForDrop() {
+		containerServo.setPosition(.75);
+	}
 
 	public void openContainer() {
-		containerServo.setPosition(0.55);
+		containerServo.setPosition(.35);
 	}
 
 	public void closeContainer() {

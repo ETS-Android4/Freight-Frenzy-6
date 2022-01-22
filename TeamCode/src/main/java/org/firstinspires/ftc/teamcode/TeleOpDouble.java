@@ -23,17 +23,20 @@ public class TeleOpDouble extends OpMode {
 	private boolean last_g1_lb= false;
 	//last gamepad 1 right bumper
 	private boolean last_g1_rb = false;
+	private boolean containerIsLiftable = true;
 
-	ElapsedTime OutTakeTimer = new ElapsedTime();
+	ElapsedTime liftTimer = new ElapsedTime();
 
 	private enum OutTakePosition {
 		INTAKE,
-		EXTENDINGTOP,
 		EXTENDINGLOWER,
+		EXTENDINGTOP,
 		LOWER,
 		TOP,
-		DROP,
-		RETRACKING
+		DROPLOWER,
+		DROPTOP,
+		RETRACKINGLOWER,
+		RETRACKINGTOP
 	}
 
 	OutTakePosition outTakePosition = OutTakePosition.INTAKE;
@@ -42,6 +45,7 @@ public class TeleOpDouble extends OpMode {
 	public void init() {
 		robot.init(hardwareMap, telemetry, this, false);
 		logger = new Logger(telemetry);
+		outTakePosition = OutTakePosition.INTAKE;
 
 		logger.statusLog(0, "Initialized");
 	}
@@ -118,10 +122,10 @@ public class TeleOpDouble extends OpMode {
 		// Move according to player 1 joysticks inputs
 		singleJoystickDrive();
 
-		if (this.gamepad1.y) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
-		} else if (this.gamepad1.a) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(0);
+		if (this.gamepad1.y && containerIsLiftable) {
+			robot.outtake.freightcontainer.containerMotor.setPower(.4);
+		} else if (this.gamepad1.a && containerIsLiftable) {
+			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
 
 		/* Controller 2 settings --------------------------------------------------------------- */
@@ -165,62 +169,103 @@ public class TeleOpDouble extends OpMode {
 
 		switch (outTakePosition) {
 			case INTAKE:
-				if (this.gamepad2.dpad_up) {
-					robot.outtake.setOutTakeToTopPosition();
-					robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
-					outTakePosition = OutTakePosition.EXTENDINGTOP;
-				} else if (this.gamepad2.dpad_right) {
-					robot.outtake.setOutTakeToLowerPosition();
-					robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
+				if (this.gamepad2.dpad_right) {
+					robot.outtake.freightcrane.craneVertically(1750, 1);
+					containerIsLiftable = false;
 					outTakePosition = OutTakePosition.EXTENDINGLOWER;
+				} else if (this.gamepad2.dpad_up) {
+					robot.outtake.freightcrane.craneVertically(2500, 1);
+					containerIsLiftable = false;
+					outTakePosition = OutTakePosition.EXTENDINGTOP;
 				}
 				break;
 			case EXTENDINGLOWER:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 4000) {
-					robot.outtake.freightcontainer.setContainerFlipperPower(.5);
-					outTakePosition = OutTakePosition.LOWER;
-				}
-				break;
-			case EXTENDINGTOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 4500) {
-					robot.outtake.freightcontainer.setContainerFlipperPower(.5);
-					outTakePosition = OutTakePosition.TOP;
-				}
-				break;
-			case LOWER:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 4800) {
-					robot.outtake.freightcrane.setVerticalCranePower(0);
-					outTakePosition = OutTakePosition.DROP;
-				}
-				break;
-			case TOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 5750) {
-					outTakePosition = OutTakePosition.DROP;
-					OutTakeTimer.reset();
-					OutTakeTimer.startTime();
-
-				}
-			case DROP:
-				if (this.gamepad2.dpad_down) {
-					if (OutTakeTimer.seconds() >= 1) {
-						robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
-						robot.outtake.setOutTakeToIntakePosition();
-						outTakePosition = OutTakePosition.RETRACKING;
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 1700) {
+					robot.outtake.freightcontainer.flipContainerForDrop();
+					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() >= 80) {
+						robot.outtake.freightcontainer.containerMotor.setPower(0);
+						robot.outtake.freightcrane.craneVertically(800, 1);
+						outTakePosition = OutTakePosition.LOWER;
 					}
 				}
 				break;
-			case RETRACKING:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() < 100) {
-					robot.outtake.freightcontainer.setContainerFlipperPower(0);
-					robot.outtake.freightcontainer.openContainer();
-					outTakePosition = OutTakePosition.INTAKE;
+			case EXTENDINGTOP:
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2450) {
+					robot.outtake.freightcontainer.flipContainerForDrop();
+					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() >= 80) {
+						robot.outtake.freightcontainer.containerMotor.setPower(0);
+						outTakePosition = OutTakePosition.TOP;
+					}
 				}
+				break;
+			case LOWER:
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() < 850) {
+					outTakePosition = OutTakePosition.DROPLOWER;
+				}
+				break;
+			case TOP:
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2450) {
+					outTakePosition = OutTakePosition.DROPTOP;
+				}
+			case DROPLOWER:
+				if (this.gamepad2.dpad_left) {
+					robot.outtake.freightcontainer.openContainerForDrop();
+				}
+				if (this.gamepad2.dpad_down) {
+					robot.outtake.freightcrane.craneVertically(1750,1);
+					robot.outtake.freightcontainer.closeContainer();
+					robot.outtake.freightcontainer.flipContainerForIntake();
+					liftTimer.reset();
+					liftTimer.startTime();
+					outTakePosition = OutTakePosition.RETRACKINGLOWER;
+				}
+				break;
+			case DROPTOP:
+				if (this.gamepad2.dpad_left) {
+					robot.outtake.freightcontainer.openContainerForDrop();
+				}
+				if (this.gamepad2.dpad_down) {
+					robot.outtake.freightcontainer.closeContainer();
+					robot.outtake.freightcontainer.flipContainerForIntake();
+					liftTimer.reset();
+					liftTimer.startTime();
+					outTakePosition = OutTakePosition.RETRACKINGTOP;
+				}
+				break;
+			case RETRACKINGLOWER:
+				if (robot.outtake.freightcrane.verticalMotor. getCurrentPosition() > 1700) {
+					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() <= 80) {
+						robot.outtake.freightcontainer.containerMotor.setPower(0);
+						if (liftTimer.seconds() >= 3) {
+							robot.outtake.freightcrane.craneVertically(0,1);
+							robot.outtake.freightcontainer.openContainer();
+							containerIsLiftable = true;
+							outTakePosition = OutTakePosition.INTAKE;
+						}
+					}
+				}
+				break;
+			case RETRACKINGTOP:
+				if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() <= 80) {
+					robot.outtake.freightcontainer.containerMotor.setPower(0);
+					robot.outtake.freightcrane.craneVertically(0, 1);
+					if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() < 50) {
+						if (liftTimer.seconds() >= 2) {
+							robot.outtake.freightcontainer.openContainer();
+							containerIsLiftable = true;
+							outTakePosition = OutTakePosition.INTAKE;
+						}
+					}
+				}
+				break;
 			default:
 				outTakePosition = OutTakePosition.INTAKE;
 		}
 
-		telemetry.addData("VM Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
-		telemetry.addData("VM power", robot.outtake.freightcrane.verticalMotor.getPower());
+		telemetry.addData("containerMotor Curr Pos",String.format(Locale.US, "%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
+		telemetry.addData("containerMotor Power", robot.outtake.freightcontainer.containerMotor.getPower());
+		telemetry.addData("verticalMotor Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
+		telemetry.addData("verticalMotor Power", robot.outtake.freightcrane.verticalMotor.getPower());
 		telemetry.addData("Curr OutTakePos", outTakePosition);
 		telemetry.update();
 	}

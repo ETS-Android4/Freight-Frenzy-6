@@ -41,18 +41,6 @@ public class outtake extends robotcomponent {
 		);
 	}
 
-	public void setOutTakeToTopPosition() {
-		freightcrane.CraneVertically( 5900, 1);
-	}
-
-	public void setOutTakeToLowerPosition() {
-		freightcrane.CraneVertically(5000, 1);
-	}
-
-	public void setOutTakeToIntakePosition() {
-		freightcrane.CraneVertically(99,1);
-	}
-
 	@Override
 	public void stopEverything() {
 		freightcrane.stopEverything();

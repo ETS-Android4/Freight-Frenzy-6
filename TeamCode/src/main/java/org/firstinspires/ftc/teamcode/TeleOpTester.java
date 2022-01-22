@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.robot;
 
+import java.util.Locale;
+
 
 /**
  * Created by shell bots on 12/31/2021.
@@ -139,23 +141,23 @@ public class TeleOpTester extends OpMode {
 		/* Controller 2 settings --------------------------------------------------------------- */
 
 		while (this.gamepad2.right_trigger > 0.5) {
-			robot.outtake.freightcrane.setVerticalCranePower(1);
+			robot.outtake.freightcrane.verticalMotor.setPower(.5);
 		} if (this.gamepad2.right_trigger < 0.5) {
-			robot.outtake.freightcrane.setVerticalCranePower(0);
+			robot.outtake.freightcrane.verticalMotor.setPower(0);
 		}
 
 		while (this.gamepad2.left_trigger > 0.5) {
-			robot.outtake.freightcrane.setVerticalCranePower(-1);
+			robot.outtake.freightcrane.verticalMotor.setPower(-.5);
 		} if (this.gamepad2.left_trigger < 0.5) {
-			robot.outtake.freightcrane.setVerticalCranePower(0);
+			robot.outtake.freightcrane.verticalMotor.setPower(0);
 		}
 
 		if (this.gamepad2.dpad_up) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(.5);
+			robot.outtake.freightcontainer.containerMotor.setPower(.25);
 		} else if (this.gamepad2.dpad_down) {
-			robot.outtake.freightcontainer.setContainerFlipperPower(-.5);
+			robot.outtake.freightcontainer.containerMotor.setPower(-.25);
 		} else if (this.gamepad2.dpad_left){
-			robot.outtake.freightcontainer.setContainerFlipperPower(0);
+			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
 
 		if (this.gamepad2.y) {
@@ -164,8 +166,11 @@ public class TeleOpTester extends OpMode {
 			robot.outtake.freightcontainer.closeContainer();
 		}
 
-		telemetry.addData("containerMotor power", robot.outtake.freightcontainer.containerMotor.getPower());
-		telemetry.addData("verticalMotor power", robot.outtake.freightcrane.verticalMotor.getPower());
+		telemetry.addData("CM Curr Pos",String.format(Locale.US, "%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
+		telemetry.addData("CM power", robot.outtake.freightcontainer.containerMotor.getPower());
+		telemetry.addData("VM Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
+		telemetry.addData("VM power", robot.outtake.freightcrane.verticalMotor.getPower());
+//		telemetry.addData("Curr OutTakePos", outTakePosition);
 		telemetry.update();
 	}
 
