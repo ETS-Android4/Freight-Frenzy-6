@@ -47,7 +47,7 @@ public class freightcontainer extends robotcomponent{
 			containerMotor.setPower(-.4);
 		}
 	}
-	public void openContainerForDrop() {
+	public void openContainerCompletly() {
 		containerServo.setPosition(.5);
 	}
 

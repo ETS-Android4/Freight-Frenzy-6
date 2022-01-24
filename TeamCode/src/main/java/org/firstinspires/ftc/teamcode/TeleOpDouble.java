@@ -131,28 +131,30 @@ public class TeleOpDouble extends OpMode {
 		/* Controller 2 settings --------------------------------------------------------------- */
 
 		//Turn the duck spinners off and on
+		//rotate duck spinner for red alliance
 		while(this.gamepad2.b) {
-			robot.caroselspinner.turnOnSpinners(-1);
+			robot.caroselspinner.supplySpinnersPower(-1);
 		}
-		robot.caroselspinner.turnOnSpinners(0);
+		robot.caroselspinner.supplySpinnersPower(0);
+		//rotate duck spinner for blue alliance
 		while(this.gamepad2.x) {
-			robot.caroselspinner.turnOnSpinners( 1);
+			robot.caroselspinner.supplySpinnersPower( 1);
 		}
-		robot.caroselspinner.turnOnSpinners(0);
+		robot.caroselspinner.supplySpinnersPower(0);
 
 		// Turn the intake on and off
 		if (this.gamepad2.right_bumper && !last_g1_rb) {
 			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
+				robot.intake.setIntakePower(0);
 			} else {
-				robot.intake.setintakepower(1);
+				robot.intake.setIntakePower(1);
 			}
 			isIntakeRunning = !isIntakeRunning;
 		} else if (this.gamepad2.left_bumper && !last_g1_lb) {
 			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
+				robot.intake.setIntakePower(0);
 			} else {
-				robot.intake.setintakepower(-1);
+				robot.intake.setIntakePower(-1);
 			}
 			isIntakeRunning = !isIntakeRunning;
 		}
@@ -209,7 +211,7 @@ public class TeleOpDouble extends OpMode {
 				}
 			case DROPLOWER:
 				if (this.gamepad2.dpad_left) {
-					robot.outtake.freightcontainer.openContainerForDrop();
+					robot.outtake.freightcontainer.openContainerCompletly();
 				}
 				if (this.gamepad2.dpad_down) {
 					robot.outtake.freightcrane.craneVertically(1750,1);
@@ -222,7 +224,7 @@ public class TeleOpDouble extends OpMode {
 				break;
 			case DROPTOP:
 				if (this.gamepad2.dpad_left) {
-					robot.outtake.freightcontainer.openContainerForDrop();
+					robot.outtake.freightcontainer.openContainerCompletly();
 				}
 				if (this.gamepad2.dpad_down) {
 					robot.outtake.freightcontainer.closeContainer();

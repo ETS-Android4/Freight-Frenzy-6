@@ -51,7 +51,7 @@ public class robot {
 	public intake intake = null;
 	public caroselspinner caroselspinner = null;
 	public outtake outtake = null;
-	public cameravision cameraVision = null;
+	public cameravision cameravision = null;
 
 	/* Constructor */
 	public robot() { }
@@ -72,7 +72,7 @@ public class robot {
 
 		// Create specific robot parts
 		logger = new Logger(telemetry);
-		cameraVision = new cameravision(hardwareMap);
+		cameravision = new cameravision(hardwareMap);
 		drivetrain = new drivetrain(opmode);
 		odometerpods = new odometerpods(opmode);
 		intake = new intake(opmode);

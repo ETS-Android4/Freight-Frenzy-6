@@ -44,30 +44,21 @@ public class outtake extends robotcomponent {
 		);
 	}
 
-	public void placeInTopGoal() {
-		liftTimer.reset();
-		liftTimer.startTime();
+	public void raiseToPlaceInTopGoal() {
 		freightcrane.craneVertically(2750, 1);
 		if (freightcrane.verticalMotor.getCurrentPosition() > 2700) {
 			freightcontainer.flipContainerForDrop();
 			if (freightcontainer.containerMotor.getCurrentPosition() >= 80) {
 				freightcontainer.containerMotor.setPower(0);
-				if (liftTimer.seconds() > 5) {
-					freightcontainer.openContainerForDrop();
-				}
-				if (liftTimer.seconds() > 7) {
-					freightcontainer.closeContainer();
-					if (freightcontainer.containerMotor.getCurrentPosition() <= 80) {
-						freightcontainer.containerMotor.setPower(0);
-						freightcrane.craneVertically(0, 1);
-						if (freightcrane.verticalMotor.getCurrentPosition() < 50) {
-							if (liftTimer.seconds() >= 10) {
-								freightcontainer.openContainer();
-							}
-						}
-					}
-				}
 			}
+		}
+	}
+
+	public void lowerBackToIntakePosition() {
+		freightcontainer.flipContainerForDrop();
+		if (freightcontainer.containerMotor.getCurrentPosition() <= 80) {
+			freightcontainer.containerMotor.setPower(0);
+			freightcrane.craneVertically(0, 1);
 		}
 	}
 

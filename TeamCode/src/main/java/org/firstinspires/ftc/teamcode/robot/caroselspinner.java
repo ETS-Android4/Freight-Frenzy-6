@@ -22,7 +22,7 @@ public class caroselspinner extends robotcomponent {
 		this.rightSpinner = rightSpinner;
 	}
 
-	public void turnOnSpinners(double power) {
+	public void supplySpinnersPower(double power) {
 		leftSpinner.setPower(power);
 		rightSpinner.setPower(power);
 	}

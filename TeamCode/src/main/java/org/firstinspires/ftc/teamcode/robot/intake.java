@@ -23,7 +23,7 @@ public class intake extends robotcomponent {
 		intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 	}
 
-	public void setintakepower(double power) {
+	public void setIntakePower(double power) {
 		intakeMotor.setPower(-power);
 	}
 

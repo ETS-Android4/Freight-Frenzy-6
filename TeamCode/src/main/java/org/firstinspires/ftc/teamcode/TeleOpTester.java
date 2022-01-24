@@ -116,27 +116,27 @@ public class TeleOpTester extends OpMode {
 		// Turn the intake on and off
 		if (this.gamepad1.y) {
 			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
+				robot.intake.setIntakePower(0);
 			} else {
-				robot.intake.setintakepower(1);
+				robot.intake.setIntakePower(1);
 			}
 			isIntakeRunning = !isIntakeRunning;
 		} else if (this.gamepad1.a) {
 			if(isIntakeRunning) {
-				robot.intake.setintakepower(0);
+				robot.intake.setIntakePower(0);
 			} else {
-				robot.intake.setintakepower(-1);
+				robot.intake.setIntakePower(-1);
 			}
 			isIntakeRunning = !isIntakeRunning;
 		}
 
 		while(this.gamepad1.x) {
-			robot.caroselspinner.turnOnSpinners(1);
+			robot.caroselspinner.supplySpinnersPower(1);
 		}
 		while(this.gamepad1.b) {
-			robot.caroselspinner.turnOnSpinners(-1);
+			robot.caroselspinner.supplySpinnersPower(-1);
 		}
-		robot.caroselspinner.turnOnSpinners(0);
+		robot.caroselspinner.supplySpinnersPower(0);
 
 		/* Controller 2 settings --------------------------------------------------------------- */
 
