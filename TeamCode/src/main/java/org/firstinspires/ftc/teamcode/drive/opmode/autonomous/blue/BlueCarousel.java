@@ -22,12 +22,15 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous(group = "drive")
 public class BlueCarousel extends LinearOpMode {
 
+	public static double aFirstPositionX = -40;
+	public static double aFirstPositionY = 30;
+
 	@Override
 	public void runOpMode() throws InterruptedException {
 		SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 		robot robot = new robot();
 		robot.init(hardwareMap, telemetry, this, true);
-
+		robot.odometerpods.lowerOdometerWheels();
 		robot.cameravision.start();
 
 		Pose2d startPose = new Pose2d(-40, 64.25, Math.toRadians(270));
@@ -36,11 +39,12 @@ public class BlueCarousel extends LinearOpMode {
 
 		TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
 			//drive infront of the capstone
-				.lineToLinearHeading(new Pose2d(-40, 45, Math.toRadians(0)))
+				.lineToLinearHeading(new Pose2d(aFirstPositionX, aFirstPositionY, Math.toRadians(0)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
 				})
+				/*
 			//drive to alliance shipping hub
 				.setReversed(true)
 				.splineToConstantHeading(new Vector2d(-30, 24), Math.toRadians(0))
@@ -96,6 +100,7 @@ public class BlueCarousel extends LinearOpMode {
 				})
 			//drive to the depot
 				.lineToSplineHeading(new Pose2d(-64,38, Math.toRadians(180)))
+				 */
 				.build();
 
 		telemetry.addData("Status", "Ready to run");
@@ -110,6 +115,8 @@ public class BlueCarousel extends LinearOpMode {
 		telemetry.update();
 
 		drive.followTrajectorySequence(trajSeq);
+
+		robot.odometerpods.raiseOdometerWheels();
 
 /*
 		if (capstonePosition == FreightFrenzyDeterminationPipeline.CapstonePosition.LEFT) {

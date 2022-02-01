@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline;
 import org.firstinspires.ftc.teamcode.robot.cameravision;
+import org.firstinspires.ftc.teamcode.robot.robot;
 
 
 /**
@@ -40,6 +41,7 @@ public class TeleOpCameraTest extends OpMode {
 	 */
 	@Override
 	public void stop() {
+		cameraVision.save();
 		cameraVision.end();
 		logger.completeLog("Status", "Stopped");
 		logger.update();

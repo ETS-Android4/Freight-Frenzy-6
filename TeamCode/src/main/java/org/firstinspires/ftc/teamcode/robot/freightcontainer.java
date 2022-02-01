@@ -34,9 +34,9 @@ public class freightcontainer extends robotcomponent{
 
 	public void flipContainerForDrop() {
 		if (opModeIsActive()) {
-			containerMotor.setTargetPosition(150);
+			containerMotor.setTargetPosition(100);
 			containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-			containerMotor.setPower(.4);
+			containerMotor.setPower(.8);
 		}
 	}
 
@@ -44,15 +44,15 @@ public class freightcontainer extends robotcomponent{
 		if (opModeIsActive()) {
 			containerMotor.setTargetPosition(0);
 			containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-			containerMotor.setPower(-.4);
+			containerMotor.setPower(-.8);
 		}
 	}
-	public void openContainerCompletly() {
-		containerServo.setPosition(.5);
+	public void openContainerCompletely() {
+		containerServo.setPosition(.425);
 	}
 
 	public void openContainer() {
-		containerServo.setPosition(.35);
+		containerServo.setPosition(.40);
 	}
 
 	public void closeContainer() {

@@ -15,10 +15,10 @@ public class meepmeep {
 				.setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.63)
 				.setDimensions(12.5,16)
 				.followTrajectorySequence(drive ->
-						drive.trajectorySequenceBuilder(new Pose2d(6.25, -64.25, Math.toRadians(-270)))
-
+						drive.trajectorySequenceBuilder(new Pose2d(6.25, 64.25, Math.toRadians(270)))
 								.build()
 				);
+
 
 		meepMeep.setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
 				.setDarkMode(true)

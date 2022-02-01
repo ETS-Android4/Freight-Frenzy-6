@@ -27,7 +27,7 @@ public class RedCarousel extends LinearOpMode {
 		SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 		robot robot = new robot();
 		robot.init(hardwareMap, telemetry, this, true);
-
+		robot.odometerpods.lowerOdometerWheels();
 		robot.cameravision.start();
 
 		Pose2d startPose = new Pose2d(-40, -64.25, Math.toRadians(-270));
@@ -46,7 +46,7 @@ public class RedCarousel extends LinearOpMode {
 				.splineToConstantHeading(new Vector2d(-30, -24), Math.toRadians(-0))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//PLACE FREIGHT
-					robot.outtake.freightcontainer.openContainerCompletly();
+					robot.outtake.freightcontainer.openContainerCompletely();
 
 				})
 				.setReversed(false)
@@ -87,7 +87,7 @@ public class RedCarousel extends LinearOpMode {
 				.splineToConstantHeading(new Vector2d(-30, -24), Math.toRadians(-0))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//PLACE FREIGHT
-					robot.outtake.freightcontainer.openContainerCompletly();
+					robot.outtake.freightcontainer.openContainerCompletely();
 				})
 				.setReversed(false)
 				.waitSeconds(2)
@@ -110,6 +110,8 @@ public class RedCarousel extends LinearOpMode {
 		telemetry.update();
 
 		drive.followTrajectorySequence(trajSeq);
+
+		robot.odometerpods.raiseOdometerWheels();
 
 /*
 		if (capstonePosition == FreightFrenzyDeterminationPipeline.CapstonePosition.LEFT) {

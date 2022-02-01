@@ -176,7 +176,7 @@ public class TeleOpDouble extends OpMode {
 					containerIsLiftable = false;
 					outTakePosition = OutTakePosition.EXTENDINGLOWER;
 				} else if (this.gamepad2.dpad_up) {
-					robot.outtake.freightcrane.craneVertically(2750, 1);
+					robot.outtake.freightcrane.craneVertically(2850, 1);
 					containerIsLiftable = false;
 					outTakePosition = OutTakePosition.EXTENDINGTOP;
 				}
@@ -192,7 +192,7 @@ public class TeleOpDouble extends OpMode {
 				}
 				break;
 			case EXTENDINGTOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2700) {
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2750) {
 					robot.outtake.freightcontainer.flipContainerForDrop();
 					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() >= 80) {
 						robot.outtake.freightcontainer.containerMotor.setPower(0);
@@ -206,12 +206,12 @@ public class TeleOpDouble extends OpMode {
 				}
 				break;
 			case TOP:
-				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2700) {
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 2750) {
 					outTakePosition = OutTakePosition.DROPTOP;
 				}
 			case DROPLOWER:
 				if (this.gamepad2.dpad_left) {
-					robot.outtake.freightcontainer.openContainerCompletly();
+					robot.outtake.freightcontainer.openContainerCompletely();
 				}
 				if (this.gamepad2.dpad_down) {
 					robot.outtake.freightcrane.craneVertically(1750,1);
@@ -224,7 +224,7 @@ public class TeleOpDouble extends OpMode {
 				break;
 			case DROPTOP:
 				if (this.gamepad2.dpad_left) {
-					robot.outtake.freightcontainer.openContainerCompletly();
+					robot.outtake.freightcontainer.openContainerCompletely();
 				}
 				if (this.gamepad2.dpad_down) {
 					robot.outtake.freightcontainer.closeContainer();
@@ -235,7 +235,7 @@ public class TeleOpDouble extends OpMode {
 				}
 				break;
 			case RETRACKINGLOWER:
-				if (robot.outtake.freightcrane.verticalMotor. getCurrentPosition() > 1700) {
+				if (robot.outtake.freightcrane.verticalMotor.getCurrentPosition() > 1700) {
 					if (robot.outtake.freightcontainer.containerMotor.getCurrentPosition() <= 80) {
 						robot.outtake.freightcontainer.containerMotor.setPower(0);
 						if (liftTimer.seconds() >= 3) {
