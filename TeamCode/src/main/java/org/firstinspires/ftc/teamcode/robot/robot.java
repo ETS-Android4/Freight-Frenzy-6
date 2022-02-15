@@ -50,6 +50,7 @@ public class robot {
 	public odometerpods odometerpods = null;
 	public intake intake = null;
 	public caroselspinner caroselspinner = null;
+	public capstoneturret capstoneturret = null;
 	public outtake outtake = null;
 	public cameravision cameravision = null;
 
@@ -77,6 +78,7 @@ public class robot {
 		odometerpods = new odometerpods(opmode);
 		intake = new intake(opmode);
 		caroselspinner = new caroselspinner(opmode);
+		capstoneturret = new capstoneturret(opmode);
 		outtake = new outtake(opmode);
 
 
@@ -107,8 +109,15 @@ public class robot {
 
 		caroselspinner.init(
 				telemetry,
-				this.hardwareMap.get(CRServo.class, "leftSpinner"), //Hub:2 Port:1
+				//this.hardwareMap.get(CRServo.class, "leftSpinner"), //Hub:2 Port:1
 				this.hardwareMap.get(CRServo.class, "rightSpinner")  //Hub:1 Port:4
+		);
+
+		capstoneturret.init(
+				telemetry,
+				this.hardwareMap.get(CRServo.class, "extensionServo"),
+				this.hardwareMap.get(CRServo.class, "rotationServo"),
+				this.hardwareMap.get(DcMotor.class,"tiltMotor")
 		);
 
 		outtake.init(
@@ -127,13 +136,13 @@ public class robot {
 
 	public void stopEverything() {
 		caroselspinner.stopEverything();
+		capstoneturret.stopEverything();
 		drivetrain.stopEverything();
 		outtake.stopEverything();
 		intake.stopEverything();
 	}
 
 	public void logTeleOpData() {
-		caroselspinner.logTeleOpData();
 		drivetrain.logTeleOpData();
 		outtake.logTeleOpData();
 		intake.logTeleOpData();

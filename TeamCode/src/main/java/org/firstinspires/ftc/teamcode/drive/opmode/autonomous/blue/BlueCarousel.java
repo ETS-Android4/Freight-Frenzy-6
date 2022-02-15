@@ -24,7 +24,6 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
  */
 
 @Config
-
 @Autonomous(group = "drive")
 public class BlueCarousel extends LinearOpMode {
 

@@ -17,13 +17,18 @@ public class TeleOpDouble extends OpMode {
 
 	private robot robot = new robot();
 	private Logger logger = null;
+
 	private double speed = .5;
+	private float extensionPower;
+	private float rotationPower;
+	private float tiltPower;
+	private boolean isTurretControlEnabled = false;
+	private boolean last_g1_lsb = false;
 	private boolean isIntakeRunning = false;
-	//last gamepad 1 left bumper
 	private boolean last_g1_lb= false;
-	//last gamepad 1 right bumper
 	private boolean last_g1_rb = false;
 	private boolean containerIsLiftable = true;
+
 
 	ElapsedTime liftTimer = new ElapsedTime();
 
@@ -39,11 +44,9 @@ public class TeleOpDouble extends OpMode {
 		RETRACKINGTOP
 	}
 
-	//TODO: make it automatic
+	//TODO: make it automatic, and make different states?
 	private enum DuckSpinnerState {
-		RESTING,
-		SPINNINGFORRED,
-		SPINNINGFORBLUE
+		RESTING
 	}
 
 	OutTakePosition outTakePosition = OutTakePosition.INTAKE;
@@ -93,27 +96,27 @@ public class TeleOpDouble extends OpMode {
 		 * 		Y button - intake is no longer possible
 		 * 		A button - intake is possible
 		 *
+		 * 		X button - Spin the duck-spinners for blue alliance
+		 * 		B button - Spin the duck-spinners for red alliance
+		 *
 		 * 	Controller 2 - "Arm Controller" -------------------------------------------------------
+		 *
+		 *		Right Joystick X - turn the tape measure
+		 * 		Right Joystick Y - tilt the tape measure
+		 * 		Left Joystick Y - Extends the tape measure
+		 *
+		 * 		Right Bumper - toggle switch to spin the intake forwards
+		 * 		Left Bumper - toggle switch to spin the intake backwards
 		 *
 		 * 		Y button - drop the freight (open the container)
 		 * 		A button - lock the freight in the robot (close the container)
 		 *
-		 * 		X button - Spin the duck-spinners for blue alliance
-		 * 		B button - Spin the duck-spinners for red alliance
-		 *
-		 * 		Dpad up - get ready to place a freight in the highest goal
-		 * 				  (extend the crane vertically, extend the the crane horizontally, and flip
-		 * 				  the container into the drop position.)
-		 * 				  if pressed when already in the highest position lower the goal so more
-		 * 				  freight can be grabbed
-		 * 		Dpad down - get ready to place a freight in the lowest goal
-		 * 					(flip he container into the upright position, collapse the crane
-		 * 					horizontally, and collapse the crone vertically.)
-		 * 					if pressed when already in the lowest position lower the goal so more
-		 * 					freight can be grabbed
+		 * 		Dpad up - get ready to drop a freight in the alliance shipping hub
+		 * 		Dpad right - get ready to drop a freight in the shared shipping hub
+		 * 		Dpad down - get ready to intake freight
+		 * 		Dpad left - drop a freight
 		 *
 		 */
-
 
 		/* Controller 1 settings --------------------------------------------------------------- */
 
@@ -136,35 +139,35 @@ public class TeleOpDouble extends OpMode {
 			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
 
-		/* Controller 2 settings --------------------------------------------------------------- */
-
-
 		//Turn the duck spinners off and on
 		switch (duckSpinnerState) {
 			case RESTING:
 				robot.caroselspinner.supplySpinnersPower(0);
-				if (gamepad2.b) {
+				if (gamepad1.b) {
 					//rotate duck spinner for red alliance
 					robot.caroselspinner.supplySpinnersPower(-1);
-				} else if (gamepad2.x) {
+				} else if (gamepad1.x) {
 					//rotate duck spinner for blue alliance
 					robot.caroselspinner.supplySpinnersPower(1);
 				}
 				break;
 		}
 
-		/*
-		//Turn the duck spinners off and on
-		//rotate duck spinner for red alliance
-		while(this.gamepad2.b) {
-			robot.caroselspinner.supplySpinnersPower(-1);
+		/* Controller 2 settings --------------------------------------------------------------- */
+
+		if (this.gamepad2.left_stick_button && !last_g1_lsb) {
+			if(isTurretControlEnabled) {
+				extensionPower = gamepad2.left_stick_y;
+				rotationPower = gamepad2.right_stick_x;
+				tiltPower = gamepad2.right_stick_y;
+				robot.capstoneturret.setTurretPowers(extensionPower, rotationPower, tiltPower);
+			} else {
+				robot.capstoneturret.setTurretPowers(0,0,0);
+			}
+			isTurretControlEnabled = !isTurretControlEnabled;
 		}
-		robot.caroselspinner.supplySpinnersPower(0);
-		//rotate duck spinner for blue alliance
-		while(this.gamepad2.x) {
-			robot.caroselspinner.supplySpinnersPower( 1);
-		}
-		robot.caroselspinner.supplySpinnersPower(0);		 */
+
+		last_g1_lsb = this.gamepad2.left_stick_button;
 
 		// Turn the intake on and off
 		if (this.gamepad2.right_bumper && !last_g1_rb) {
@@ -198,10 +201,12 @@ public class TeleOpDouble extends OpMode {
 				if (this.gamepad2.dpad_right) {
 					robot.outtake.freightcrane.craneVertically(1750, 1);
 					containerIsLiftable = false;
+					robot.outtake.freightcontainer.containerMotor.setPower(0);
 					outTakePosition = OutTakePosition.EXTENDINGLOWER;
 				} else if (this.gamepad2.dpad_up) {
 					robot.outtake.freightcrane.craneVertically(2850, 1);
 					containerIsLiftable = false;
+					robot.outtake.freightcontainer.containerMotor.setPower(0);;
 					outTakePosition = OutTakePosition.EXTENDINGTOP;
 				}
 				break;
