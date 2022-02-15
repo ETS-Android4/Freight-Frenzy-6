@@ -11,6 +11,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -18,14 +19,12 @@ import org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline;
 import org.firstinspires.ftc.teamcode.robot.robot;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
+/*
+ * This is an example of a more complex path to really test the tuning.
+ */
 
-/*
- * This is an example of a more complex path to really test the tuning.
- */
-/*
- * This is an example of a more complex path to really test the tuning.
- */
 @Config
+@Disabled
 @Autonomous(group = "drive")
 public class BlueWarehouse extends LinearOpMode {
 
@@ -52,6 +51,7 @@ public class BlueWarehouse extends LinearOpMode {
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
+					robot.outtake.freightcontainer.flipContainerForDrop();
 				})
 				.waitSeconds(.5)
 				.addTemporalMarker(2.5, () -> {

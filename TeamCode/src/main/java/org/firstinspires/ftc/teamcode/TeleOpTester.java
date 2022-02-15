@@ -152,21 +152,27 @@ public class TeleOpTester extends OpMode {
 			robot.outtake.freightcrane.verticalMotor.setPower(0);
 		}
 
-		/*
+
 		if (this.gamepad2.dpad_up) {
-			robot.outtake.freightcontainer.containerMotor.setPower(.25);
+			robot.outtake.freightcontainer.containerMotor.setPower(.5);
 		} else if (this.gamepad2.dpad_down) {
-			robot.outtake.freightcontainer.containerMotor.setPower(-.25);
+			robot.outtake.freightcontainer.containerMotor.setPower(-.5);
 		} else if (this.gamepad2.dpad_left){
 			robot.outtake.freightcontainer.containerMotor.setPower(0);
 		}
-		 */
+
 		if (this.gamepad2.y) {
 			robot.outtake.freightcontainer.openContainer();
 		} else if (this.gamepad2.a) {
 			robot.outtake.freightcontainer.closeContainer();
+		} else if (this.gamepad2.x) {
+			robot.outtake.freightcontainer.openContainerCompletely();
 		}
 
+
+		telemetry.addData("Curr right Pos", robot.odometerpods.rightXAxis.getPosition());
+		telemetry.addData("Curr left Pos", robot.odometerpods.leftXAxis.getPosition());
+		telemetry.addData("Curr middle Pos", robot.odometerpods.middleYAxis.getPosition());
 		telemetry.addData("CM Curr Pos",String.format(Locale.US, "%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
 		telemetry.addData("CM power", robot.outtake.freightcontainer.containerMotor.getPower());
 		telemetry.addData("VM Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
@@ -174,6 +180,7 @@ public class TeleOpTester extends OpMode {
 //		telemetry.addData("Curr OutTakePos", outTakePosition);
 		telemetry.update();
 
+/*
 		while (this.gamepad2.dpad_up) {
 			robot.drivetrain.frontLeft.setPower(1);
 		}
@@ -187,6 +194,7 @@ public class TeleOpTester extends OpMode {
 			robot.drivetrain.frontRight.setPower(1);
 		}
 		robot.drivetrain.setAllPowers(0);
+		*/
 	}
 
 	/**

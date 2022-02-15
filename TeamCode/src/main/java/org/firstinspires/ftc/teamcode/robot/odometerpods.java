@@ -9,9 +9,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class odometerpods extends robotcomponent {
 
-	private Servo rightXAxis;
-	private Servo leftXAxis;
-	private Servo middleYAxis;
+	public Servo rightXAxis;
+	public Servo leftXAxis;
+	public Servo middleYAxis;
 
 	odometerpods(OpMode opmode) {
 		super(opmode);
@@ -26,14 +26,14 @@ public class odometerpods extends robotcomponent {
 	}
 
 	public void lowerOdometerWheels() {
-		leftXAxis.setPosition(.4);
-		rightXAxis.setPosition(.35);
-		middleYAxis.setPosition(.4);
+		leftXAxis.setPosition(.5);
+		rightXAxis.setPosition(.5);
+		middleYAxis.setPosition(.5);
 	}
 
 	public void raiseOdometerWheels() {
 		leftXAxis.setPosition(0);
-		rightXAxis.setPosition(.9);
+		rightXAxis.setPosition(1);
 		middleYAxis.setPosition(0);
 	}
 

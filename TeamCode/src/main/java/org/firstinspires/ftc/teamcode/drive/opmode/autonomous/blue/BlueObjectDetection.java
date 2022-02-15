@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.red;
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.blue;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -6,7 +6,6 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -24,13 +23,12 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.TRACK_WIDTH;
  */
 
 @Config
-@Disabled
 @Autonomous(group = "drive")
-public class RedWarehouse extends LinearOpMode {
-	TrajectoryVelocityConstraint number = SampleMecanumDrive.getVelocityConstraint(15,MAX_ANG_VEL,TRACK_WIDTH);
+public class BlueObjectDetection extends LinearOpMode {
+	TrajectoryVelocityConstraint number = SampleMecanumDrive.getVelocityConstraint(15, MAX_ANG_VEL, TRACK_WIDTH);
 	TrajectoryAccelerationConstraint number2 = SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL);
 
-	TrajectoryVelocityConstraint number3 = SampleMecanumDrive.getVelocityConstraint(MAX_VEL,MAX_ANG_VEL,TRACK_WIDTH);
+	TrajectoryVelocityConstraint number3 = SampleMecanumDrive.getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
 
 	@Override
 	public void runOpMode() throws InterruptedException {
@@ -41,12 +39,113 @@ public class RedWarehouse extends LinearOpMode {
 		robot.outtake.freightcontainer.closeContainer();
 		robot.cameravision.start();
 
-		Pose2d startPose = new Pose2d(6.25, -64.25, Math.toRadians(-270));
+		FreightFrenzyDeterminationPipeline.CapstonePosition capstonePosition = robot.cameravision.getPosition();
+		telemetry.addData("Capstone Pos", capstonePosition.toString());
+		telemetry.update();
+
+		Pose2d startPose = new Pose2d(6.25, 64.25, Math.toRadians(270));
 
 		drive.setPoseEstimate(startPose);
 
-		TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
+/*
+				TrajectorySequence trajSeqLowerGoal = drive.trajectorySequenceBuilder(startPose)
+				.addTemporalMarker(0, () -> {
+					//RAISE ARM
+					robot.outtake.raiseToPlaceInTopGoal();
+					robot.outtake.freightcontainer.flipContainerForDrop();
+				})
+				.waitSeconds(1.5)
+				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					//RAISE ARM
+					robot.outtake.lowerBackToIntakePosition();
+				})
+				.lineToLinearHeading(new Pose2d(4,45, Math.toRadians(180)))
+				.lineToLinearHeading(new Pose2d(4.125, 32.25, Math.toRadians(215)))
+				.waitSeconds(.5)
+				.addTemporalMarker(4, () -> {
+					//DROP FREIGHT #1
+					robot.outtake.freightcontainer.openContainerCompletely();
+				})
+				.waitSeconds(.5)
+				.addTemporalMarker(6, () -> {
+					//DROP FREIGHT #1
+					robot.outtake.freightcontainer.closeContainer();
+				})
+				.waitSeconds(.5)
+				.lineToLinearHeading(new Pose2d(4, 67, Math.toRadians(180)))
+				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					robot.outtake.freightcontainer.flipContainerForIntake();
+					robot.outtake.raiseToPlaceInTopGoal();
+					//LOWER ARM
+				})
+				.UNSTABLE_addTemporalMarkerOffset(1, () -> {
+					robot.outtake.lowerBackToIntakePosition();
+//robot.intake.setIntakePower(-0.85);
+					//TURN OFF INTAKE
+				})
+				.setConstraints(number, number2)
+				.lineToConstantHeading(new Vector2d(45, 67))
+				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
+					robot.outtake.freightcontainer.closeContainer();
+//robot.intake.setIntakePower(0.5);
+					//TURN OFF INTAKE
+				})
+				.build();
+
+
+
+
+
+
+
+			TrajectorySequence trajSeqMiddleGoal = drive.trajectorySequenceBuilder(startPose)
+				.addTemporalMarker(0, () -> {
+					//RAISE ARM
+					robot.outtake.raiseToPlaceInTopGoal();
+					robot.outtake.freightcontainer.flipContainerForDrop();
+				})
+				.waitSeconds(.5)
+				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					//RAISE ARM
+					robot.outtake.raiseToPlaceInMiddleGoal();
+				})
+				.lineToLinearHeading(new Pose2d(4.5, 32.5, Math.toRadians(215)))
+				.waitSeconds(.5)
+				.addTemporalMarker(2, () -> {
+					//DROP FREIGHT #1
+					robot.outtake.freightcontainer.openContainerCompletely();
+				})
+				.waitSeconds(.5)
+				.addTemporalMarker(2.5, () -> {
+					//DROP FREIGHT #1
+					robot.outtake.freightcontainer.closeContainer();
+
+				})
+				.lineToLinearHeading(new Pose2d(4, 67, Math.toRadians(180)))
+				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					robot.outtake.freightcontainer.flipContainerForIntake();
+					//LOWER ARM
+				})
+				.UNSTABLE_addTemporalMarkerOffset(2, () -> {
+					robot.outtake.lowerBackToIntakePosition();
+					//LOWER ARM
+				})
+				.setConstraints(number, number2)
+				.lineToConstantHeading(new Vector2d(45, 65))
+				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
+					robot.outtake.freightcontainer.closeContainer();
+//robot.intake.setIntakePower(0.5);
+					//TURN OFF INTAKE
+				})
+				.build();
+
+*/
+
+
+
+
+		TrajectorySequence trajSeqUpperGoal = drive.trajectorySequenceBuilder(startPose)
+				.lineToLinearHeading(new Pose2d(4, 32, Math.toRadians(215)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
@@ -63,57 +162,51 @@ public class RedWarehouse extends LinearOpMode {
 					robot.outtake.freightcontainer.closeContainer();
 					robot.outtake.freightcontainer.flipContainerForIntake();
 				})
-
-				.waitSeconds(.5)
-				.lineToLinearHeading(new Pose2d(11, -67.25, Math.toRadians(-180)))
+				.waitSeconds(.75)
+				.lineToLinearHeading(new Pose2d(4, 67, Math.toRadians(180)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.lowerBackToIntakePosition();
 
 					//LOWER ARM
 				})
-
 				.UNSTABLE_addTemporalMarkerOffset(1, () -> {
 					robot.outtake.freightcontainer.openContainer();
-//robot.intake.setIntakePower(-0.85);
+			//		robot.intake.setIntakePower(-0.85);
 					//TURN OFF INTAKE
 				})
 				.setConstraints(number, number2)
-				.lineToConstantHeading(new Vector2d(45, -67.25))
+				.lineToLinearHeading(new Pose2d(42.5,  70, Math.toRadians(180)))
 				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-					robot.outtake.freightcontainer.closeContainer();
-//					robot.intake.setIntakePower(0.5);
+		//			robot.intake.setIntakePower(0.85);
 					//TURN OFF INTAKE
 				})
 				/*
 				.setConstraints(number3, number2)
 				.lineToConstantHeading(new Vector2d(9, -67.25))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					robot.outtake.freightcontainer.closeContainer();
 					robot.intake.setIntakePower(0);
 					//TURN OFF INTAKE
 				})
-
-
-
-				.lineToLinearHeading(new Pose2d(3.5, -31.5, Math.toRadians(-215)))
+				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
 					robot.outtake.freightcontainer.flipContainerForDrop();
 				})
 				.waitSeconds(.5)
-				.addTemporalMarker(3, () -> {
+				.UNSTABLE_addTemporalMarkerOffset(2.5, () -> {
 					//DROP FREIGHT #1
 					robot.outtake.freightcontainer.openContainerCompletely();
 				})
-				/*
 				.waitSeconds(.5)
-				.addTemporalMarker(15.75, () -> {
+				.UNSTABLE_addTemporalMarkerOffset(2.5, () -> {
 					//DROP FREIGHT #1
 					robot.outtake.freightcontainer.closeContainer();
 					robot.outtake.freightcontainer.flipContainerForIntake();
 				})
-				.waitSeconds(.5)
-				.lineToLinearHeading(new Pose2d(11, -67.25, Math.toRadians(-180)))
+				.waitSeconds(.75)
+				.lineToLinearHeading(new Pose2d(4, -67, Math.toRadians(-180)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.lowerBackToIntakePosition();
 
@@ -125,131 +218,20 @@ public class RedWarehouse extends LinearOpMode {
 					//TURN OFF INTAKE
 				})
 				.setConstraints(number, number2)
-				.lineToConstantHeading(new Vector2d(43.5, -67.25))
+				.lineToLinearHeading(new Pose2d(42.5, -70, Math.toRadians(-180)))
 				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-					robot.outtake.freightcontainer.closeContainer();
-					//TURN OFF INTAKE
-				})
-				.UNSTABLE_addTemporalMarkerOffset(5, () -> {
-					robot.intake.setIntakePower(0);
+
+					robot.intake.setIntakePower(0.85);
 					//TURN OFF INTAKE
 				})
 				.setConstraints(number3, number2)
-				.lineToConstantHeading(new Vector2d(11, -67.25))
+				.lineToConstantHeading(new Vector2d(9, -67.25))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
+					robot.outtake.freightcontainer.closeContainer();
 					robot.intake.setIntakePower(0);
 					//TURN OFF INTAKE
 				})
-
-
-
-				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					//RAISE ARM
-					robot.outtake.raiseToPlaceInTopGoal();
-					robot.outtake.freightcontainer.flipContainerForDrop();
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(2.5, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.openContainerCompletely();
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(3, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.closeContainer();
-					robot.outtake.freightcontainer.flipContainerForIntake();
-				})
-				.waitSeconds(.5)
-				.lineToLinearHeading(new Pose2d(14, -67.5, Math.toRadians(-180)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.outtake.lowerBackToIntakePosition();
-					robot.outtake.freightcontainer.openContainer();
-					robot.intake.setIntakePower(-1);
-					//LOWER ARM
-				})
-				.lineToConstantHeading(new Vector2d(47.5, -67.5))
-				.UNSTABLE_addTemporalMarkerOffset(3, () -> {
-					robot.outtake.freightcontainer.closeContainer();
-					//TURN OFF INTAKE
-				})
-				.lineToConstantHeading(new Vector2d(14, -64.25))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.intake.setIntakePower(0);
-					//TURN OFF INTAKE
-				})
-				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					//RAISE ARM
-					robot.outtake.raiseToPlaceInTopGoal();
-					robot.outtake.freightcontainer.flipContainerForDrop();
-
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(2.5, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.openContainerCompletely();
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(3, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.closeContainer();
-					robot.outtake.freightcontainer.flipContainerForIntake();
-				})
-				.waitSeconds(.5)
-				.lineToLinearHeading(new Pose2d(14, -67.5, Math.toRadians(-180)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.outtake.lowerBackToIntakePosition();
-					robot.outtake.freightcontainer.openContainer();
-					robot.intake.setIntakePower(-1);
-					//LOWER ARM
-				})
-				.lineToConstantHeading(new Vector2d(47.5, -67.5))
-				.UNSTABLE_addTemporalMarkerOffset(3, () -> {
-					robot.outtake.freightcontainer.closeContainer();
-					//TURN OFF INTAKE
-				})
-				.lineToConstantHeading(new Vector2d(14, -64.25))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.intake.setIntakePower(0);
-					//TURN OFF INTAKE
-				})
-				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					//RAISE ARM
-					robot.outtake.raiseToPlaceInTopGoal();
-					robot.outtake.freightcontainer.flipContainerForDrop();
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(2.5, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.openContainerCompletely();
-				})
-				.waitSeconds(.5)
-				.addTemporalMarker(3, () -> {
-					//DROP FREIGHT #1
-					robot.outtake.freightcontainer.closeContainer();
-					robot.outtake.freightcontainer.flipContainerForIntake();
-				})
-				.waitSeconds(.5)
-				.lineToLinearHeading(new Pose2d(14, -67.5, Math.toRadians(-180)))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.outtake.lowerBackToIntakePosition();
-					robot.outtake.freightcontainer.openContainer();
-					robot.intake.setIntakePower(-1);
-					//LOWER ARM
-				})
-				.lineToConstantHeading(new Vector2d(47.5, -67.5))
-				.UNSTABLE_addTemporalMarkerOffset(3, () -> {
-					robot.outtake.freightcontainer.closeContainer();
-					//TURN OFF INTAKE
-				})
-				.lineToConstantHeading(new Vector2d(14, -64.25))
-				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-					robot.intake.setIntakePower(0);
-					//TURN OFF INTAKE
-				})
- */
+				*/
 				.build();
 
 		telemetry.addData("Status", "Ready to run");
@@ -259,19 +241,22 @@ public class RedWarehouse extends LinearOpMode {
 
 		if (isStopRequested()) return;
 
-		FreightFrenzyDeterminationPipeline.CapstonePosition capstonePosition = robot.cameravision.getPosition();
+		capstonePosition = robot.cameravision.getPosition();
 		telemetry.addData("Capstone Pos", capstonePosition.toString());
 		telemetry.update();
 
-		drive.followTrajectorySequence(trajSeq);
-
-		robot.odometerpods.raiseOdometerWheels();
-		sleep(2000);
-
 /*
 		if (capstonePosition == FreightFrenzyDeterminationPipeline.CapstonePosition.LEFT) {
+			drive.followTrajectorySequence(trajSeqLowerGoal);
 		} else if (capstonePosition == FreightFrenzyDeterminationPipeline.CapstonePosition.MIDDLE) {
+			drive.followTrajectorySequence(trajSeqMiddleGoal);
 		} else {
+			drive.followTrajectorySequence(trajSeqUpperGoal);
+		}
  */
+		drive.followTrajectorySequence(trajSeqUpperGoal);
+		robot.cameravision.end();
+		robot.odometerpods.raiseOdometerWheels();
+		sleep(2000);
 	}
 }

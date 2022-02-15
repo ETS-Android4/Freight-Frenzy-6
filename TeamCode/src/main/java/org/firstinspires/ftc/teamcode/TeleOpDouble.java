@@ -39,7 +39,15 @@ public class TeleOpDouble extends OpMode {
 		RETRACKINGTOP
 	}
 
+	//TODO: make it automatic
+	private enum DuckSpinnerState {
+		RESTING,
+		SPINNINGFORRED,
+		SPINNINGFORBLUE
+	}
+
 	OutTakePosition outTakePosition = OutTakePosition.INTAKE;
+	DuckSpinnerState duckSpinnerState = DuckSpinnerState.RESTING;
 
 	@Override
 	public void init() {
@@ -130,6 +138,22 @@ public class TeleOpDouble extends OpMode {
 
 		/* Controller 2 settings --------------------------------------------------------------- */
 
+
+		//Turn the duck spinners off and on
+		switch (duckSpinnerState) {
+			case RESTING:
+				robot.caroselspinner.supplySpinnersPower(0);
+				if (gamepad2.b) {
+					//rotate duck spinner for red alliance
+					robot.caroselspinner.supplySpinnersPower(-1);
+				} else if (gamepad2.x) {
+					//rotate duck spinner for blue alliance
+					robot.caroselspinner.supplySpinnersPower(1);
+				}
+				break;
+		}
+
+		/*
 		//Turn the duck spinners off and on
 		//rotate duck spinner for red alliance
 		while(this.gamepad2.b) {
@@ -140,7 +164,7 @@ public class TeleOpDouble extends OpMode {
 		while(this.gamepad2.x) {
 			robot.caroselspinner.supplySpinnersPower( 1);
 		}
-		robot.caroselspinner.supplySpinnersPower(0);
+		robot.caroselspinner.supplySpinnersPower(0);		 */
 
 		// Turn the intake on and off
 		if (this.gamepad2.right_bumper && !last_g1_rb) {

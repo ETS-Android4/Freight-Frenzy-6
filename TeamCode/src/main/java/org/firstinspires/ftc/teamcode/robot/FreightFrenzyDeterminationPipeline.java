@@ -38,6 +38,7 @@ public class FreightFrenzyDeterminationPipeline extends OpenCvPipeline {
 	/*
 	 * An enum to define the randomization
 	 */
+
 	public enum CapstonePosition
 	{
 		LEFT,
