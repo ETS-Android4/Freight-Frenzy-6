@@ -45,11 +45,11 @@ public class outtake extends robotcomponent {
 	}
 
 	public void raiseToPlaceInTopGoal() {
-		freightcrane.craneVertically(2850, 1);
+		freightcrane.craneVertically(2900, 1);
 	}
 
 	public void raiseToPlaceInMiddleGoal() {
-		freightcrane.craneVertically(1850, 1);
+		freightcrane.craneVertically(1750, 1);
 	}
 
 	public void lowerBackToIntakePosition() {

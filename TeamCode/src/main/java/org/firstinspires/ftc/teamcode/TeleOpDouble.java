@@ -19,15 +19,18 @@ public class TeleOpDouble extends OpMode {
 	private Logger logger = null;
 
 	private double speed = .5;
+	private boolean firstTime = true;
 	private float extensionPower;
 	private float rotationPower;
 	private float tiltPower;
 	private boolean isTurretControlEnabled = false;
-	private boolean last_g1_lsb = false;
+	private boolean last_g2_x = false;
+	private boolean last_g2_b = false;
 	private boolean isIntakeRunning = false;
-	private boolean last_g1_lb= false;
-	private boolean last_g1_rb = false;
+	private boolean last_g2_lb = false;
+	private boolean last_g2_rb = false;
 	private boolean containerIsLiftable = true;
+	private boolean outtakeIsUseAble = true;
 
 
 	ElapsedTime liftTimer = new ElapsedTime();
@@ -142,42 +145,61 @@ public class TeleOpDouble extends OpMode {
 		//Turn the duck spinners off and on
 		switch (duckSpinnerState) {
 			case RESTING:
-				robot.caroselspinner.supplySpinnersPower(0);
 				if (gamepad1.b) {
 					//rotate duck spinner for red alliance
 					robot.caroselspinner.supplySpinnersPower(-1);
 				} else if (gamepad1.x) {
 					//rotate duck spinner for blue alliance
 					robot.caroselspinner.supplySpinnersPower(1);
+				} else {
+					robot.caroselspinner.supplySpinnersPower(0);
 				}
 				break;
 		}
 
 		/* Controller 2 settings --------------------------------------------------------------- */
 
-		if (this.gamepad2.left_stick_button && !last_g1_lsb) {
-			if(isTurretControlEnabled) {
-				extensionPower = gamepad2.left_stick_y;
-				rotationPower = gamepad2.right_stick_x;
-				tiltPower = gamepad2.right_stick_y;
-				robot.capstoneturret.setTurretPowers(extensionPower, rotationPower, tiltPower);
-			} else {
-				robot.capstoneturret.setTurretPowers(0,0,0);
-			}
-			isTurretControlEnabled = !isTurretControlEnabled;
+		if (this.gamepad2.b) {
+			last_g2_b = !last_g2_b;
 		}
 
-		last_g1_lsb = this.gamepad2.left_stick_button;
+		if (this.gamepad2.x) {
+			last_g2_x = !last_g2_x;
+			/*
+			if (firstTime) {
+				//sets the turret to a controller position
+				robot.capstoneturret.setTurretToOptimalDriverPosition();
+				firstTime = false;
+			}
+			 */
+		}
+
+		if (last_g2_x) {
+			outtakeIsUseAble = false;
+			telemetry.addLine ("Capping Turret Mode");
+			extensionPower = gamepad2.left_stick_y;
+			rotationPower = gamepad2.right_stick_x;
+			tiltPower = gamepad2.right_stick_y;
+			robot.capstoneturret.setTurretPowers(extensionPower, rotationPower, tiltPower);
+		} else if (last_g2_b) {
+			outtakeIsUseAble = false;
+			telemetry.addLine("Setting Up Turret Mode");
+			rotationPower = gamepad2.right_stick_x;
+			robot.capstoneturret.setRotationServoPower(rotationPower);
+		} else {
+			outtakeIsUseAble = true;
+			robot.capstoneturret.setTurretPowers(0, 0, 0);
+		}
 
 		// Turn the intake on and off
-		if (this.gamepad2.right_bumper && !last_g1_rb) {
+		if (this.gamepad2.right_bumper && !last_g2_rb) {
 			if(isIntakeRunning) {
 				robot.intake.setIntakePower(0);
 			} else {
 				robot.intake.setIntakePower(1);
 			}
 			isIntakeRunning = !isIntakeRunning;
-		} else if (this.gamepad2.left_bumper && !last_g1_lb) {
+		} else if (this.gamepad2.left_bumper && !last_g2_lb) {
 			if(isIntakeRunning) {
 				robot.intake.setIntakePower(0);
 			} else {
@@ -186,8 +208,8 @@ public class TeleOpDouble extends OpMode {
 			isIntakeRunning = !isIntakeRunning;
 		}
 
-		last_g1_lb = this.gamepad2.left_bumper;
-		last_g1_rb = this.gamepad2.right_bumper;
+		last_g2_lb = this.gamepad2.left_bumper;
+		last_g2_rb = this.gamepad2.right_bumper;
 
 		//Open and close the freight container
 		if (this.gamepad2.y) {
@@ -198,12 +220,12 @@ public class TeleOpDouble extends OpMode {
 
 		switch (outTakePosition) {
 			case INTAKE:
-				if (this.gamepad2.dpad_right) {
+				if (this.gamepad2.dpad_right && containerIsLiftable) {
 					robot.outtake.freightcrane.craneVertically(1750, 1);
 					containerIsLiftable = false;
 					robot.outtake.freightcontainer.containerMotor.setPower(0);
 					outTakePosition = OutTakePosition.EXTENDINGLOWER;
-				} else if (this.gamepad2.dpad_up) {
+				} else if (this.gamepad2.dpad_up && containerIsLiftable) {
 					robot.outtake.freightcrane.craneVertically(2850, 1);
 					containerIsLiftable = false;
 					robot.outtake.freightcontainer.containerMotor.setPower(0);;
@@ -293,10 +315,11 @@ public class TeleOpDouble extends OpMode {
 				outTakePosition = OutTakePosition.INTAKE;
 		}
 
-		telemetry.addData("containerMotor Curr Pos",String.format(Locale.US, "%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
-		telemetry.addData("containerMotor Power", robot.outtake.freightcontainer.containerMotor.getPower());
-		telemetry.addData("verticalMotor Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
-		telemetry.addData("verticalMotor Power", robot.outtake.freightcrane.verticalMotor.getPower());
+//		telemetry.addData("containerMotor Curr Pos",String.format(Locale.US, "%7d", robot.outtake.freightcontainer.containerMotor.getCurrentPosition()));
+//		telemetry.addData("containerMotor Power", robot.outtake.freightcontainer.containerMotor.getPower());
+//		telemetry.addData("verticalMotor Curr Pos", String.format(Locale.US, "%7d", robot.outtake.freightcrane.verticalMotor.getCurrentPosition()));
+//		telemetry.addData("verticalMotor Power", robot.outtake.freightcrane.verticalMotor.getPower());
+		telemetry.addData("Outtake Curr Usability", outtakeIsUseAble);
 		telemetry.addData("Curr OutTakePos", outTakePosition);
 		telemetry.update();
 	}

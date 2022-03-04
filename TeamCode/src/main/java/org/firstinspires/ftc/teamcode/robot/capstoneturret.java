@@ -33,9 +33,26 @@ public class capstoneturret extends robotcomponent{
 
 	public void setTurretPowers(float extensionServoPower, float rotationServoPower, float tiltMotorPower) {
 		extensionServo.setPower(extensionServoPower);
-		rotationServo.setPower(rotationServoPower);
-		tiltMotor.setPower(tiltMotorPower);
+		rotationServo.setPower(rotationServoPower/10);
+		tiltMotor.setPower(tiltMotorPower/5);
 	}
+
+	public void setTurretToOptimalDriverPosition() {
+		tiltMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+		setCRServoPosition(rotationServo, .5);
+		tiltMotor.setTargetPosition(100);
+		tiltMotor.setPower(.2);
+	}
+
+	public void setRotationServoPower(float rotationServoPower) {
+		rotationServo.setPower(rotationServoPower);
+	}
+
+	public static void setCRServoPosition(CRServo crservo, double position) {
+		crservo.getController().setServoPosition(crservo.getPortNumber(), position);
+	}
+
 
 	@Override
 	public void stopEverything() {

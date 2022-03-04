@@ -109,7 +109,7 @@ public class robot {
 
 		caroselspinner.init(
 				telemetry,
-				//this.hardwareMap.get(CRServo.class, "leftSpinner"), //Hub:2 Port:1
+//				this.hardwareMap.get(CRServo.class, "leftSpinner"), //Hub:2 Port:1
 				this.hardwareMap.get(CRServo.class, "rightSpinner")  //Hub:1 Port:4
 		);
 

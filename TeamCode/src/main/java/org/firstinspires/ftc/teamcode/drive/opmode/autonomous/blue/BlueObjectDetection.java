@@ -145,25 +145,26 @@ public class BlueObjectDetection extends LinearOpMode {
 
 
 		TrajectorySequence trajSeqUpperGoal = drive.trajectorySequenceBuilder(startPose)
-				.lineToLinearHeading(new Pose2d(4, 32, Math.toRadians(215)))
+				.lineToLinearHeading(new Pose2d(10, 50, Math.toRadians(180)))
+				.lineToLinearHeading(new Pose2d(7.25, 36.75, Math.toRadians(247.5)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
 					robot.outtake.freightcontainer.flipContainerForDrop();
 				})
 				.waitSeconds(.5)
-				.addTemporalMarker(2.5, () -> {
+				.UNSTABLE_addTemporalMarkerOffset(0.75, () -> {
 					//DROP FREIGHT #1
 					robot.outtake.freightcontainer.openContainerCompletely();
 				})
 				.waitSeconds(.5)
-				.addTemporalMarker(3, () -> {
+				.UNSTABLE_addTemporalMarkerOffset(1, () -> {
 					//DROP FREIGHT #1
 					robot.outtake.freightcontainer.closeContainer();
 					robot.outtake.freightcontainer.flipContainerForIntake();
 				})
 				.waitSeconds(.75)
-				.lineToLinearHeading(new Pose2d(4, 67, Math.toRadians(180)))
+				.lineToLinearHeading(new Pose2d(9, 66, Math.toRadians(180)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.lowerBackToIntakePosition();
 
@@ -171,23 +172,25 @@ public class BlueObjectDetection extends LinearOpMode {
 				})
 				.UNSTABLE_addTemporalMarkerOffset(1, () -> {
 					robot.outtake.freightcontainer.openContainer();
-			//		robot.intake.setIntakePower(-0.85);
+//					robot.intake.setIntakePower(-0.85);
 					//TURN OFF INTAKE
 				})
 				.setConstraints(number, number2)
-				.lineToLinearHeading(new Pose2d(42.5,  70, Math.toRadians(180)))
+				.lineToLinearHeading(new Pose2d(45, 66, Math.toRadians(180)))
 				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-		//			robot.intake.setIntakePower(0.85);
+//					robot.intake.setIntakePower(0.85);
 					//TURN OFF INTAKE
 				})
 				/*
 				.setConstraints(number3, number2)
-				.lineToConstantHeading(new Vector2d(9, -67.25))
+				.lineToConstantHeading(new Vector2d(9, 67.25))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.freightcontainer.closeContainer();
-					robot.intake.setIntakePower(0);
+//					robot.intake.setIntakePower(0);
 					//TURN OFF INTAKE
 				})
+
+				/*
 				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM

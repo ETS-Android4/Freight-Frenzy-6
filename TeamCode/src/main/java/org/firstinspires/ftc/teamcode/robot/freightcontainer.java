@@ -36,7 +36,7 @@ public class freightcontainer extends robotcomponent{
 		if (opModeIsActive()) {
 			containerMotor.setTargetPosition(150);
 			containerMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-			containerMotor.setPower(.75);
+			containerMotor.setPower(1);
 		}
 	}
 

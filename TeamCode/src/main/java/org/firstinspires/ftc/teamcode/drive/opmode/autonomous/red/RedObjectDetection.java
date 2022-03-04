@@ -145,7 +145,8 @@ public class RedObjectDetection extends LinearOpMode {
 
 
 		TrajectorySequence trajSeqUpperGoal = drive.trajectorySequenceBuilder(startPose)
-				.lineToLinearHeading(new Pose2d(4, -32, Math.toRadians(-215)))
+				.lineToLinearHeading(new Pose2d(10, -50, Math.toRadians(-180)))
+				.lineToLinearHeading(new Pose2d(7.25, -36.75, Math.toRadians(-247.5)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					//RAISE ARM
 					robot.outtake.raiseToPlaceInTopGoal();
@@ -163,7 +164,7 @@ public class RedObjectDetection extends LinearOpMode {
 					robot.outtake.freightcontainer.flipContainerForIntake();
 				})
 				.waitSeconds(.75)
-				.lineToLinearHeading(new Pose2d(4, -67, Math.toRadians(-180)))
+				.lineToLinearHeading(new Pose2d(9, -64, Math.toRadians(-180)))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.lowerBackToIntakePosition();
 
@@ -171,20 +172,21 @@ public class RedObjectDetection extends LinearOpMode {
 				})
 				.UNSTABLE_addTemporalMarkerOffset(1, () -> {
 					robot.outtake.freightcontainer.openContainer();
-					robot.intake.setIntakePower(-0.85);
+//					robot.intake.setIntakePower(-0.85);
 					//TURN OFF INTAKE
 				})
 				.setConstraints(number, number2)
-				.lineToLinearHeading(new Pose2d(50, -67, Math.toRadians(-180)))
+				.lineToLinearHeading(new Pose2d(45, -63, Math.toRadians(-180)))
 				.UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-					robot.intake.setIntakePower(0.85);
+//					robot.intake.setIntakePower(0.85);
 					//TURN OFF INTAKE
 				})
+				/*
 				.setConstraints(number3, number2)
-				.lineToConstantHeading(new Vector2d(9, -67.25))
+				.lineToConstantHeading(new Vector2d(9, 67.25))
 				.UNSTABLE_addTemporalMarkerOffset(0, () -> {
 					robot.outtake.freightcontainer.closeContainer();
-					robot.intake.setIntakePower(0);
+//					robot.intake.setIntakePower(0);
 					//TURN OFF INTAKE
 				})
 

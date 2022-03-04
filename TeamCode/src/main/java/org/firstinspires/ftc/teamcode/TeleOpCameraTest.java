@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.robot.FreightFrenzyDeterminationPipeline;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.robot.robot;
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(group = "Manual", name = "Camera Test Manual")
+@Disabled
 public class TeleOpCameraTest extends OpMode {
 
 	private Logger logger = null;
